@@ -1,4 +1,4 @@
-# week13Project
+# week-13-project
 
 ## Database Schema Design
 

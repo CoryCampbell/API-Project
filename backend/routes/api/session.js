@@ -40,4 +40,9 @@ router.post("/", async (req, res, next) => {
     });
 });
 
+router.delete("/", (_req, res) => {
+    res.clearCookie("XSRF-Token");
+    return res.json({ message: "success" });
+});
+
 module.exports = router;

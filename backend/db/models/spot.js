@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
+            Spot.belongsTo(models.User, {
+                foreignKey: "ownerId",
+                onDelete: "CASCADE"
+            });
         }
     }
     Spot.init(
@@ -52,10 +56,6 @@ module.exports = (sequelize, DataTypes) => {
             },
             price: {
                 type: DataTypes.INTEGER,
-                allowNull: false
-            },
-            avgRating: {
-                type: DataTypes.DECIMAL,
                 allowNull: false
             },
             previewImage: {

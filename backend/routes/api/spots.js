@@ -1,14 +1,18 @@
 const express = require("express");
-const router = express.Router();
 const { Op } = require("sequelize");
-const bcrypt = require("b");
+const bcrypt = require("bcryptjs");
 
-// const {};
+const { Spot } = require("../../db/models");
+
+const router = express.Router();
+
+router.get("/current", async (req, res) => {
+    //authorize the current user
+    //return all spots owned by this user
+});
 
 router.get("/", async (req, res) => {
-    const { spot } = req;
-
-    const allSpots = await Spots.findAll();
+    const allSpots = await Spot.findAll();
     res.json(allSpots);
 });
 

@@ -39,9 +39,30 @@ router.get("/:spotId", async (req, res) => {
     try {
         const { spotId } = req.params;
         const spotDetails = await Spot.findByPk(spotId, {
-            include: [{ model: SpotImage }, { model: User, as: "Owner" }]
+            include: [
+                { model: SpotImage, attributes: ["id", "url", "preview"] },
+                { model: User, as: "Owner", attributes: ["id", "firstName", "lastName"] }
+            ]
         });
-        res.json(spotDetails);
+
+        const result = spotDetails.toJSON();
+
+        const reviews = await Review.count({
+            where: {
+                spotId
+            }
+        });
+
+        const sumOfReviews = await Review.sum("stars", {
+            where: {
+                spotId
+            }
+        });
+
+        result.numReviews = reviews;
+        result.avgRating = sumOfReviews / reviews;
+
+        res.json(result);
     } catch (error) {
         res.status(404).json({
             message: "Spot couldn't be found"

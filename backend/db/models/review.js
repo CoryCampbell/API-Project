@@ -40,7 +40,10 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING
             },
             stars: {
-                type: DataTypes.INTEGER
+                type: DataTypes.INTEGER,
+                validate: {
+                    len: [0, 5]
+                }
             }
         },
         {

@@ -1,9 +1,9 @@
 const express = require("express");
-const { Op } = require("sequelize");
-const bcrypt = require("bcryptjs");
 const { requireAuth } = require("../../utils/auth");
 const { Spot, SpotImage, User } = require("../../db/models");
 
+const { Op } = require("sequelize");
+const bcrypt = require("bcryptjs");
 
 const options = {};
 const router = express.Router();
@@ -143,7 +143,7 @@ router.delete("/:spotId", requireAuth, async (req, res) => {
             "message": "Successfully deleted"
         });
     } catch (error) {
-        req.status(404).json({ "message": "Spot couldn't be found" });
+        res.status(404).json({ "message": "Spot couldn't be found" });
     }
 });
 

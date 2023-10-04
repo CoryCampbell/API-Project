@@ -10,7 +10,7 @@ const { Review } = require("../../db/models");
 
 const router = express.Router();
 
-//get all reviews for current spot
+//get all reviews for current spot by userId
 router.get("/current", requireAuth, async (req, res) => {
     try {
         const { user } = req;
@@ -28,5 +28,6 @@ router.get("/current", requireAuth, async (req, res) => {
         });
     }
 });
+
 
 module.exports = router;

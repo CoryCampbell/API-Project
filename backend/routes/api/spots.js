@@ -1,6 +1,6 @@
 const express = require("express");
 const { requireAuth } = require("../../utils/auth");
-const { Spot, SpotImage, User } = require("../../db/models");
+const { Spot, SpotImage, User, Review } = require("../../db/models");
 
 const { Op } = require("sequelize");
 const bcrypt = require("bcryptjs");
@@ -18,6 +18,20 @@ router.get("/current", requireAuth, async (req, res) => {
         }
     });
     res.json(yourSpots);
+});
+
+//get all reviews for current spot by spotId
+router.get("/:spotId/reviews", async (req, res) => {
+    const spotId = req.params.spotId;
+
+    const allReviews = await Review.findAll({
+        where: {
+            spotId
+        }
+    });
+    if (allReviews.toString() === "") return res.status(404).json({ message: "Spot couldn't be found" });
+
+    res.json(allReviews);
 });
 
 //get details of a spot from an id

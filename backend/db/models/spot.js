@@ -11,7 +11,8 @@ module.exports = (sequelize, DataTypes) => {
             // define association here
             Spot.belongsTo(models.User, {
                 foreignKey: "ownerId",
-                onDelete: "CASCADE"
+                onDelete: "CASCADE",
+                hooks: true
             });
         }
     }
@@ -20,7 +21,10 @@ module.exports = (sequelize, DataTypes) => {
             ownerId: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
-                unique: true
+                references: {
+                    model: "Users",
+                    key: "id"
+                }
             },
             address: {
                 type: DataTypes.STRING(255),
@@ -57,13 +61,6 @@ module.exports = (sequelize, DataTypes) => {
             price: {
                 type: DataTypes.INTEGER,
                 allowNull: false
-            },
-            previewImage: {
-                type: DataTypes.STRING(255),
-                allowNull: false,
-                validate: {
-                    isUrl: true
-                }
             }
         },
         {

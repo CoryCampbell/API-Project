@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
         static associate(models) {
             // define association here
             Spot.belongsTo(models.User, {
+                as: "Owner",
                 foreignKey: "ownerId",
                 onDelete: "CASCADE",
                 hooks: true
@@ -57,7 +58,7 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: false
             },
             name: {
-                type: DataTypes.STRING(255),
+                type: DataTypes.STRING(50),
                 allowNull: false
             },
             description: {

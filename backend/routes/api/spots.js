@@ -23,7 +23,7 @@ router.get("/:spotId", async (req, res) => {
     try {
         const { spotId } = req.params;
         const spotDetails = await Spot.findByPk(spotId, {
-            include: [SpotImage, { User, as: "Owner" }]
+            include: [{ model: SpotImage }, { model: User, as: "Owner" }]
         });
         res.json(spotDetails);
     } catch (error) {
@@ -35,7 +35,11 @@ router.get("/:spotId", async (req, res) => {
 
 //get all spots
 router.get("/", async (req, res) => {
-    const allSpots = await Spot.findAll();
+    const allSpots = await Spot.findAll({
+        include: {
+            model: SpotImage
+        }
+    });
     res.json(allSpots);
 });
 
@@ -93,6 +97,51 @@ router.post("/", requireAuth, async (req, res) => {
                 "price": "Price per day is required"
             }
         });
+    }
+});
+
+//edit a spots information
+router.put("/:spotId", requireAuth, async (req, res) => {
+    const updatedSpotData = req.body;
+    const { spotId } = req.params;
+
+    try {
+        const spot = await Spot.findByPk(spotId);
+
+        await spot.update(updatedSpotData);
+
+        res.json(spot);
+    } catch (error) {
+        res.status(400).json({
+            "message": "Bad Request",
+            "errors": {
+                "address": "Street address is required",
+                "city": "City is required",
+                "state": "State is required",
+                "country": "Country is required",
+                "lat": "Latitude is not valid",
+                "lng": "Longitude is not valid",
+                "name": "Name must be less than 50 characters",
+                "description": "Description is required",
+                "price": "Price per day is required"
+            }
+        });
+    }
+});
+
+router.delete("/:spotId", requireAuth, async (req, res) => {
+    const { spotId } = req.params;
+
+    try {
+        const spot = await Spot.findByPk(spotId);
+
+        await spot.destroy();
+
+        res.status(200).json({
+            "message": "Successfully deleted"
+        });
+    } catch (error) {
+        req.status(404).json({ "message": "Spot couldn't be found" });
     }
 });
 

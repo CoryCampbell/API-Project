@@ -4,6 +4,8 @@ const bcrypt = require("bcryptjs");
 const { requireAuth } = require("../../utils/auth");
 const { Spot, SpotImage, User } = require("../../db/models");
 
+
+const options = {};
 const router = express.Router();
 
 //return all spots owned by this user

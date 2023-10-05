@@ -8,12 +8,14 @@ const { User } = require("../../db/models");
 const router = express.Router();
 
 const validateSignup = [
-    check("email").exists({ checkFalsy: true }).isEmail().withMessage("Please provide a valid email."),
-    check("username")
-        .exists({ checkFalsy: true })
-        .isLength({ min: 4 })
-        .withMessage("Please provide a username with at least 4 characters."),
-    check("username").not().isEmail().withMessage("Username cannot be an email."),
+    check("email").exists({ checkFalsy: true }).withMessage("Invalid email"),
+
+    check("username").exists({ checkFalsy: true }).withMessage("Username is required"),
+
+    check("firstName").exists({ checkFalsy: true }).withMessage("First Name is required"),
+
+    check("lastName").exists({ checkFalsy: true }).withMessage("Last Name is required"),
+
     check("password")
         .exists({ checkFalsy: true })
         .isLength({ min: 6 })
@@ -25,6 +27,16 @@ const validateSignup = [
 router.post("/", validateSignup, async (req, res) => {
     const { email, password, username, firstName, lastName } = req.body;
     const hashedPassword = bcrypt.hashSync(password);
+
+    const errorObject = {};
+
+    if (!email) errorObject.email = "Invalid email";
+    if (!username) errorObject.username = "Username is required";
+    if (!firstName) errorObject.firstName = "First Name is required";
+    if (!lastName) errorObject.lastName = "Last Name is required";
+
+    if (errorObject) throw new Error(errorObject);
+
     const user = await User.create({ email, username, firstName, lastName, hashedPassword });
 
     const safeUser = {

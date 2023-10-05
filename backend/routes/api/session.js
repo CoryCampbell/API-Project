@@ -21,6 +21,11 @@ const validateLogin = [
 router.post("/", validateLogin, async (req, res, next) => {
     const { credential, password } = req.body;
 
+    if (credential === undefined) errorObject.message = "Email or username is required";
+    if (password === undefined) errorObject.message = "Password is required";
+
+    if (errorObject.message || errorObject.password) return res.json(errorObject);
+
     const user = await User.unscoped().findOne({
         where: {
             [Op.or]: {

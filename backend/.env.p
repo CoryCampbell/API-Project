@@ -1,0 +1,5 @@
+NODE_ENV=production
+JWT_SECRET=OvsU+hOsmZDECA
+JWT_EXPIRES_IN=604800
+SCHEMA=week_13_project
+DATABASE_URL=postgres://app_academy_projects_wrdi_user:sRxcdpXen6ntRmKBEaXPTW3HFmqPbWth@dpg-ckbjuruct0pc73eh544g-a/app_academy_projects_wrdi

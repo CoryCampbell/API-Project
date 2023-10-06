@@ -63,38 +63,38 @@ router.get("/:spotId/reviews", requireAuth, async (req, res) => {
 
 //get details of a spot from an id
 router.get("/:spotId", async (req, res) => {
-    try {
-        const { spotId } = req.params;
-        const spotDetails = await Spot.findByPk(spotId, {
-            include: [
-                { model: SpotImage, attributes: ["id", "url", "preview"] },
-                { model: User, as: "Owner", attributes: ["id", "firstName", "lastName"] }
-            ]
-        });
+    const { spotId } = req.params;
+    const spotDetails = await Spot.findByPk(spotId, {
+        include: [
+            { model: SpotImage, as: "previewImage", attributes: ["id", "url", "preview"] },
+            { model: User, as: "Owner", attributes: ["id", "firstName", "lastName"] }
+        ]
+    });
 
-        const result = spotDetails.toJSON();
+    const result = spotDetails.toJSON();
 
-        const reviewCount = await Review.count({
-            where: {
-                spotId
-            }
-        });
+    const reviewCount = await Review.count({
+        where: {
+            spotId
+        }
+    });
 
-        const sumOfReviews = await Review.sum("stars", {
-            where: {
-                spotId
-            }
-        });
+    const sumOfReviews = await Review.sum("stars", {
+        where: {
+            spotId
+        }
+    });
 
-        result.numReviews = reviewCount;
-        result.avgRating = sumOfReviews / reviewCount;
+    result.numReviews = reviewCount;
+    result.avgRating = sumOfReviews / reviewCount;
 
-        res.json(result);
-    } catch (error) {
-        res.status(404).json({
-            message: "Spot couldn't be found"
-        });
-    }
+    res.json(result);
+
+    // catch (error) {
+    //     res.status(404).json({
+    //         message: "Spot couldn't be found"
+    //     });
+    // }
 });
 
 //get all spots

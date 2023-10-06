@@ -10,7 +10,7 @@ const { Review, ReviewImage, User, SpotImage, Spot } = require("../../db/models"
 
 const router = express.Router();
 
-//get all reviews for current spot by userId
+//get all reviews of the Current User
 router.get("/current", requireAuth, async (req, res) => {
     const { user } = req;
 

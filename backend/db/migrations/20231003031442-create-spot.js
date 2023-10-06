@@ -60,15 +60,17 @@ module.exports = {
                     allowNull: false
                 },
                 price: {
-                    type: Sequelize.INTEGER,
+                    type: Sequelize.DECIMAL(6, 2),
                     allowNull: false
                 },
                 createdAt: {
                     allowNull: false,
+                    defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
                     type: Sequelize.DATE
                 },
                 updatedAt: {
                     allowNull: false,
+                    defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
                     type: Sequelize.DATE
                 }
             },

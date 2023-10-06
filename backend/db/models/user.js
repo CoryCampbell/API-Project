@@ -16,7 +16,9 @@ module.exports = (sequelize, DataTypes) => {
             });
 
             User.hasMany(models.Review, {
-                foreignKey: "userId"
+                foreignKey: "userId",
+                onDelete: "CASCADE",
+                hooks: true
             });
         }
     }

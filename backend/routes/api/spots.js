@@ -174,31 +174,58 @@ router.post("/", requireAuth, async (req, res) => {
 
 //edit a spots information
 router.put("/:spotId", requireAuth, async (req, res) => {
-    const updatedSpotData = req.body;
+    const errorObj = {};
+
+    const { address, city, state, country, lat, lng, name, description, price } = req.body;
     const { spotId } = req.params;
 
-    try {
-        const spot = await Spot.findByPk(spotId);
+    // try {
+    const spot = await Spot.findByPk(spotId);
 
-        await spot.update(updatedSpotData);
+    await spot.update({
+        address,
+        city,
+        state,
+        country,
+        lat,
+        lng,
+        name,
+        description,
+        price
+    });
 
-        res.json(spot);
-    } catch (error) {
-        res.status(400).json({
-            "message": "Bad Request",
-            "errors": {
-                "address": "Street address is required",
-                "city": "City is required",
-                "state": "State is required",
-                "country": "Country is required",
-                "lat": "Latitude is not valid",
-                "lng": "Longitude is not valid",
-                "name": "Name must be less than 50 characters",
-                "description": "Description is required",
-                "price": "Price per day is required"
-            }
+    if (!address) errorObj.address = "Street address is required";
+    if (!city) errorObj.city = "City is required";
+    if (!state) errorObj.state = "State is required";
+    if (!country) errorObj.country = "Country is required";
+    if (!lat) errorObj.lat = "Latitude is not valid";
+    if (!lng) errorObj.lng = "Longitude is not valid";
+    if (!name) errorObj.name = "Name must be less than 50 characters";
+    if (!description) errorObj.description = "Description is required";
+    if (!price) errorObj.price = "Price per day is required";
+
+    if (
+        errorObj.address ||
+        errorObj.city ||
+        errorObj.state ||
+        errorObj.country ||
+        errorObj.lat ||
+        errorObj.lng ||
+        errorObj.name ||
+        errorObj.description ||
+        errorObj.price
+    )
+        return res.json({
+            "message": errorObj
         });
-    }
+
+    res.json(spot);
+    // }
+    // catch (error) {
+    //     res.status(400).json({
+    //         "message": "Spot couldn't be found"
+    //     });
+    // }
 });
 
 router.delete("/:spotId", requireAuth, async (req, res) => {

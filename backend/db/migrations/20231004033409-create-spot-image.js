@@ -21,7 +21,6 @@ module.exports = {
                 spotId: {
                     type: Sequelize.INTEGER,
                     allowNull: false,
-                    unique: true,
                     references: {
                         model: "Spots",
                         key: "id"
@@ -29,7 +28,8 @@ module.exports = {
                 },
                 url: {
                     type: Sequelize.STRING,
-                    allowNull: false
+                    allowNull: false,
+                    unique: true
                 },
                 preview: {
                     type: Sequelize.BOOLEAN,

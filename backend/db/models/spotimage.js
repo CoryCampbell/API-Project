@@ -21,7 +21,6 @@ module.exports = (sequelize, DataTypes) => {
             spotId: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
-                unique: true,
                 references: {
                     model: "Spots",
                     key: "id"
@@ -30,13 +29,10 @@ module.exports = (sequelize, DataTypes) => {
             url: {
                 type: DataTypes.STRING,
                 allowNull: false,
+                unique: true,
                 validate: {
                     isUrl: true
                 }
-            },
-            preview: {
-                type: DataTypes.BOOLEAN,
-                allowNull: false
             },
             preview: DataTypes.BOOLEAN
         },

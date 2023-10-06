@@ -79,7 +79,6 @@ router.get("/", async (req, res) => {
         include: [
             {
                 model: SpotImage,
-                as: "previewImage",
                 attributes: ["url"]
             }
         ]
@@ -94,7 +93,10 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
     try {
         const { url, preview } = req.body;
 
+        const { spotId } = req.params;
+
         const newImage = await SpotImage.create({
+            spotId,
             url,
             preview
         });

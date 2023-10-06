@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
+            ReviewImage.belongsTo(models.Review, { foreignKey: "reviewId" });
         }
     }
     ReviewImage.init(
@@ -19,7 +20,11 @@ module.exports = (sequelize, DataTypes) => {
         {
             sequelize,
             modelName: "ReviewImage",
-            defaultScope: { exclude: ["updatedAt", "createdAt"] }
+            defaultScope: {
+                attributes: {
+                    exclude: ["updatedAt", "createdAt"]
+                }
+            }
         }
     );
     return ReviewImage;

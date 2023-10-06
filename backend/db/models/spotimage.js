@@ -20,23 +20,30 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 references: {
-                    model: "Spots",
-                    key: "id"
+                    foreignKey: "spotId"
                 }
             },
             url: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                unique: true,
                 validate: {
                     isUrl: true
                 }
             },
-            preview: DataTypes.BOOLEAN
+            preview: {
+                type: DataTypes.BOOLEAN,
+                allowNull: false,
+                defaultValue: false
+            }
         },
         {
             sequelize,
-            modelName: "SpotImage"
+            modelName: "SpotImage",
+            defaultScope: {
+                attributes: {
+                    exclude: ["createdAt", "updatedAt"]
+                }
+            }
         }
     );
     return SpotImage;

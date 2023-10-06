@@ -30,6 +30,16 @@ module.exports = {
                     spotId: 3,
                     url: "https://www.herbeasleychevy.com/blogs/3828/wp-content/uploads/2021/04/nature-wichita-falls-tx.jpg",
                     preview: true
+                },
+                {
+                    spotId: 4,
+                    url: "https://www.herbeasleychevy.com/blogs/3828/wp-content/uploads/2021/04/nature-wichita-falls-tx.jpg",
+                    preview: true
+                },
+                {
+                    spotId: 5,
+                    url: "https://www.herbeasleychevy.com/blogs/3828/wp-content/uploads/2021/04/nature-wichita-falls-tx.jpg",
+                    preview: true
                 }
             ],
             { validate: true }

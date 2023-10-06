@@ -75,17 +75,8 @@ router.get("/:spotId", async (req, res) => {
 
 //get all spots
 router.get("/", async (req, res) => {
-    const allSpots = await Spot.findAll({
-        include: [
-            {
-                model: SpotImage,
-                attributes: ["url"]
-            }
-        ]
-    });
-    res.json({
-        "Spots": allSpots
-    });
+    const allSpots = await Spot.findAll();
+    res.json(allSpots);
 });
 
 //add image to spot based on the spots id

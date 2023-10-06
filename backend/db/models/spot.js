@@ -9,18 +9,20 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
+
             Spot.belongsTo(models.User, {
                 foreignKey: "ownerId"
             });
 
             Spot.hasMany(models.SpotImage, {
-                foreignKey: "spotId",
-                onDelete: "CASCADE",
-                hooks: true
+                foreignKey: "spotId"
+            });
+
+            Spot.hasMany(models.Booking, {
+                foreignKey: "spotId"
             });
 
             Spot.hasMany(models.Review, {
-                as: "avgRating",
                 foreignKey: "spotId"
             });
         }
@@ -29,11 +31,7 @@ module.exports = (sequelize, DataTypes) => {
         {
             ownerId: {
                 type: DataTypes.INTEGER,
-                allowNull: false,
-                references: {
-                    model: "Users",
-                    key: "id"
-                }
+                allowNull: false
             },
             address: {
                 type: DataTypes.STRING(255),
@@ -62,6 +60,7 @@ module.exports = (sequelize, DataTypes) => {
             },
             name: {
                 type: DataTypes.STRING(50),
+                unique: true,
                 allowNull: false
             },
             description: {

@@ -53,7 +53,7 @@ module.exports = {
                     price: 600
                 },
                 {
-                    ownerId: 3,
+                    ownerId: 4,
                     address: "507 Terracotta Ln",
                     city: "Witchita",
                     state: "Texas",
@@ -63,6 +63,18 @@ module.exports = {
                     name: "Fabulous Castle's neighbor. Just a plain house.",
                     description: "The king used to live next door.",
                     price: 10
+                },
+                {
+                    ownerId: 5,
+                    address: "508 Terracotta Ln",
+                    city: "Witchita",
+                    state: "Texas",
+                    country: "USA",
+                    lat: 45.12124,
+                    lng: -87.17615,
+                    name: "wow, a king used to live two doors down",
+                    description: "Maybe you might see some royalty.",
+                    price: 8
                 }
             ],
             { validate: true }

@@ -5,7 +5,7 @@ const { Spot, SpotImage, User, Review } = require("../../db/models");
 const { Op } = require("sequelize");
 const bcrypt = require("bcryptjs");
 
-const options = {};
+
 const router = express.Router();
 
 //return all spots owned by this user
@@ -15,13 +15,40 @@ router.get("/current", requireAuth, async (req, res) => {
     const yourSpots = await Spot.findAll({
         where: {
             ownerId: user.id
-        }
+        },
+        include: [
+            {
+                model: SpotImage,
+                as: "previewImage",
+                attributes: ["url"]
+            },
+            {
+                model: Review,
+                as: "avgRating"
+            }
+        ]
     });
-    res.json(yourSpots);
+
+    // const result = yourSpots.toJSON();
+
+    // const reviewCount = await Review.count();
+
+    // const sumOfReviews = await Review.sum("stars", {
+    //     where: {
+    //         spotId
+    //     }
+    // });
+
+    // result.numReviews = reviewCount;
+    // result.avgRating = sumOfReviews / reviewCount;
+
+    // res.json(result);
+
+    res.json({ "Spots": yourSpots });
 });
 
 //get all reviews for current spot by spotId
-router.get("/:spotId/reviews", async (req, res) => {
+router.get("/:spotId/reviews", requireAuth, async (req, res) => {
     const spotId = req.params.spotId;
 
     const allReviews = await Review.findAll({
@@ -47,7 +74,7 @@ router.get("/:spotId", async (req, res) => {
 
         const result = spotDetails.toJSON();
 
-        const reviews = await Review.count({
+        const reviewCount = await Review.count({
             where: {
                 spotId
             }
@@ -59,8 +86,8 @@ router.get("/:spotId", async (req, res) => {
             }
         });
 
-        result.numReviews = reviews;
-        result.avgRating = sumOfReviews / reviews;
+        result.numReviews = reviewCount;
+        result.avgRating = sumOfReviews / reviewCount;
 
         res.json(result);
     } catch (error) {
@@ -73,11 +100,17 @@ router.get("/:spotId", async (req, res) => {
 //get all spots
 router.get("/", async (req, res) => {
     const allSpots = await Spot.findAll({
-        include: {
-            model: SpotImage
-        }
+        include: [
+            {
+                model: SpotImage,
+                as: "previewImage",
+                attributes: ["url"]
+            }
+        ]
     });
-    res.json(allSpots);
+    res.json({
+        "Spots": allSpots
+    });
 });
 
 //add new image to spot
@@ -97,6 +130,28 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
         });
     }
 });
+
+//create a review for a spot based on the spots id
+// router.post("/:spotId/reviews", requireAuth, async (req, res) => {
+//     try {
+//         const { review, stars } = req.body;
+
+//         const { spotId } = req.params;
+
+//         const spot = await Spot.findByPk(spotId);
+
+//         const newReview = await Review.create({
+//             review,
+//             stars
+//         });
+
+//         res.json(newReview);
+//     } catch (error) {
+//         res.status(404).json({
+//             "message": "Spot couldn't be found"
+//         });
+//     }
+// });
 
 //create a new spot
 router.post("/", requireAuth, async (req, res) => {

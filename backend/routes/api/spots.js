@@ -1,6 +1,6 @@
 const express = require("express");
 const { requireAuth } = require("../../utils/auth");
-const { Spot, SpotImage, User, Review, ReviewImage } = require("../../db/models");
+const { Spot, SpotImage, User, Review, ReviewImage, Booking } = require("../../db/models");
 
 const { Op } = require("sequelize");
 const bcrypt = require("bcryptjs");
@@ -20,6 +20,52 @@ router.get("/current", requireAuth, async (req, res) => {
     });
 
     res.json(yourSpots);
+});
+
+//get all Bookings for a Spot based on the Spot's id
+router.get("/:spotId/bookings", requireAuth, async (req, res) => {
+    try {
+        const { user } = req;
+
+        const { spotId } = req.params;
+
+        //result for NON OWNER
+        const bookingsObjForNon = await Booking.findAll({
+            where: {
+                spotId
+            },
+            attributes: {
+                exclude: ["createdAt", "updatedAt", "userId"]
+            }
+        });
+
+        //result for OWNER
+        const bookingsObjForOwner = await Booking.findAll({
+            where: {
+                spotId
+            },
+            attributes: {
+                exclude: ["createdAt", "updatedAt"]
+            }
+        });
+
+        //refactor this into a for loop that checks each instance of the array for userId comparison and return true or false boolean if all match
+        const userId = bookingsObjForOwner[0].dataValues.userId;
+
+        if (user.id === userId) {
+            res.json({
+                "Bookings": bookingsObjForOwner
+            });
+        } else {
+            res.json({
+                "Bookings": bookingsObjForNon
+            });
+        }
+    } catch (error) {
+        res.status(404).json({
+            "message": "Spot couldn't be found"
+        });
+    }
 });
 
 //get all reviews by a spotId

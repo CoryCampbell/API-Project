@@ -11,14 +11,20 @@ const { Review, ReviewImage, User, SpotImage, Spot, Booking } = require("../../d
 const router = express.Router();
 
 //get all of the Current User's Bookings
-router.get("/current", async (req, res) => {
+router.get("/current", requireAuth, async (req, res) => {
     //
     const { user } = req;
     const bookings = await Booking.findAll({
         where: {
             userId: user.id
         },
-        include: [{ model: Spot, attributes: { exclude: ["description", "createdAt", "updatedAt"] } }]
+        include: [
+            {
+                model: Spot,
+                attributes: { exclude: ["description", "createdAt", "updatedAt"] },
+                include: SpotImage
+            }
+        ]
     });
 
     res.json({

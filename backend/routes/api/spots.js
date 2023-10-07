@@ -40,13 +40,17 @@ router.get("/:spotId/bookings", requireAuth, async (req, res) => {
         });
 
         //result for OWNER
+        // -needs id attribute in response
         const bookingsObjForOwner = await Booking.findAll({
             where: {
                 spotId
             },
-            attributes: {
-                exclude: ["createdAt", "updatedAt"]
-            }
+            include: [
+                {
+                    model: User,
+                    attributes: ["id", "firstName", "lastName"]
+                }
+            ]
         });
 
         //refactor this into a for loop that checks each instance of the array for userId comparison and return true or false boolean if all match

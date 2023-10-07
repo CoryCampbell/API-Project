@@ -5,6 +5,7 @@ const usersRouter = require("./users.js");
 const spotsRouter = require("./spots.js");
 const reviewsRouter = require("./reviews.js");
 const bookingsRouter = require("./bookings.js");
+const spotImagesRouter = require("./spot-images.js");
 
 const { setTokenCookie } = require("../../utils/auth.js");
 const { User, Spot } = require("../../db/models");
@@ -21,6 +22,8 @@ router.use("/spots", spotsRouter);
 router.use("/reviews", reviewsRouter);
 
 router.use("/bookings", bookingsRouter);
+
+router.use("/spot-images", spotImagesRouter);
 
 router.get("/restore-user", (req, res) => {
     return res.json(req.user);

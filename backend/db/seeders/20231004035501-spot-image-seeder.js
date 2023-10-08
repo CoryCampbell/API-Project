@@ -33,12 +33,12 @@ module.exports = {
                 },
                 {
                     spotId: 4,
-                    url: "https://www.herbeasleychevy.com/blogs/3828/wp-content/uploads/2021/04/nature-wichita-falls-tx.jpg",
+                    url: "https://a0.muscache.com/im/pictures/miso/Hosting-638550295906956591/original/ade7c506-6805-448a-a209-bde97ca8547c.jpeg?im_w=720",
                     preview: true
                 },
                 {
                     spotId: 5,
-                    url: "https://www.herbeasleychevy.com/blogs/3828/wp-content/uploads/2021/04/nature-wichita-falls-tx.jpg",
+                    url: "https://a0.muscache.com/im/pictures/73de3da2-3580-4d32-bf7a-04f9dc004af9.jpg?im_w=720",
                     preview: true
                 }
             ],

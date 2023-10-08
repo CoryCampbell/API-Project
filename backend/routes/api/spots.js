@@ -218,67 +218,92 @@ router.post("/", requireAuth, async (req, res) => {
 
 //edit a spots information
 router.put("/:spotId", requireAuth, async (req, res) => {
+    const { user } = req;
+
     const errorObj = {};
 
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
     const { spotId } = req.params;
 
-    // try {
-    const spot = await Spot.findByPk(spotId);
-
-    await spot.update({
-        address,
-        city,
-        state,
-        country,
-        lat,
-        lng,
-        name,
-        description,
-        price
-    });
-
-    if (!address) errorObj.address = "Street address is required";
-    if (!city) errorObj.city = "City is required";
-    if (!state) errorObj.state = "State is required";
-    if (!country) errorObj.country = "Country is required";
-    if (!lat) errorObj.lat = "Latitude is not valid";
-    if (!lng) errorObj.lng = "Longitude is not valid";
-    if (!name) errorObj.name = "Name must be less than 50 characters";
-    if (!description) errorObj.description = "Description is required";
-    if (!price) errorObj.price = "Price per day is required";
-
-    if (
-        errorObj.address ||
-        errorObj.city ||
-        errorObj.state ||
-        errorObj.country ||
-        errorObj.lat ||
-        errorObj.lng ||
-        errorObj.name ||
-        errorObj.description ||
-        errorObj.price
-    )
-        return res.json({
-            "message": errorObj
-        });
-
-    res.json(spot);
-    // }
-    // catch (error) {
-    //     res.status(400).json({
-    //         "message": "Spot couldn't be found"
-    //     });
-    // }
-});
-
-router.delete("/:spotId", requireAuth, async (req, res) => {
-    const { spotId } = req.params;
-
     try {
         const spot = await Spot.findByPk(spotId);
 
-        await spot.destroy();
+        //authorization check
+        if (user.id === spot.ownerId) {
+            await spot.update({
+                address,
+                city,
+                state,
+                country,
+                lat,
+                lng,
+                name,
+                description,
+                price
+            });
+        } else {
+            return res.status(403).json({
+                "message": "Forbidden"
+            });
+        }
+
+        if (!address) errorObj.address = "Street address is required";
+        if (!city) errorObj.city = "City is required";
+        if (!state) errorObj.state = "State is required";
+        if (!country) errorObj.country = "Country is required";
+        if (!lat) errorObj.lat = "Latitude is not valid";
+        if (!lng) errorObj.lng = "Longitude is not valid";
+        if (!name) errorObj.name = "Name must be less than 50 characters";
+        if (!description) errorObj.description = "Description is required";
+        if (!price) errorObj.price = "Price per day is required";
+
+        if (
+            errorObj.address ||
+            errorObj.city ||
+            errorObj.state ||
+            errorObj.country ||
+            errorObj.lat ||
+            errorObj.lng ||
+            errorObj.name ||
+            errorObj.description ||
+            errorObj.price
+        )
+            return res.json({
+                "message": errorObj
+            });
+
+        res.json(spot);
+    } catch (error) {
+        res.status(400).json({
+            "message": "Spot couldn't be found"
+        });
+    }
+});
+
+router.delete("/:spotId", requireAuth, async (req, res) => {
+    try {
+        const { spotId } = req.params;
+        const { user } = req;
+
+        const spotToDelete = await Spot.findByPk(spotId);
+
+        console.log("spotToDelete", spotToDelete);
+        const ownerId = spotToDelete.dataValues.ownerId;
+        console.log("UserId:", user.id);
+        console.log("ownerId", ownerId);
+
+        //authorization check
+        if (user.id === ownerId) {
+            await spotToDelete.destroy({
+                where: {
+                    id: spotId
+                }
+            });
+        } else {
+            return res.status(403).json({
+                "message": "Forbidden"
+            });
+        }
 
         res.status(200).json({
             "message": "Successfully deleted"

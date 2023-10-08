@@ -10,19 +10,21 @@ const { Review, ReviewImage, User, SpotImage, Spot } = require("../../db/models"
 
 const router = express.Router();
 
-//get all reviews of the Current User
+//get all reviews of the Current User (written by current user)
 router.get("/current", requireAuth, async (req, res) => {
     const { user } = req;
 
-    const reviewId = user.id;
 
     const allReviews = await Review.findAll({
+        where: {
+            userId: user.id
+        },
         include: [
             { model: User, attributes: ["id", "firstName", "lastName"] },
             {
                 model: Spot,
                 attributes: { exclude: ["description", "createdAt", "updatedAt"] },
-                include: { model: SpotImage, where: { preview: true } }
+                include: { model: SpotImage, attributes: ["url"], where: { preview: true } }
             },
             { model: ReviewImage, attributes: ["id", "url"] }
         ]

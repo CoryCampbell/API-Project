@@ -16,26 +16,25 @@ router.delete("/:imageId", requireAuth, async (req, res) => {
         const { imageId } = req.params;
         const { user } = req;
 
-
         //find the spot that the spotimage belongs to then use that spot.ownerId to authorize deletion
         const spot = await Spot.findAll({ include: SpotImage });
 
-        const spotOwnerId = Spot.ownerId;
+        const spotOwnerId = spot.dataValues.ownerId;
 
-        console.log("spot", spot);
+        console.log("spotOwnerId =--->", spotOwnerId);
 
-        // const spotImageToDelete = await SpotImage.findByPk(imageId);
-        // const spotImageUserId = spotImageToDelete.dataValues.userId;
-        // console.log("spotImageUserId", spotImageUserId);
+        const spotImageToDelete = await SpotImage.findByPk(imageId);
+        const spotImageUserId = spotImageToDelete.dataValues.ownerId;
+        console.log("spotImageUserId", spotImageUserId);
 
-        // //authorization check
-        // if (user.id === spotImageUserId) {
-        //     await spotImageToDelete.destroy();
-        // } else {
-        //     return res.status(403).json({
-        //         "message": "Forbidden"
-        //     });
-        // }
+        //authorization check
+        if (user.id === spotImageUserId) {
+            await spotImageToDelete.destroy();
+        } else {
+            return res.status(403).json({
+                "message": "Forbidden"
+            });
+        }
 
         res.json({
             "message": "Successfully deleted"

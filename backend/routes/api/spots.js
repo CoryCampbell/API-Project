@@ -45,6 +45,7 @@ router.get("/:spotId/bookings", requireAuth, async (req, res) => {
             where: {
                 spotId
             },
+            attributes: ["id", "spotId", "userId", "startDate", "endDate", "createdAt", "updatedAt"],
             include: [
                 {
                     model: User,

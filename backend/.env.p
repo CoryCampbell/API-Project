@@ -2,4 +2,4 @@ NODE_ENV=production
 JWT_SECRET=95375e85da0f900addf9fbbd9e198529
 JWT_EXPIRES_IN=604800
 SCHEMA=week_13_project
-DATABASE_URL=postgres://app_academy_projects_wrdi_user:sRxcdpXen6ntRmKBEaXPTW3HFmqPbWth@dpg-ckbjuruct0pc73eh544g-a/app_academy_projects_wrdi
+DATABASE_URL=postgres://app_academy_projects_pq7a_user:n1m8DpwvL5I5ScgzJ80M3d5NdjuZu02W@dpg-ckh4n96afg7c73fucmb0-a/app_academy_projects_pq7a

@@ -81,4 +81,76 @@ router.post("/:reviewId/images", requireAuth, async (req, res) => {
 });
 
 
+//Edit a Review
+router.put("/:reviewId", requireAuth, async (req, res) => {
+    const { user } = req;
+    const { reviewId } = req.params;
+    const { review, stars } = req.body;
+
+    //find the review that is getting an image
+    //=========== this also checks that the review exists
+    const reviewToUpdate = await Review.findByPk(reviewId);
+
+    const errorsObj = {};
+
+    if (!review) errorsObj.review = "Review text is required";
+    if (!stars) errorsObj.stars = "Stars must be an integer from 1 to 5";
+
+    if (errorsObj.review || errorsObj.stars)
+        return res.status(400).json({
+            "message": "Bad Request",
+            "errors": errorsObj
+        });
+
+    try {
+        //authorization check
+        if (user.id === reviewToUpdate.userId) {
+            await reviewToUpdate.update({
+                review,
+                stars
+            });
+            res.json(reviewToUpdate);
+        } else {
+            return res.status(403).json({
+                "message": "Forbidden"
+            });
+        }
+    } catch (error) {
+        res.status(404).json({
+            "message": "Review couldn't be found"
+        });
+    }
+});
+
+//delete a Review
+router.delete("/:reviewId", requireAuth, async (req, res) => {
+    try {
+        const { reviewId } = req.params;
+        const { user } = req;
+        const review = await Review.findByPk(reviewId);
+
+
+        const reviewUserId = review.dataValues.userId;
+        const reviewToDelete = await Review.findByPk(reviewId);
+
+        //authorization check
+        if (user.id === reviewUserId) {
+            await reviewToDelete.destroy();
+        } else {
+            return res.status(403).json({
+                "message": "Forbidden"
+            });
+        }
+
+        res.json({
+            "message": "Successfully deleted"
+        });
+    } catch (error) {
+        res.status(404).json({
+            "message": "Review couldn't be found"
+        });
+    }
+});
+
+
 module.exports = router;

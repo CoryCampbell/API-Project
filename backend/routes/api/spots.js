@@ -157,43 +157,53 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
 });
 
 //Create a Booking from a Spot based on the Spot's id
-router.post("/:spotId/bookings", requireAuth, async (req, res) => {
-    try {
-        const { startDate, endDate } = req.body;
-        const { spotId } = req.params;
-        const { user } = req;
+// router.post("/:spotId/bookings", requireAuth, async (req, res) => {
+//     try {
+//         const { spotId } = req.params;
 
-        //authorization check
-        //only create if user does NOT own the spot
-        if (user.id !== ownerId) {
-            //check if this spot has been booked for these dates
+//         //find the spot that is being booked
+//         //=========== this also checks that the spot exists
+//         const spot = await Spot.findByPk(spotId);
 
-            //endDate cannot be before startDate
+//         const { startDate, endDate } = req.body;
+//         const { user } = req;
 
-            //create booking and add it to THIS spot
-            //find the spot that is being booked
-            const spot = await Spot.findByPk(spotId);
+//         //authorization check
+//         //only create if user does NOT own the spot
+//         if (user.id !== ownerId) {
+//             //need to get:
+//             //          any bookings that exist already on this spot
+//             //          the startdate and enddate of each booking
 
-            //create the booking
-            const newBooking = await Booking.create({
-                spotId,
-                userId: user.id,
-                startDate,
-                endDate
-            });
+//             currentBookings.forEach((booking) => {
+//                 //check if this spot has been booked for these dates
+//                 //
+//                 //
+//                 //endDate cannot be before startDate
+//                 //
+//                 //
+//             });
 
-            res.json(newBooking);
-        } else {
-            return res.status(403).json({
-                "message": "Forbidden"
-            });
-        }
-    } catch (error) {
-        res.status(404).json({
-            "message": "Spot couldn't be found"
-        });
-    }
-});
+//             //create the booking
+//             const newBooking = await Booking.create({
+//                 spotId,
+//                 userId: user.id,
+//                 startDate,
+//                 endDate
+//             });
+
+//             res.json(newBooking);
+//         } else {
+//             return res.status(403).json({
+//                 "message": "Forbidden"
+//             });
+//         }
+//     } catch (error) {
+//         res.status(404).json({
+//             "message": "Spot couldn't be found"
+//         });
+//     }
+// });
 
 //create a review for a spot based on the spots id
 

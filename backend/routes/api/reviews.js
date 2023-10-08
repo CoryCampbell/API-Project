@@ -10,6 +10,8 @@ const { Review, ReviewImage, User, SpotImage, Spot } = require("../../db/models"
 
 const router = express.Router();
 
+//==================================================================================
+
 //get all reviews of the Current User (written by current user)
 router.get("/current", requireAuth, async (req, res) => {
     const { user } = req;

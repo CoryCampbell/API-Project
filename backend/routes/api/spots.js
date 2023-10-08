@@ -98,7 +98,7 @@ router.get("/:spotId", async (req, res) => {
         const spotDetails = await Spot.findByPk(spotId, {
             include: [
                 { model: SpotImage, attributes: ["id", "url", "preview"] },
-                { model: User, attributes: ["id", "firstName", "lastName"] }
+                { model: User, as: "Owner", attributes: ["id", "firstName", "lastName"] }
             ]
         });
 
@@ -130,7 +130,9 @@ router.get("/:spotId", async (req, res) => {
 //get all spots
 router.get("/", async (req, res) => {
     const allSpots = await Spot.findAll();
-    res.json(allSpots);
+    res.json({
+        "Spots": allSpots
+    });
 });
 
 //add image to spot based on the spots id
@@ -147,6 +149,45 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
         });
 
         res.json(newImage);
+    } catch (error) {
+        res.status(404).json({
+            "message": "Spot couldn't be found"
+        });
+    }
+});
+
+//Create a Booking from a Spot based on the Spot's id
+router.post("/:spotId/bookings", requireAuth, async (req, res) => {
+    try {
+        const { startDate, endDate } = req.body;
+        const { spotId } = req.params;
+        const { user } = req;
+
+        //authorization check
+        //only create if user does NOT own the spot
+        if (user.id !== ownerId) {
+            //check if this spot has been booked for these dates
+
+            //endDate cannot be before startDate
+
+            //create booking and add it to THIS spot
+            //find the spot that is being booked
+            const spot = await Spot.findByPk(spotId);
+
+            //create the booking
+            const newBooking = await Booking.create({
+                spotId,
+                userId: user.id,
+                startDate,
+                endDate
+            });
+
+            res.json(newBooking);
+        } else {
+            return res.status(403).json({
+                "message": "Forbidden"
+            });
+        }
     } catch (error) {
         res.status(404).json({
             "message": "Spot couldn't be found"

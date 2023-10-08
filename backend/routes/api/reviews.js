@@ -45,7 +45,16 @@ router.post("/:reviewId/images", requireAuth, async (req, res) => {
         const review = await Review.findByPk(reviewId);
 
         //aggregate count on review.images
-        
+        const allReviewImages = await ReviewImage.count({
+            where: {
+                reviewId
+            }
+        });
+        if (allReviewImages >= 10) {
+            return res.status(403).json({
+                "message": "Maximum number of images for this resource was reached"
+            });
+        }
 
         if (user.id === review.userId) {
             const newImage = await ReviewImage.create({

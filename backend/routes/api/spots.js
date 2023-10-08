@@ -130,6 +130,7 @@ router.get("/:spotId", async (req, res) => {
 //get all spots
 router.get("/", async (req, res) => {
     const allSpots = await Spot.findAll();
+
     res.json({
         "Spots": allSpots
     });
@@ -139,16 +140,32 @@ router.get("/", async (req, res) => {
 router.post("/:spotId/images", requireAuth, async (req, res) => {
     try {
         const { url, preview } = req.body;
-
         const { spotId } = req.params;
+        const { user } = req;
 
-        const newImage = await SpotImage.create({
-            spotId,
-            url,
-            preview
-        });
+        //find the spot that is getting an image
+        //=========== this also checks that the spot exists
+        const spot = await Spot.findByPk(spotId);
 
-        res.json(newImage);
+        if (user.id === spot.ownerId) {
+            const newImage = await SpotImage.create({
+                spotId,
+                url,
+                preview
+            });
+
+            const newImageObject = newImage.toJSON();
+
+            res.json({
+                "id": newImageObject.id,
+                "url": newImageObject.url,
+                "preview": true
+            });
+        } else {
+            res.status(403).json({
+                "message": "Forbidden"
+            });
+        }
     } catch (error) {
         res.status(404).json({
             "message": "Spot couldn't be found"

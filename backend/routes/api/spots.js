@@ -469,7 +469,6 @@ router.post("/:spotId/reviews", requireAuth, async (req, res) => {
         const { review, stars } = req.body;
         const { user } = req;
         const { spotId } = req.params;
-        const thisSpotId = spotId;
         const userId = user.id;
 
         //body validations errors
@@ -564,7 +563,20 @@ router.post("/", requireAuth, async (req, res) => {
         price
     });
 
-    res.status(201).json(newSpot);
+    const resObj = {
+        id,
+        ownerId,
+        address,
+        city,
+        state,
+        country,
+        lat: Number(lat),
+        lng: Number(lng),
+        name,
+        description,
+        price
+    };
+    res.status(201).json(resObj);
 });
 
 //edit a spot

@@ -559,41 +559,52 @@ router.post("/:spotId/reviews", requireAuth, async (req, res) => {
 
 //create a new spot
 router.post("/", requireAuth, async (req, res) => {
-    try {
-        const { address, city, state, country, lat, lng, name, description, price } = req.body;
+    const { address, city, state, country, lat, lng, name, description, price } = req.body;
 
-        const { user } = req;
+    const { user } = req;
 
-        const newSpot = await Spot.create({
-            ownerId: user.id,
-            address,
-            city,
-            state,
-            country,
-            lat,
-            lng,
-            name,
-            description,
-            price
-        });
+    const errorsObject = {};
 
-        res.status(201).json(newSpot);
-    } catch (error) {
-        res.status(400).json({
+    if (!address) errorsObject.address = "Street address is required";
+    if (!city) errorsObject.city = "City is required";
+    if (!state) errorsObject.state = "State is required";
+    if (!country) errorsObject.country = "Country is required";
+    if (!lat || isNaN(lat)) errorsObject.lat = "Latitude is not valid";
+    if (!lng || isNaN(lat)) errorsObject.lng = "Longitude is not valid";
+    if (!name || name.length > 50) errorsObject.name = "Name must be less than 50 characters";
+    if (!description) errorsObject.description = "Description is required";
+    if (!price || price < 1) errorsObject.price = "Price per day is required";
+
+    if (
+        errorsObject.address ||
+        errorsObject.city ||
+        errorsObject.state ||
+        errorsObject.country ||
+        errorsObject.lat ||
+        errorsObject.lng ||
+        errorsObject.name ||
+        errorsObject.description ||
+        errorsObject.price
+    )
+        return res.json({
             "message": "Bad Request",
-            "errors": {
-                "address": "Street address is required",
-                "city": "City is required",
-                "state": "State is required",
-                "country": "Country is required",
-                "lat": "Latitude is not valid",
-                "lng": "Longitude is not valid",
-                "name": "Name must be less than 50 characters",
-                "description": "Description is required",
-                "price": "Price per day is required"
-            }
+            "errors": errorsObject
         });
-    }
+
+    const newSpot = await Spot.create({
+        ownerId: user.id,
+        address,
+        city,
+        state,
+        country,
+        lat,
+        lng,
+        name,
+        description,
+        price
+    });
+
+    res.status(201).json(newSpot);
 });
 
 //edit a spots information

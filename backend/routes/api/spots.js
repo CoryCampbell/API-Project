@@ -564,7 +564,7 @@ router.post("/", requireAuth, async (req, res) => {
     });
 
     const resObj = {
-        id,
+        id: newSpot.id,
         ownerId,
         address,
         city,

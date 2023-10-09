@@ -1,5 +1,5 @@
 const express = require("express");
-const { Op } = require("sequelize");
+const { Op, json } = require("sequelize");
 const bcrypt = require("bcryptjs");
 
 const { check } = require("express-validator");
@@ -16,7 +16,6 @@ const router = express.Router();
 router.get("/current", requireAuth, async (req, res) => {
     const { user } = req;
 
-
     const allReviews = await Review.findAll({
         where: {
             userId: user.id
@@ -26,13 +25,21 @@ router.get("/current", requireAuth, async (req, res) => {
             {
                 model: Spot,
                 attributes: { exclude: ["description", "createdAt", "updatedAt"] },
-                include: { model: SpotImage, attributes: ["url"], where: { preview: true } }
+                include: { model: SpotImage, attributes: [["url", "previewImage"]], where: { preview: true } }
             },
             { model: ReviewImage, attributes: ["id", "url"] }
         ]
     });
 
-    res.json({ "Reviews": allReviews });
+    const completedReviewsObject = [];
+
+    allReviews.forEach((review) => {
+        const jsonReviewObject = review.toJSON();
+
+        completedReviewsObject.push(jsonReviewObject);
+    });
+
+    res.json({ "Reviews": completedReviewsObject });
 });
 
 //add image to a Review based on the Review's id

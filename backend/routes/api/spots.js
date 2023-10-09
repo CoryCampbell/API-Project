@@ -16,10 +16,70 @@ router.get("/current", requireAuth, async (req, res) => {
     const yourSpots = await Spot.findAll({
         where: {
             ownerId
-        }
+        },
+        include: [
+            {
+                model: Review,
+                attributes: [["stars", "avgRating"]]
+            },
+            {
+                model: SpotImage,
+                attributes: [["url", "previewImage"]]
+            }
+        ]
     });
 
-    res.json(yourSpots);
+    //refactor the results
+    const result = [];
+
+    yourSpots.forEach(async (spotObj) => {
+        const jsonSpotObject = spotObj.toJSON();
+        // get avgRating of each spot
+        // append avgRating to each spot
+        // get previewImage url
+        // append .previewImage = url
+        // console.log("spotObj", spotObj);
+        const spotPreviewImage = spotObj.dataValues.SpotImages[0].dataValues.previewImage;
+
+        let sumOfRatings = 0;
+
+        jsonSpotObject.Reviews.forEach((review) => {
+            sumOfRatings += review.avgRating;
+        });
+
+        // get the total count of reviews for this spot
+        const reviewsCount = jsonSpotObject.Reviews.length;
+
+        // get the sum of all the ratings for this spot
+
+        // calculate the avgRating
+        jsonSpotObject.avgRating = sumOfRatings / reviewsCount;
+        console.log("jsonSpotObject.avgRating", spotObj.avgRating);
+
+        completeSpotObject = {
+            id: spotObj.id,
+            ownerId: spotObj.ownerId,
+            address: spotObj.address,
+            city: spotObj.city,
+            state: spotObj.state,
+            country: spotObj.country,
+            lat: spotObj.lat,
+            lng: spotObj.lng,
+            name: spotObj.name,
+            description: spotObj.description,
+            price: spotObj.price,
+            createdAt: spotObj.createdAt,
+            updatedAt: spotObj.updatedAt,
+            avgRating: jsonSpotObject.avgRating || null,
+            previewImage: spotPreviewImage
+        };
+
+        result.push(completeSpotObject);
+    });
+
+    res.json({
+        "Spots": result
+    });
 });
 
 //get all Bookings for a Spot based on the Spot's id

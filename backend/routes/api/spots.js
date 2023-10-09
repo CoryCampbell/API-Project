@@ -7,7 +7,7 @@ const bcrypt = require("bcryptjs");
 
 const router = express.Router();
 
-//get all reviews of the current user
+//get all Spots of the current user
 router.get("/current", requireAuth, async (req, res) => {
     const { user } = req;
 
@@ -56,7 +56,7 @@ router.get("/current", requireAuth, async (req, res) => {
         jsonSpotObject.avgRating = sumOfRatings / reviewsCount;
         console.log("jsonSpotObject.avgRating", spotObj.avgRating);
 
-        completeSpotObject = {
+        let completeSpotObject = {
             id: spotObj.id,
             ownerId: spotObj.ownerId,
             address: spotObj.address,

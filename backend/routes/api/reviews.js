@@ -2,7 +2,7 @@ const express = require("express");
 const { Op, json } = require("sequelize");
 const bcrypt = require("bcryptjs");
 
-const { check } = require("express-validator");
+const { check, Result } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 
 const { setTokenCookie, restoreUser, requireAuth } = require("../../utils/auth");
@@ -25,21 +25,45 @@ router.get("/current", requireAuth, async (req, res) => {
             {
                 model: Spot,
                 attributes: { exclude: ["description", "createdAt", "updatedAt"] },
-                include: { model: SpotImage, attributes: [["url", "previewImage"]], where: { preview: true } }
+                include: { model: SpotImage, attributes: ["url"], where: { preview: true } }
             },
             { model: ReviewImage, attributes: ["id", "url"] }
         ]
     });
 
-    const completedReviewsObject = [];
+    let result = [];
 
     allReviews.forEach((review) => {
-        const jsonReviewObject = review.toJSON();
+        const reviewPreviewImage = review.dataValues.Spot.dataValues.SpotImages[0].dataValues.url;
 
-        completedReviewsObject.push(jsonReviewObject);
+        let finalObject = {
+            id: review.id,
+            userId: review.userId,
+            spotId: review.spotId,
+            review: review.review,
+            stars: review.stars,
+            createAt: review.createdAt,
+            updatedAt: review.updatedAt,
+            User: review.User,
+            Spot: {
+                id: review.Spot.id,
+                ownerId: review.Spot.ownerId,
+                address: review.Spot.address,
+                city: review.Spot.city,
+                state: review.Spot.state,
+                country: review.Spot.country,
+                lat: review.Spot.lat,
+                lng: review.Spot.lng,
+                name: review.Spot.name,
+                price: review.Spot.price,
+                previewImage: reviewPreviewImage
+            },
+            ReviewImages: review.ReviewImages
+        };
+        result.push(finalObject);
     });
 
-    res.json({ "Reviews": completedReviewsObject });
+    res.json({ "Reviews": result });
 });
 
 //add image to a Review based on the Review's id

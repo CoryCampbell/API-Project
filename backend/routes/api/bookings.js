@@ -12,10 +12,9 @@ const router = express.Router();
 
 //get all of the Current User's Bookings
 router.get("/current", requireAuth, async (req, res) => {
-    const { user } = req;
     const bookings = await Booking.findAll({
         where: {
-            userId: user.id
+            userId: req.user.id
         },
         attributes: ["id", "spotId", "userId", "startDate", "endDate", "createdAt", "updatedAt"],
         include: [

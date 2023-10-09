@@ -101,13 +101,15 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
             attributes: ["id", "spotId", "userId", "startDate", "endDate", "createdAt", "updatedAt"]
         });
 
-        console.log("bookingUserId", booking);
-        const bookingUserId = Booking.dataValues.userId;
+        const bookingUserId = booking.dataValues.userId;
+        console.log("bookingUserId", bookingUserId);
 
         //setup for date comparison
         let currentDate = new Date().getTime();
 
         //past date check
+        console.log("newEndDate", newEndDate);
+        console.log("currentDate", currentDate);
         if (newEndDate < currentDate) {
             return res.status(403).json({ "message": "Past bookings can't be modified" });
         }
@@ -195,14 +197,12 @@ router.delete("/:bookingId", requireAuth, async (req, res) => {
         const bookingToDelete = await Booking.findByPk(bookingId);
 
         //setup for date comparison
-        let currentDate = new Date().toJSON().slice(0, 10);
-        const parsedCurrentDate = Date.parse(Date(currentDate));
-        console.log("parsedCurrentDate", parsedCurrentDate);
+        let currentDate = new Date().getTime();
 
-        const parsedBookingStarted = Date.parse(booking.startDate);
-        console.log("parsedBookingsStarted", parsedBookingStarted);
+        const parsedBookingStarted = new Date(booking.startDate).getTime();
 
-        if (parsedBookingStarted < parsedCurrentDate) {
+        //check if booking has been started
+        if (parsedBookingStarted < currentDate) {
             return res.status(403).json({
                 "message": "Bookings that have been started can't be deleted"
             });

@@ -22,8 +22,7 @@ module.exports = {
                     type: Sequelize.INTEGER,
                     allowNull: false,
                     references: {
-                        model: "Spots",
-                        key: "id"
+                        model: "Spots"
                     },
                     onDelete: "CASCADE"
                 },
@@ -46,12 +45,12 @@ module.exports = {
                 createdAt: {
                     allowNull: false,
                     defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
-                    type: Sequelize.DATE
+                    type: Sequelize.DATEONLY
                 },
                 updatedAt: {
                     allowNull: false,
                     defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
-                    type: Sequelize.DATE
+                    type: Sequelize.DATEONLY
                 }
             },
             options

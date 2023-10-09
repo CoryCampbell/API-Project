@@ -23,8 +23,8 @@ router.post("/", validateLogin, async (req, res, next) => {
 
     const errorObject = {};
 
-    if (credential === undefined) errorObject.message = "Email or username is required";
-    if (password === undefined) errorObject.message = "Password is required";
+    if (!credential) errorObject.message = "Email or username is required";
+    if (!password) errorObject.message = "Password is required";
 
     if (errorObject.message || errorObject.password) return res.json(errorObject);
 

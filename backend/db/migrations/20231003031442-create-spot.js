@@ -22,11 +22,9 @@ module.exports = {
                     type: Sequelize.INTEGER,
                     allowNull: false,
                     references: {
-                        model: "Users",
-                        key: "id"
+                        model: "Users"
                     },
-                    onDelete: "CASCADE",
-                    hooks: true
+                    onDelete: "CASCADE"
                 },
                 address: {
                     type: Sequelize.STRING(255),
@@ -68,12 +66,12 @@ module.exports = {
                 createdAt: {
                     allowNull: false,
                     defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
-                    type: Sequelize.DATE
+                    type: Sequelize.DATEONLY
                 },
                 updatedAt: {
                     allowNull: false,
                     defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
-                    type: Sequelize.DATE
+                    type: Sequelize.DATEONLY
                 }
             },
             options

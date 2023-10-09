@@ -8,7 +8,7 @@ const { User } = require("../../db/models");
 const router = express.Router();
 
 const validateSignup = [
-    check("email").exists({ checkFalsy: true }).withMessage("Invalid email"),
+    check("email").exists({ checkFalsy: true }).isEmail().withMessage("Invalid email"),
 
     check("username").exists({ checkFalsy: true }).withMessage("Username is required"),
 
@@ -30,13 +30,13 @@ router.post("/", validateSignup, async (req, res) => {
 
     const errorObject = {};
 
-    if (email === undefined) errorObject.email = "Invalid email";
-    if (username === undefined) errorObject.username = "Username is required";
-    if (firstName === undefined) errorObject.firstName = "First Name is required";
-    if (lastName === undefined) errorObject.lastName = "Last Name is required";
+    if (!email) errorObject.email = "Invalid email";
+    if (!username) errorObject.username = "Username is required";
+    if (!firstName) errorObject.firstName = "First Name is required";
+    if (!lastName) errorObject.lastName = "Last Name is required";
 
     if (errorObject.email || errorObject.username || errorObject.firstName || errorObject.lastName)
-        return res.json(errorObject);
+        return res.status(400).json(errorObject);
 
     const user = await User.create({ email, username, firstName, lastName, hashedPassword });
 

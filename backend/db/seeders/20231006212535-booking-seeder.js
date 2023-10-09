@@ -26,32 +26,32 @@ module.exports = {
                 {
                     spotId: 1,
                     userId: 2,
-                    startDate: "10/10/2024",
-                    endDate: "10/17/2024"
+                    startDate: "2024-10-10",
+                    endDate: "2024-10-17"
                 },
                 {
                     spotId: 2,
                     userId: 3,
-                    startDate: "10/10/2024",
-                    endDate: "10/17/2024"
+                    startDate: "2024-10-10",
+                    endDate: "2024-10-17"
                 },
                 {
                     spotId: 3,
                     userId: 4,
-                    startDate: "10/10/2024",
-                    endDate: "10/17/2024"
+                    startDate: "2024-10-10",
+                    endDate: "2024-10-17"
                 },
                 {
                     spotId: 4,
                     userId: 5,
-                    startDate: "10/10/2024",
-                    endDate: "10/17/2024"
+                    startDate: "2024-10-10",
+                    endDate: "2024-10-17"
                 },
                 {
                     spotId: 5,
                     userId: 1,
-                    startDate: "10/10/2023",
-                    endDate: "10/17/2023"
+                    startDate: "2024-10-10",
+                    endDate: "2024-10-17"
                 }
             ],
             { validate: true }

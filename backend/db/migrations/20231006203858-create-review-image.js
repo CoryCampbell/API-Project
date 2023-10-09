@@ -22,9 +22,9 @@ module.exports = {
                     type: Sequelize.INTEGER,
                     allowNull: false,
                     references: {
-                        model: "Reviews"
-                    },
-                    onDelete: "CASCADE"
+                        model: "Reviews",
+                        key: "id"
+                    }
                 },
                 url: {
                     type: Sequelize.STRING,

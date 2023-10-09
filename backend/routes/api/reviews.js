@@ -1,8 +1,8 @@
 const express = require("express");
-const { Op } = require("sequelize");
+const { Op, json } = require("sequelize");
 const bcrypt = require("bcryptjs");
 
-const { check } = require("express-validator");
+const { check, Result } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 
 const { setTokenCookie, restoreUser, requireAuth } = require("../../utils/auth");
@@ -10,10 +10,11 @@ const { Review, ReviewImage, User, SpotImage, Spot } = require("../../db/models"
 
 const router = express.Router();
 
+//==================================================================================
+
 //get all reviews of the Current User (written by current user)
 router.get("/current", requireAuth, async (req, res) => {
     const { user } = req;
-
 
     const allReviews = await Review.findAll({
         where: {
@@ -30,7 +31,39 @@ router.get("/current", requireAuth, async (req, res) => {
         ]
     });
 
-    res.json({ "Reviews": allReviews });
+    let result = [];
+
+    allReviews.forEach((review) => {
+        const reviewPreviewImage = review.dataValues.Spot.dataValues.SpotImages[0].dataValues.url;
+
+        let finalObject = {
+            id: review.id,
+            userId: review.userId,
+            spotId: review.spotId,
+            review: review.review,
+            stars: review.stars,
+            createAt: review.createdAt,
+            updatedAt: review.updatedAt,
+            User: review.User,
+            Spot: {
+                id: review.Spot.id,
+                ownerId: review.Spot.ownerId,
+                address: review.Spot.address,
+                city: review.Spot.city,
+                state: review.Spot.state,
+                country: review.Spot.country,
+                lat: review.Spot.lat,
+                lng: review.Spot.lng,
+                name: review.Spot.name,
+                price: review.Spot.price,
+                previewImage: reviewPreviewImage
+            },
+            ReviewImages: review.ReviewImages
+        };
+        result.push(finalObject);
+    });
+
+    res.json({ "Reviews": result });
 });
 
 //add image to a Review based on the Review's id

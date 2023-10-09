@@ -565,16 +565,16 @@ router.post("/", requireAuth, async (req, res) => {
 
     const resObj = {
         id: newSpot.id,
-        ownerId,
-        address,
-        city,
-        state,
-        country,
+        ownerId: newSpot.ownerId,
+        address: newSpot.address,
+        city: newSpot.city,
+        state: newSpot.state,
+        country: newSpot.country,
         lat: Number(lat),
         lng: Number(lng),
-        name,
-        description,
-        price
+        name: newSpot.name,
+        description: newSpot.description,
+        price: newSpot.price
     };
     res.status(201).json(resObj);
 });

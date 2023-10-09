@@ -58,8 +58,10 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
     const { bookingId } = req.params;
     const { user } = req;
 
+    //setup for date comparison
     const newStartDate = new Date(startDate).getTime();
     const newEndDate = new Date(endDate).getTime();
+    let currentDate = new Date().getTime();
 
     //body validations
     const errorsObj = {};
@@ -91,16 +93,17 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
         });
 
         const bookingUserId = booking.dataValues.userId;
-        console.log("bookingUserId", bookingUserId);
-
-        //setup for date comparison
-        let currentDate = new Date().getTime();
 
         //past date check
-        console.log("newEndDate", newEndDate);
-        console.log("currentDate", currentDate);
-        if (newEndDate <= currentDate) {
-            return res.status(403).json({ "message": "Past bookings can't be modified" });
+        let bookingObject = booking.toJSON();
+        let comparisonStart = new Date(req.body.startDate).getTime();
+        let comparisonEnd = new Date(req.body.endDate).getTime();
+
+        if (new Date().getTime() >= new Date(bookingObject.endDate).getTime()) {
+            res.status(403);
+            return res.send({
+                "message": "Past bookings can't be modified"
+            });
         }
 
         //get info for current bookings
@@ -109,7 +112,6 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
         });
 
         currentBookings.forEach((booking) => {
-            console.log("booking", booking);
             //setup for date comparisons
             const bookingStartDate = new Date(booking.dataValues.startDate).getTime();
             const bookingEndDate = new Date(booking.dataValues.endDate).getTime();

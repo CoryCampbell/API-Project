@@ -61,7 +61,6 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
     //setup for date comparison
     const newStartDate = new Date(startDate).getTime();
     const newEndDate = new Date(endDate).getTime();
-    let currentDate = new Date().getTime();
 
     //body validations
     const errorsObj = {};
@@ -96,8 +95,6 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
 
         //past date check
         let bookingObject = booking.toJSON();
-        let comparisonStart = new Date(req.body.startDate).getTime();
-        let comparisonEnd = new Date(req.body.endDate).getTime();
 
         if (new Date().getTime() >= new Date(bookingObject.endDate).getTime()) {
             res.status(403);

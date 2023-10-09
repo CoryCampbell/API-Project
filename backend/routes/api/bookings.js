@@ -10,56 +10,46 @@ const { Review, ReviewImage, User, SpotImage, Spot, Booking } = require("../../d
 
 const router = express.Router();
 
-//get all of the Current User's Bookings
+
+// Get all Current User's Bookings
 router.get("/current", requireAuth, async (req, res) => {
-    const bookings = await Booking.findAll({
+    const { user } = req;
+    const allUserBookings = await Booking.findAll({
         where: {
-            userId: req.user.id
+            userId: user.id
         },
         attributes: ["id", "spotId", "userId", "startDate", "endDate", "createdAt", "updatedAt"],
         include: [
             {
                 model: Spot,
-                attributes: { exclude: ["description", "createdAt", "updatedAt"] },
-                include: [{ model: SpotImage, attributes: ["url"] }]
+                attributes: {
+                    exclude: ["description", "createdAt", "updatedAt"]
+                }
             }
         ]
     });
 
-    const result = [];
+    const allImages = await SpotImage.findAll();
+    let allBookingsObject = allUserBookings.map((booking) => booking.toJSON());
 
-    bookings.forEach((booking) => {
-        const bookingPreviewImage = booking.dataValues.Spot.dataValues.SpotImages[0].dataValues.url;
+    for (let i = 0; i < allBookingsObject.length; i++) {
+        for (let j = 0; j < allImages.length; j++) {
+            if (allImages[j].spotId === allBookingsObject[i].spotId) {
+                if (allImages[j].preview === true) {
+                    allBookingsObject[i].Spot.previewImage = allImages[j].url;
+                    break;
+                } else {
+                    allBookingsObject[i].Spot.previewImage = "No preview available";
+                }
+            } else {
+                allBookingsObject[i].Spot.previewImage = "No preview available";
+            }
+        }
+        allBookingsObject[i].endDate = allBookingsObject[i].endDate;
+        allBookingsObject[i].startDate = allBookingsObject[i].startDate;
+    }
 
-        const resObject = {
-            id: booking.id,
-            spotId: booking.spotId,
-            Spot: {
-                id: booking.Spot.id,
-                ownerId: booking.Spot.ownerId,
-                address: booking.Spot.address,
-                city: booking.Spot.city,
-                state: booking.Spot.state,
-                country: booking.Spot.country,
-                lat: booking.Spot.lat,
-                lng: booking.Spot.lng,
-                name: booking.Spot.name,
-                price: booking.Spot.price,
-                previewImage: bookingPreviewImage
-            },
-            userId: booking.userId,
-            startDate: booking.startDate,
-            endDate: booking.endDate,
-            createdAt: booking.createdAt,
-            updatedAt: booking.updatedAt
-        };
-
-        result.push(resObject);
-    });
-
-    res.json({
-        "Bookings": result
-    });
+    res.json({ Bookings: allBookingsObject });
 });
 
 //edit a booking
@@ -126,11 +116,6 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
 
             //check if this spot has been booked for these dates
             const errorsObject = {};
-
-            console.log("newStartDate", newStartDate);
-            console.log("newEndDate", newEndDate);
-            console.log("bookingStartDate", bookingStartDate);
-            console.log("bookingEndDate", bookingEndDate);
 
             //start date is during a booking
             if (newStartDate >= bookingStartDate && newStartDate <= bookingEndDate) {

@@ -222,29 +222,60 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
 //     }
 // });
 
+
 //create a review for a spot based on the spots id
+router.post("/:spotId/reviews", requireAuth, async (req, res) => {
+    try {
+        const { review, stars } = req.body;
+        const { user } = req;
+        const { spotId } = req.params;
+        const thisSpotId = spotId;
+        const userId = user.id;
 
-// router.post("/:spotId/reviews", requireAuth, async (req, res) => {
-//     try {
-//         const { review, stars } = req.body;
+        //body validations errors
+        const errorsObj = {};
 
-//         const { spotId } = req.params;
+        if (!review) errorsObj.review = "Review text is required";
+        if (!stars) errorsObj.stars = "Stars must be an integer from 1 to 5";
 
-//         const spot = await Spot.findByPk(spotId);
+        if (errorsObj.review || errorsObj.stars)
+            return res.status(400).json({
+                "message": "Bad Request",
+                "errors": errorsObj
+            });
 
-//         const newReview = await Review.create({
-//             review,
-//             stars
-//         });
+        //403 error- each user can only leave ONE review on a spot
+        //------ find all reviews where userId and check what spot they reviewed
+        //--------- check array length and return error
+        const thisSpot = await Spot.findByPk(spotId, {
+            include: Review
+        });
 
-//         res.json(newReview);
-//     } catch (error) {
-//         res.status(404).json({
-//             "message": "Spot couldn't be found"
-//         });
-//     }
-// });
+        const thisSpotsReviews = thisSpot.Reviews;
 
+        thisSpotsReviews.forEach((review) => {
+            console.log("review", review);
+            if (review.dataValues.userId === user.id) {
+                return res.status(403).json({
+                    "message": "User already has a review for this spot"
+                });
+            }
+        });
+
+        //create the new review
+        const newReview = await Review.create({
+            spotId,
+            userId,
+            review,
+            stars
+        });
+        res.status(201).json(newReview);
+    } catch (error) {
+        res.status(404).json({
+            "message": "Spot couldn't be found"
+        });
+    }
+});
 
 //create a new spot
 router.post("/", requireAuth, async (req, res) => {
@@ -266,7 +297,7 @@ router.post("/", requireAuth, async (req, res) => {
             price
         });
 
-        res.json(newSpot);
+        res.status(201).json(newSpot);
     } catch (error) {
         res.status(400).json({
             "message": "Bad Request",

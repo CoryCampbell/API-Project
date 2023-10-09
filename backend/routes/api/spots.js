@@ -9,6 +9,12 @@ const router = express.Router();
 
 //get all Spots of the current user
 router.get("/current", requireAuth, async (req, res) => {
+    //pagination and query filters
+    const { page = 1, size = 20, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+
+    
+
+    //rest of get all spots^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     const { user } = req;
 
     const ownerId = user.id;
@@ -305,22 +311,23 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
         const currentBookings = spot.dataValues.Bookings;
         const ownerId = spot.dataValues.ownerId;
 
-        const newStartDate = startDate.split("-").join("");
-        const newEndDate = endDate.split("-").join("");
+        const newStartDate = new Date(startDate).getTime();
+
+        const newEndDate = new Date(endDate).getTime();
 
         //body validations
-        const errorsObj = {};
+        // const errorsObj = {};
 
-        if (!startDate) {
-            errorsObj.startDate = "Please provide a valid Start Date";
-        }
-        if (!endDate) {
-            errorsObj.endDate = "Please provide a valid End Date";
-        }
+        // if (!startDate) {
+        //     errorsObj.startDate = "Please provide a valid Start Date";
+        // }
+        // if (!endDate) {
+        //     errorsObj.endDate = "Please provide a valid End Date";
+        // }
 
-        if (errorsObj.startDate || errorsObj.endDate) {
-            return res.status(400).json({ "message": "Bad Request", "errors": errorsObj });
-        }
+        // if (errorsObj.startDate || errorsObj.endDate) {
+        //     return res.status(400).json({ "message": "Bad Request", "errors": errorsObj });
+        // }
 
         //end must come after start
         //issues with single digit dates and date comparison
@@ -338,16 +345,36 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
         if (user.id !== ownerId) {
             currentBookings.forEach((booking) => {
                 //setup for date comparisons
-                const bookingStartDate = booking.dataValues.startDate.split("-").join("");
-                const bookingEndDate = booking.dataValues.endDate.split("-").join("");
+                const bookingStartDate = new Date(booking.dataValues.startDate).getTime();
+                const bookingEndDate = new Date(booking.dataValues.endDate).getTime();
 
                 //check if this spot has been booked for these dates
                 const errorsObject = {};
 
+                console.log("newStartDate", newStartDate);
+                console.log("newEndDate", newEndDate);
+                console.log("bookingStartDate", bookingStartDate);
+                console.log("bookingEndDate", bookingEndDate);
+
+                //start date is during a booking
                 if (newStartDate >= bookingStartDate && newStartDate <= bookingEndDate) {
                     errorsObject.startDate = "Start date conflicts with an existing booking";
                 }
+                //end date is during a booking
                 if (newEndDate >= bookingStartDate && newEndDate <= bookingEndDate) {
+                    errorsObject.endDate = "End date conflicts with an existing booking";
+                }
+
+                if (newStartDate < bookingStartDate && newEndDate > bookingEndDate) {
+                    errorsObject.startDate = "Start date conflicts with an existing booking";
+                    errorsObject.endDate = "End date conflicts with an existing booking";
+                }
+
+                if (newStartDate === bookingStartDate) {
+                    errorsObject.startDate = "Start date conflicts with an existing booking";
+                }
+
+                if (newEndDate === bookingEndDate) {
                     errorsObject.endDate = "End date conflicts with an existing booking";
                 }
 
@@ -359,15 +386,28 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
                 }
             });
 
+            const spot = await Spot.findByPk(spotId);
+
             // create the booking
-            const newBooking = await Booking.create({
-                spotId,
-                userId: user.id,
+            const newBooking = await spot.createBooking({
+                userId: parseInt(user.id),
                 startDate,
                 endDate
             });
 
-            return res.json(newBooking);
+            console.log("newBooking", newBooking);
+
+            const result = {
+                id: newBooking.id,
+                spotId: newBooking.spotId,
+                userId: newBooking.userId,
+                startDate: newBooking.startDate,
+                endDate: newBooking.endDate,
+                createdAt: newBooking.createdAt,
+                updatedAt: newBooking.updatedAt
+            };
+
+            return res.json(result);
         } else {
             return res.status(403).json({
                 "message": "Forbidden"
@@ -379,7 +419,6 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
         });
     }
 });
-
 
 //create a review for a spot based on the spots id
 router.post("/:spotId/reviews", requireAuth, async (req, res) => {
@@ -538,6 +577,7 @@ router.put("/:spotId", requireAuth, async (req, res) => {
     }
 });
 
+//delete a spot
 router.delete("/:spotId", requireAuth, async (req, res) => {
     try {
         const { spotId } = req.params;
@@ -547,8 +587,6 @@ router.delete("/:spotId", requireAuth, async (req, res) => {
 
         console.log("spotToDelete", spotToDelete);
         const ownerId = spotToDelete.dataValues.ownerId;
-        console.log("UserId:", user.id);
-        console.log("ownerId", ownerId);
 
         //authorization check
         if (user.id === ownerId) {

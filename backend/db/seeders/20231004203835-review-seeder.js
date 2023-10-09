@@ -20,19 +20,19 @@ module.exports = {
                     userId: 1,
                     spotId: 1,
                     review: "This was not Australia, but had a really nice bathroom.",
-                    stars: 1
+                    stars: 4
                 },
                 {
                     userId: 2,
                     spotId: 1,
                     review: "Wasnt quite what i was expecting but wow.",
-                    stars: 5
+                    stars: 1
                 },
                 {
                     userId: 3,
                     spotId: 1,
                     review: "Im coming back SOON!!!!",
-                    stars: 5
+                    stars: 4
                 },
                 {
                     userId: 4,
@@ -49,73 +49,73 @@ module.exports = {
                 {
                     userId: 1,
                     spotId: 2,
-                    review: "This was not Australia, but had a really nice bathroom.",
+                    review: "This was kinda bland.",
                     stars: 1
                 },
                 {
                     userId: 2,
                     spotId: 2,
-                    review: "Wasnt quite what i was expecting but wow.",
-                    stars: 5
+                    review: "WONT BE COMING BACK.",
+                    stars: 1
                 },
                 {
                     userId: 3,
                     spotId: 2,
-                    review: "Im coming back SOON!!!!",
-                    stars: 5
+                    review: "GROSS",
+                    stars: 1
                 },
                 {
                     userId: 4,
                     spotId: 2,
                     review: "MEH",
-                    stars: 3
+                    stars: 2
                 },
                 {
                     userId: 5,
                     spotId: 2,
-                    review: "you wont regret it!",
-                    stars: 5
+                    review: "DONT WASTE YOUR TIME!",
+                    stars: 1
                 },
                 {
                     userId: 1,
                     spotId: 3,
-                    review: "This was not Australia, but had a really nice bathroom.",
-                    stars: 1
+                    review: "decent",
+                    stars: 3
                 },
                 {
                     userId: 2,
                     spotId: 3,
-                    review: "Wasnt quite what i was expecting but wow.",
-                    stars: 5
+                    review: "mid",
+                    stars: 3
                 },
                 {
                     userId: 3,
                     spotId: 3,
-                    review: "Im coming back SOON!!!!",
-                    stars: 5
+                    review: "ive had better, but ive had worse",
+                    stars: 4
                 },
                 {
                     userId: 4,
                     spotId: 3,
-                    review: "MEH",
+                    review: "at least theres a pool",
                     stars: 3
                 },
                 {
                     userId: 5,
                     spotId: 3,
-                    review: "you wont regret it!",
-                    stars: 5
+                    review: "good for its price",
+                    stars: 3
                 },
                 {
                     userId: 1,
                     spotId: 4,
-                    review: "This was not Australia, but had a really nice bathroom.",
-                    stars: 1
+                    review: "top tier",
+                    stars: 5
                 },
                 {
                     userId: 2,
                     spotId: 4,
-                    review: "Wasnt quite what i was expecting but wow.",
+                    review: "AMAZING EVERY YEAR",
                     stars: 5
                 },
                 {
@@ -127,44 +127,44 @@ module.exports = {
                 {
                     userId: 4,
                     spotId: 4,
-                    review: "MEH",
-                    stars: 3
+                    review: "WILL RETURN",
+                    stars: 5
                 },
                 {
                     userId: 5,
                     spotId: 4,
-                    review: "you wont regret it!",
+                    review: "AMAZING",
                     stars: 5
                 },
                 {
                     userId: 1,
                     spotId: 5,
-                    review: "This was not Australia, but had a really nice bathroom.",
-                    stars: 1
+                    review: "great place but owners are rude.",
+                    stars: 3
                 },
                 {
                     userId: 2,
                     spotId: 5,
-                    review: "Wasnt quite what i was expecting but wow.",
+                    review: "love it here",
                     stars: 5
                 },
                 {
                     userId: 3,
                     spotId: 5,
-                    review: "Im coming back SOON!!!!",
-                    stars: 5
+                    review: "found a bug in the fridge",
+                    stars: 2
                 },
                 {
                     userId: 4,
                     spotId: 5,
-                    review: "MEH",
-                    stars: 3
+                    review: "good area",
+                    stars: 4
                 },
                 {
                     userId: 5,
                     spotId: 5,
-                    review: "you wont regret it!",
-                    stars: 5
+                    review: "its aiiight",
+                    stars: 3
                 }
             ],
             { validate: true }

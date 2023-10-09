@@ -27,8 +27,39 @@ router.get("/current", requireAuth, async (req, res) => {
         ]
     });
 
+    const result = [];
+
+    bookings.forEach((booking) => {
+        const bookingPreviewImage = booking.dataValues.Spot.dataValues.SpotImages[0].dataValues.url;
+
+        const resObject = {
+            id: booking.id,
+            spotId: booking.spotId,
+            Spot: {
+                id: booking.Spot.id,
+                ownerId: booking.Spot.ownerId,
+                address: booking.Spot.address,
+                city: booking.Spot.city,
+                state: booking.Spot.state,
+                country: booking.Spot.country,
+                lat: booking.Spot.lat,
+                lng: booking.Spot.lng,
+                name: booking.Spot.name,
+                price: booking.Spot.price,
+                previewImage: bookingPreviewImage
+            },
+            userId: booking.userId,
+            startDate: booking.startDate,
+            endDate: booking.endDate,
+            createdAt: booking.createdAt,
+            updatedAt: booking.updatedAt
+        };
+
+        result.push(resObject);
+    });
+
     res.json({
-        "Bookings": bookings
+        "Bookings": result
     });
 });
 

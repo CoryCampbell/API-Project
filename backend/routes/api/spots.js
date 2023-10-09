@@ -607,7 +607,7 @@ router.post("/", requireAuth, async (req, res) => {
     res.status(201).json(newSpot);
 });
 
-//edit a spots information
+//edit a spot
 router.put("/:spotId", requireAuth, async (req, res) => {
     const { user } = req;
 
@@ -642,11 +642,11 @@ router.put("/:spotId", requireAuth, async (req, res) => {
         if (!city) errorObj.city = "City is required";
         if (!state) errorObj.state = "State is required";
         if (!country) errorObj.country = "Country is required";
-        if (!lat) errorObj.lat = "Latitude is not valid";
-        if (!lng) errorObj.lng = "Longitude is not valid";
-        if (!name) errorObj.name = "Name must be less than 50 characters";
+        if (!lat || isNaN(lat)) errorObj.lat = "Latitude is not valid";
+        if (!lng || isNaN(lat)) errorObj.lng = "Longitude is not valid";
+        if (!name || name.length > 50) errorObj.name = "Name must be less than 50 characters";
         if (!description) errorObj.description = "Description is required";
-        if (!price) errorObj.price = "Price per day is required";
+        if (!price || price < 1) errorObj.price = "Price per day is required";
 
         if (
             errorObj.address ||
@@ -660,12 +660,13 @@ router.put("/:spotId", requireAuth, async (req, res) => {
             errorObj.price
         )
             return res.json({
-                "message": errorObj
+                "message": "Bad Request",
+                "errors": errorObj
             });
 
         res.json(spot);
     } catch (error) {
-        res.status(400).json({
+        res.status(404).json({
             "message": "Spot couldn't be found"
         });
     }
@@ -674,30 +675,21 @@ router.put("/:spotId", requireAuth, async (req, res) => {
 //delete a spot
 router.delete("/:spotId", requireAuth, async (req, res) => {
     try {
-        const { spotId } = req.params;
         const { user } = req;
-
-        const spotToDelete = await Spot.findByPk(spotId);
-
-        console.log("spotToDelete", spotToDelete);
+        const spotToDelete = await Spot.findByPk(req.params.spotId);
         const ownerId = spotToDelete.dataValues.ownerId;
 
         //authorization check
         if (user.id === ownerId) {
-            await spotToDelete.destroy({
-                where: {
-                    id: spotId
-                }
+            await spotToDelete.destroy();
+            res.status(200).json({
+                "message": "Successfully deleted"
             });
         } else {
             return res.status(403).json({
                 "message": "Forbidden"
             });
         }
-
-        res.status(200).json({
-            "message": "Successfully deleted"
-        });
     } catch (error) {
         res.status(404).json({ "message": "Spot couldn't be found" });
     }

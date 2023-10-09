@@ -384,13 +384,12 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
 // Create a Booking from a Spot based on the Spot's id
 router.post("/:spotId/bookings", requireAuth, async (req, res) => {
     try {
-        const { spotId } = req.params;
         const { startDate, endDate } = req.body;
         const { user } = req;
 
         //find the spot that is being booked
         //=========== this also checks that the spot exists
-        const spot = await Spot.findByPk(spotId, { include: Booking });
+        const spot = await Spot.findByPk(req.params.spotId, { include: Booking });
         const currentBookings = spot.dataValues.Bookings;
         const ownerId = spot.dataValues.ownerId;
 
@@ -418,7 +417,7 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
             return res.status(400).json({
                 "message": "Bad Request",
                 "errors": {
-                    "endDate": "endDate cannot come before startDate"
+                    "endDate": "endDate cannot be on or before startDate"
                 }
             });
         }
@@ -469,11 +468,11 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
                 }
             });
 
-            const spot = await Spot.findByPk(spotId);
+            const spot = await Spot.findByPk(req.params.spotId);
 
             // create the booking
             const newBooking = await spot.createBooking({
-                userId: parseInt(user.id),
+                userId: req.user.id,
                 startDate,
                 endDate
             });

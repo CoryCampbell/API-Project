@@ -22,9 +22,8 @@ router.delete("/:imageId", requireAuth, async (req, res) => {
         });
 
         const spotImageUserId = safeSpotImage.Spot.ownerId;
-        const spotImage = await SpotImage.findByPk(imageId);
 
-        console.log("spotImageUserId", spotImageUserId);
+        const spotImage = await SpotImage.findByPk(imageId);
 
         //authorization check
         if (user.id === spotImageUserId) {

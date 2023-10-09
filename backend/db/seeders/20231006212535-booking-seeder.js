@@ -56,8 +56,8 @@ module.exports = {
                 {
                     spotId: 5,
                     userId: 1,
-                    startDate: "2024-10-08",
-                    endDate: "2024-10-17"
+                    startDate: "2024-09-08",
+                    endDate: "2024-09-17"
                 }
             ],
             { validate: true }

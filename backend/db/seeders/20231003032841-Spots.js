@@ -75,6 +75,18 @@ module.exports = {
                     name: "wow, a king used to live two doors down",
                     description: "Maybe you might see some royalty.",
                     price: 8
+                },
+                {
+                    ownerId: 5,
+                    address: "509 Terracotta Ln",
+                    city: "Witchita",
+                    state: "Texas",
+                    country: "USA",
+                    lat: 45.12455,
+                    lng: -87.17699,
+                    name: "wow, a king used to live three doors down",
+                    description: "Maybeeeee you might see some royalty.",
+                    price: 6
                 }
             ],
             { validate: true }

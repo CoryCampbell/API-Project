@@ -94,9 +94,7 @@ router.get("/:spotId/bookings", requireAuth, async (req, res) => {
             where: {
                 spotId
             },
-            attributes: {
-                exclude: ["createdAt", "updatedAt", "userId"]
-            }
+            attributes: ["spotId", "startDate", "endDate"]
         });
 
         //result for OWNER
@@ -548,7 +546,7 @@ router.post("/", requireAuth, async (req, res) => {
         errorsObject.description ||
         errorsObject.price
     )
-        return res.json({
+        return res.status(400).json({
             "message": "Bad Request",
             "errors": errorsObject
         });

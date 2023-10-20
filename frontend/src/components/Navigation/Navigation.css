@@ -1,9 +1,11 @@
 .navigationList {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: flex-end;
-  align-items: flex-end;
+  align-items: flex-start;
   margin: auto;
+  padding-right: 20px;
+  padding-top: 20px;
 }
 
 .hidden {
@@ -11,5 +13,17 @@
 }
 
 li {
+  display: flex;
+  flex-direction: column;
   list-style-type: none;
+
+}
+
+.profile-dropdown {
+  background-color: red;
+}
+
+a:visited {
+  text-decoration: none;
+  color: black;
 }

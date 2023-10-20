@@ -23,6 +23,14 @@ router.use("/review-images", reviewImagesRouter);
 
 //====================================================================
 
+router.get("/csrf/restore", (req, res) => {
+    const csrfToken = req.csrfToken();
+    res.cookie("XSRF-TOKEN", csrfToken);
+    res.status(200).json({
+        "XSRF-Token": csrfToken
+    });
+});
+
 router.get("/restore-user", (req, res) => {
     return res.json(req.user);
 });
@@ -39,10 +47,6 @@ router.get("/set-token-cookie", async (_req, res) => {
 
 router.get("/require-auth", requireAuth, (req, res) => {
     return res.json(req.user);
-});
-
-router.post("/test", function (req, res) {
-    res.json({ requestBody: req.body });
 });
 
 module.exports = router;

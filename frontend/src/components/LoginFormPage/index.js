@@ -24,21 +24,22 @@ function LoginFormPage() {
 
     return (
         <>
-            <h1>Log In</h1>
-            <form onSubmit={handleSubmit}>
-                <label>
+            <h1 class="loginH1">Log In</h1>
+            <form onSubmit={handleSubmit} class="loginForm">
+                <label class="loginLabel">
                     Username or Email
                     <input type="text" value={credential} onChange={(e) => setCredential(e.target.value)} required />
                 </label>
-                <label>
+                <label class="loginLabel">
                     Password
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                 </label>
                 {errors.credential && <p>{errors.credential}</p>}
-                <button type="submit">Log In</button>
+                <button type="submit" class="loginButton">
+                    Log In
+                </button>
             </form>
         </>
     );
 }
-
 export default LoginFormPage;

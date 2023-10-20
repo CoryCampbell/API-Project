@@ -1,22 +1,21 @@
 /* practice styling NOT FINAL */
 
 
-h1 {
+.signupH1 {
   display: flex;
-  justify-content: left;
+  justify-content: flex-start;
   text-decoration: underline;
   background-color: rgb(184, 252, 89);
   width: 500px;
   height: 50px;
   margin: auto;
-
 }
 
-form {
+.signupForm {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: end;
+  align-items: flex-end;
 
   background-color: rgb(184, 252, 89);
   width: 500px;
@@ -24,14 +23,14 @@ form {
   margin: auto;
 }
 
-label {
+.signupLabel {
   display: flex;
   flex-direction: column;
   font-size: 20px;
   margin: auto;
 }
 
-button {
+.signupButton {
   font-size: 20px;
   margin: auto;
   width: 30%;

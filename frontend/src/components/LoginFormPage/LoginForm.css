@@ -1,8 +1,8 @@
 /* practice styling NOT FINAL */
 
-h1 {
+.loginH1 {
   display: flex;
-  justify-content: left;
+  justify-content: flex-start;
   text-decoration: underline;
   background-color: rgb(184, 252, 89);
   width: 500px;
@@ -11,11 +11,11 @@ h1 {
 
 }
 
-form {
+.loginForm {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: end;
+  align-items: flex-end;
 
   background-color: rgb(184, 252, 89);
   width: 500px;
@@ -23,14 +23,15 @@ form {
   margin: auto;
 }
 
-label {
+
+.loginLabel {
   display: flex;
   flex-direction: column;
   font-size: 20px;
   margin: auto;
 }
 
-button {
+.loginButton {
   font-size: 20px;
   margin: auto;
   width: 30%;

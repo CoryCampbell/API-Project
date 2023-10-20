@@ -175,7 +175,6 @@ router.delete("/:bookingId", requireAuth, async (req, res) => {
             attributes: ["id", "spotId", "userId", "startDate", "endDate", "createdAt", "updatedAt"]
         });
 
-        console.log("booking", booking);
         const bookingUserId = booking.dataValues.userId;
         const bookingToDelete = await Booking.findByPk(bookingId);
 

@@ -15,7 +15,6 @@ const router = express.Router();
 router.delete("/:imageId", requireAuth, async (req, res) => {
 
     const spotImageToDelete = await SpotImage.findByPk(req.params.imageId, { include: Spot });
-    console.log("spotImageToDelete", spotImageToDelete);
 
     if (!spotImageToDelete) {
         return res.status(404).json({
@@ -27,7 +26,6 @@ router.delete("/:imageId", requireAuth, async (req, res) => {
         const spotImageUserId = spotImageToDelete.Spot.ownerId;
         const { user } = req;
 
-        console.log("spotImageUserId", spotImageUserId);
 
         // authorization check
         if (user.id === spotImageUserId) {

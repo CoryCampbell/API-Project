@@ -291,7 +291,6 @@ router.get("/", async (req, res) => {
     });
 
     //rest of get all spots^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    console.log("paginatedSpots", paginatedSpots);
 
     //refactor the results
     const result = [];
@@ -444,7 +443,6 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
 
         const allBookings = await Booking.findAll({ where: { userId: user.id } }, { attributes: ["id"] });
 
-        console.log("allBookings", allBookings);
 
         const bookingObject = {
             id: newBooking.id,
@@ -493,7 +491,6 @@ router.post("/:spotId/reviews", requireAuth, async (req, res) => {
         const thisSpotsReviews = thisSpot.Reviews;
 
         thisSpotsReviews.forEach((review) => {
-            console.log("review", review);
             if (review.dataValues.userId === user.id) {
                 return res.status(500).json({
                     "message": "User already has a review for this spot"

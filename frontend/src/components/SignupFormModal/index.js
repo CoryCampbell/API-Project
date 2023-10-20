@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
 import * as sessionActions from "../../store/session";
 import "./SignupForm.css";
+import { useModal } from "../../context/Modal";
 
-function SignupFormPage() {
+function SignupFormModal() {
     const dispatch = useDispatch();
-    const sessionUser = useSelector((state) => state.session.user);
+
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [firstName, setFirstName] = useState("");
@@ -14,10 +15,7 @@ function SignupFormPage() {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState({});
-
-    if (sessionUser) return <Redirect to="/" />;
-
-
+    const { closeModal } = useModal();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -31,12 +29,14 @@ function SignupFormPage() {
                     lastName,
                     password
                 })
-            ).catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) {
-                    setErrors(data.errors);
-                }
-            });
+            )
+                .then(closeModal)
+                .catch(async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) {
+                        setErrors(data.errors);
+                    }
+                });
         }
         return setErrors({
             confirmPassword: "Confirm Password field must be the same as the Password field"
@@ -46,7 +46,7 @@ function SignupFormPage() {
     return (
         <>
             <h1 class="signupH1">Sign Up</h1>
-            <form onSubmit={handleSubmit} class="signupForm">
+            <form onSubmit={handleSubmit}>
                 <label class="signupLabel">
                     Email
                     <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} required />
@@ -90,4 +90,4 @@ function SignupFormPage() {
     );
 }
 
-export default SignupFormPage;
+export default SignupFormModal;

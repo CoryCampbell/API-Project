@@ -4,6 +4,7 @@
   justify-content: flex-end;
   align-items: flex-start;
   margin: auto;
+  width: 1000px;
   padding-right: 20px;
   padding-top: 20px;
 }

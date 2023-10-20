@@ -2,7 +2,7 @@
 
 .loginH1 {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   text-decoration: underline;
   background-color: rgb(184, 252, 89);
   width: 500px;

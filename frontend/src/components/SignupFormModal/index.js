@@ -46,7 +46,7 @@ function SignupFormModal() {
     return (
         <>
             <h1 class="signupH1">Sign Up</h1>
-            <form onSubmit={handleSubmit}>
+            <form class="signupForm" onSubmit={handleSubmit}>
                 <label class="signupLabel">
                     Email
                     <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} required />

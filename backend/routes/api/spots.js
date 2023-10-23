@@ -455,7 +455,7 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
             updatedAt: newBooking.updatedAt
         };
 
-        res.json(bookingObject);
+        res.status(201).json(bookingObject);
     } else {
         //cannot book at your own spot
         return res.status(403).json({ message: "Forbidden" });

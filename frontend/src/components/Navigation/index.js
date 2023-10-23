@@ -9,11 +9,13 @@ function Navigation({ isLoaded }) {
 
     return (
         <>
-            <ul className="navigationList">
+            <ul className="fullNavBar">
                 <div>
-                    <i class="fa-brands fa-airbnb"></i>
+                    <i className="fa-brands fa-airbnb">
+                        <p className="airbnb">airbnb</p>
+                    </i>
                 </div>
-                <div>
+                <div className="dropdownMain">
                     <li>
                         <NavLink exact to="/">
                             Home

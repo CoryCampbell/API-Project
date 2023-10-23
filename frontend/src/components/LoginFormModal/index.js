@@ -11,37 +11,37 @@ function LoginFormModal() {
     const [errors, setErrors] = useState({});
     const { closeModal } = useModal();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setErrors({});
-        return dispatch(sessionActions.login({ credential, password }))
-            .then(closeModal)
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) {
-                    setErrors(data.errors);
-                }
-            });
-    };
+const handleSubmit = (e) => {
+    e.preventDefault();
+    setErrors({});
+    return dispatch(sessionActions.login({ credential, password }))
+        .then(closeModal)
+        .catch(async (res) => {
+            const data = await res.json();
+            if (data && data.errors) {
+                setErrors(data.errors);
+            }
+        });
+};
 
-    return (
-        <>
-            <h1 class="loginH1">Log In</h1>
-            <form onSubmit={handleSubmit} class="loginForm">
-                <label class="loginLabel">
-                    Username or Email
-                    <input type="text" value={credential} onChange={(e) => setCredential(e.target.value)} required />
-                </label>
-                <label class="loginLabel">
-                    Password
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                </label>
-                {errors.credential && <p>{errors.credential}</p>}
-                <button type="submit" class="loginButton">
-                    Log In
-                </button>
-            </form>
-        </>
-    );
+return (
+    <>
+        <h1 class="loginH1">Log In</h1>
+        <form onSubmit={handleSubmit} class="loginForm">
+            <label class="loginLabel">
+                Username or Email
+                <input type="text" value={credential} onChange={(e) => setCredential(e.target.value)} required />
+            </label>
+            <label class="loginLabel">
+                Password
+                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+            </label>
+            {errors.credential && <p className="errors">{errors.credential}</p>}
+            <button type="submit" class="loginButton">
+                Log In
+            </button>
+        </form>
+    </>
+);
 }
 export default LoginFormModal;

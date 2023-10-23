@@ -20,6 +20,10 @@ li {
 
 }
 
+li:hover {
+  cursor: pointer;
+}
+
 .profile-dropdown {
   background-color: rgb(184, 252, 89);
 }

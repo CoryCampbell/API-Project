@@ -37,15 +37,15 @@ router.get("/current", requireAuth, async (req, res) => {
 
         const spotPreviewImage = spotObj.dataValues.SpotImages[0].dataValues.previewImage;
 
-            let sumOfRatings = 0;
+        let sumOfRatings = 0;
 
-            // get the sum of all the ratings for this spot
-            jsonSpotObject.Reviews.forEach((review) => {
-                sumOfRatings += review.avgRating;
-            });
+        // get the sum of all the ratings for this spot
+        jsonSpotObject.Reviews.forEach((review) => {
+            sumOfRatings += review.avgRating;
+        });
 
-            // get the total count of reviews for this spot
-            const reviewsCount = jsonSpotObject.Reviews.length;
+        // get the total count of reviews for this spot
+        const reviewsCount = jsonSpotObject.Reviews.length;
 
         // calculate the avgRating
         jsonSpotObject.avgRating = sumOfRatings / reviewsCount;
@@ -57,11 +57,11 @@ router.get("/current", requireAuth, async (req, res) => {
             city: spotObj.city,
             state: spotObj.state,
             country: spotObj.country,
-            lat: spotObj.lat,
-            lng: spotObj.lng,
+            lat: Number(spotObj.lat),
+            lng: Number(spotObj.lng),
             name: spotObj.name,
             description: spotObj.description,
-            price: spotObj.price,
+            price: Number(spotObj.price),
             createdAt: spotObj.createdAt,
             updatedAt: spotObj.updatedAt,
             avgRating: jsonSpotObject.avgRating || null,
@@ -98,7 +98,6 @@ router.get("/:spotId/bookings", requireAuth, async (req, res) => {
         });
 
         //result for OWNER
-        // -needs id attribute in response
         const bookingsObjForOwner = await Booking.findAll({
             where: {
                 spotId
@@ -324,7 +323,7 @@ router.get("/", async (req, res) => {
             lng: Number(spotObj.lng),
             name: spotObj.name,
             description: spotObj.description,
-            price: spotObj.price,
+            price: Number(spotObj.price),
             createdAt: spotObj.createdAt,
             updatedAt: spotObj.updatedAt,
             avgRating: jsonSpotObject.avgRating || null,
@@ -442,7 +441,6 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
         });
 
         const allBookings = await Booking.findAll({ where: { userId: user.id } }, { attributes: ["id"] });
-
 
         const bookingObject = {
             id: newBooking.id,
@@ -571,7 +569,7 @@ router.post("/", requireAuth, async (req, res) => {
         lng: Number(lng),
         name: newSpot.name,
         description: newSpot.description,
-        price: newSpot.price
+        price: Number(newSpot.price)
     };
     res.status(201).json(resObj);
 });

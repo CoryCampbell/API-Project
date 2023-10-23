@@ -443,7 +443,7 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
             endDate
         });
 
-        const allBookings = await Booking.findAll({ where: { userId: user.id } }, { attributes: ["id"] });
+        // const allBookings = await Booking.findAll({ where: { userId: user.id } }, { attributes: ["id"] });
 
         const bookingObject = {
             id: newBooking.id,

@@ -173,6 +173,9 @@ router.get("/:spotId", async (req, res) => {
             }
         });
 
+        result.lat = Number(result.lat);
+        result.lng = Number(result.lng);
+        result.price = Number(result.price);
         result.numReviews = reviewCount;
         result.avgRating = sumOfReviews / reviewCount;
 

@@ -18,26 +18,26 @@ const handleSubmit = (e) => {
         .then(closeModal)
         .catch(async (res) => {
             const data = await res.json();
-            if (data && data.errors) {
-                setErrors(data.errors);
+            if (data && data.message) {
+                setErrors(data);
             }
         });
 };
 
 return (
     <>
-        <h1 class="loginH1">Log In</h1>
+        <h1 className="loginH1">Log In</h1>
         <form onSubmit={handleSubmit} class="loginForm">
-            <label class="loginLabel">
+            <label className="loginLabel">
                 Username or Email
                 <input type="text" value={credential} onChange={(e) => setCredential(e.target.value)} required />
             </label>
-            <label class="loginLabel">
+            <label className="loginLabel">
                 Password
                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
             </label>
-            {errors.credential && <p className="errors">{errors.credential}</p>}
-            <button type="submit" class="loginButton">
+            {errors.message && <p className="loginErrorMessage">{errors.message}</p>}
+            <button type="submit" className="loginButton">
                 Log In
             </button>
         </form>

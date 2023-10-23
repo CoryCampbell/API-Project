@@ -38,3 +38,11 @@
   height: 20%;
   border-radius: 5%;
 }
+
+.loginErrorMessage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  background-color: red;
+}

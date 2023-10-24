@@ -287,6 +287,9 @@ router.get("/", async (req, res) => {
             },
             {
                 model: SpotImage,
+                where: {
+                    preview: true
+                },
                 attributes: [["url", "previewImage"]]
             }
         ]
@@ -299,7 +302,6 @@ router.get("/", async (req, res) => {
 
     paginatedSpots.forEach(async (spotObj) => {
         const jsonSpotObject = spotObj.toJSON();
-
         const spotPreviewImage = spotObj.dataValues.SpotImages[0].dataValues.previewImage;
 
         let sumOfRatings = 0;
@@ -336,7 +338,7 @@ router.get("/", async (req, res) => {
         result.push(completeSpotObject);
     });
 
-    res.json({
+    return res.json({
         "Spots": result,
         page: Number(page),
         size: Number(size)

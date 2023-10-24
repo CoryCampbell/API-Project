@@ -5,15 +5,6 @@ const { SpotImage } = require("../models");
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface, Sequelize) {
-        /**
-         * Add seed commands here.
-         *
-         * Example:
-         * await queryInterface.bulkInsert('People', [{
-         *   name: 'John Doe',
-         *   isBetaMember: false
-         * }], {});
-         */
         await SpotImage.bulkCreate(
             [
                 {
@@ -39,6 +30,11 @@ module.exports = {
                 {
                     spotId: 5,
                     url: "https://a0.muscache.com/im/pictures/73de3da2-3580-4d32-bf7a-04f9dc004af9.jpg?im_w=720",
+                    preview: true
+                },
+                {
+                    spotId: 6,
+                    url: "https://a0.muscache.com/im/pictures/miso/Hosting-48000474/original/9857bb39-dd9d-483a-95b4-40dec03f48a7.jpeg?im_w=720",
                     preview: true
                 }
             ],

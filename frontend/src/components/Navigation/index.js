@@ -10,10 +10,9 @@ function Navigation({ isLoaded }) {
     return (
         <>
             <ul className="fullNavBar">
-                <div>
-                    <i className="fa-brands fa-airbnb">
-                        <p className="airbnb">airbnb</p>
-                    </i>
+                <div className="logoDiv">
+                    <i className="fa-brands fa-airbnb"></i>
+                    <p className="airbnbText">airbnb</p>
                 </div>
                 <div className="dropdownMain">
                     <li>
@@ -22,7 +21,7 @@ function Navigation({ isLoaded }) {
                         </NavLink>
                     </li>
                     {isLoaded && (
-                        <li>
+                        <li className="drop-down-active">
                             <ProfileButton user={sessionUser} />
                         </li>
                     )}

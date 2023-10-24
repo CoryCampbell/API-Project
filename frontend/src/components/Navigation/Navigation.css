@@ -4,11 +4,11 @@ body {
 
 .dropdownMain {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  border: solid black;
+  border: solid rgb(184, 252, 89);;
   border-radius: 25px;
-  width: 100px;
+  width: 120px;
   height: 50px;
 }
 
@@ -20,29 +20,36 @@ body {
   margin: 50px;
   margin-top: auto;
   width: auto;
+  border-bottom: .1rem solid rgb(184, 252, 89);;
+  padding-bottom: 5px;
 }
 
-.fa-airbnb {
+.logoDiv {
   display: flex;
   align-items: center;
   color: rgb(184, 252, 89);
   font-size: 50px;
 }
 
+.fa-airbnb {
+  rotate: 180deg;
+}
+
 .userButton {
+  position: relative;
   width: 40px;
   height: 40px;
   border-radius: 20px;
 }
 
-.airbnb {
+.airbnbText {
   display: flex;
-  font-size: 15px;
+  font-size: 20px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
 }
 
-.hidden {
-  display: none;
-}
+
 
 li {
   display: flex;
@@ -56,12 +63,23 @@ li:hover {
 }
 
 .profile-dropdown {
-  position: relative;
-  top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  width: 200%;
   background-color: rgb(184, 252, 89);
 }
 
+.hidden {
+  display: none;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(184, 252, 89);}
+
 a:visited {
   text-decoration: none;
-  color: black;
+  color: rgb(184, 252, 89);
 }

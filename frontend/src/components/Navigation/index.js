@@ -10,22 +10,15 @@ function Navigation({ isLoaded }) {
     return (
         <>
             <ul className="fullNavBar">
-                <div className="logoDiv">
+                <NavLink exact to="/" className="logoDiv">
                     <i className="fa-brands fa-airbnb"></i>
                     <p className="airbnbText">airbnb</p>
-                </div>
-                <div className="dropdownMain">
-                    <li>
-                        <NavLink exact to="/">
-                            Home
-                        </NavLink>
+                </NavLink>
+                {isLoaded && (
+                    <li className="drop-down-active">
+                        <ProfileButton user={sessionUser} />
                     </li>
-                    {isLoaded && (
-                        <li className="drop-down-active">
-                            <ProfileButton user={sessionUser} />
-                        </li>
-                    )}
-                </div>
+                )}
             </ul>
         </>
     );

@@ -14,3 +14,10 @@
   display: flex;
   flex-direction: column;
 }
+
+.spotInfoContainerOne {
+  display: flex;
+
+  justify-content: space-between
+  ;
+}

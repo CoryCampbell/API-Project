@@ -14,16 +14,23 @@ function SplashPage() {
     const reactiveSpots = spots?.map((spot) => (
         <div key={spot.id} className="spotContainer">
             <img src={spot.previewImage} alt="preview" className="previewImage"></img>
-            {spot.address}
-            <br></br>
-            {spot.city}
-            <br></br>
-            {spot.state}
+            <div className="spotInfoContainerOne">
+                <div>
+                    {spot.city}, {spot.state}
+                </div>
+                <div className="spotAvgRating">
+                    <i className="fa-solid fa-star"></i>
+                    {spot.avgRating}
+                </div>
+            </div>
+            <div>
+                ${spot.price}
+                .00 night
+            </div>
         </div>
     ));
     return (
         <>
-            Splash Page
             <ul className="allSpotsContainer">{reactiveSpots}</ul>
         </>
     );

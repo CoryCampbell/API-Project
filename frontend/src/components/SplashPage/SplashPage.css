@@ -1,7 +1,15 @@
 
 .previewImage {
+  border-radius: 20px;
   width: 400px;
   height: 300px;
+}
+
+.previewImage:hover {
+  cursor: pointer;
+  width: 400px;
+  height: 300px;
+  box-shadow: 0px 0px 10px rgb(184, 252, 89);
 }
 
 .allSpotsContainer {
@@ -10,6 +18,7 @@
 }
 
 .spotContainer {
+  color: rgb(184, 252, 89);
   margin: 20px;
   display: flex;
   flex-direction: column;
@@ -17,7 +26,6 @@
 
 .spotInfoContainerOne {
   display: flex;
-
   justify-content: space-between
   ;
 }

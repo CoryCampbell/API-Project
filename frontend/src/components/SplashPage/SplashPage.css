@@ -1,0 +1,16 @@
+
+.previewImage {
+  width: 400px;
+  height: 300px;
+}
+
+.allSpotsContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.spotContainer {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}

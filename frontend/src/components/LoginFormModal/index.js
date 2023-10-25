@@ -27,7 +27,7 @@ const handleSubmit = (e) => {
 return (
     <>
         <h1 className="loginH1">Log In</h1>
-        <form onSubmit={handleSubmit} class="loginForm">
+        <form onSubmit={handleSubmit} className="loginForm">
             <label className="loginLabel">
                 Username or Email
                 <input type="text" value={credential} onChange={(e) => setCredential(e.target.value)} required />

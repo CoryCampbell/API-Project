@@ -5,15 +5,19 @@ import "./SplashPage.css";
 
 function SplashPage() {
     const dispatch = useDispatch();
-    const spots = useSelector((state) => state.spots.Spots);
+    const spots = useSelector((state) => Object.values(state.spots));
 
     useEffect(() => {
         dispatch(fetchAllSpots());
     }, [dispatch]);
 
+    if (!spots[0]) return null;
+
     const reactiveSpots = spots?.map((spot) => (
         <div key={spot.id} className="spotContainer">
-            <img src={spot.previewImage} alt="preview" className="previewImage"></img>
+            <div>
+                <img src={spot.previewImage} alt="preview" className="previewImage"></img>
+            </div>
             <div className="spotInfoContainerOne">
                 <div>
                     {spot.city}, {spot.state}

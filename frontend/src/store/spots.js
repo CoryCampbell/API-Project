@@ -28,8 +28,8 @@ export const fetchAllSpots = () => async (dispatch) => {
     return response;
 };
 
-export const fetchSpotDetails = () => async (dispatch) => {
-    const response = await csrfFetch("/api/spots/:spotId", {
+export const fetchSpotDetails = (spotId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
         method: "GET"
     });
 
@@ -44,13 +44,16 @@ const initialState = {
 };
 
 export const spotsReducer = (state = initialState, action) => {
+    let normalizedAllSpots = {};
     switch (action.type) {
         case GET_ALL_SPOTS:
-            let normalizedAllSpots = {};
             action.payload.Spots.forEach((spot) => {
                 normalizedAllSpots[spot.id] = spot;
             });
             return normalizedAllSpots;
+        case GET_SPOT_DETAILS:
+            console.log("action", action);
+            return { ...state, [action.payload.id]: action.payload };
         default:
             return state;
     }

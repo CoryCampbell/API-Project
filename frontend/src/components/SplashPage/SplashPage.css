@@ -1,14 +1,15 @@
 
 .previewImage {
   border-radius: 20px;
-  width: 400px;
-  height: 300px;
+  width: 26rem;
+  height: 18rem;
 }
 
 .previewImage:hover {
+  border-radius: 20px;
+  width: 26rem;
+  height: 18rem;
   cursor: pointer;
-  width: 400px;
-  height: 300px;
   box-shadow: 0px 0px 10px rgb(184, 252, 89);
 }
 

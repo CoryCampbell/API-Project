@@ -103,8 +103,6 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
 
         const bookingUserId = booking.dataValues.userId;
 
-        console.log("new booking id", booking.dataValues.id);
-
         if (booking.dataValues.id === bookingId && user.id === bookingUserId) {
             booking.update({
                 startDate,

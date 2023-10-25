@@ -5,6 +5,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import AllSpots from "./components/SplashPage";
 import { Route } from "react-router-dom/cjs/react-router-dom.min";
+import SpotDetails from "./components/SpotDetails";
 
 function App() {
     const dispatch = useDispatch();
@@ -20,6 +21,9 @@ function App() {
                 <Switch>
                     <Route exact path="/">
                         <AllSpots />
+                    </Route>
+                    <Route path="/spots/:spotId">
+                        <SpotDetails />
                     </Route>
                     <Route>"404: Not Found"</Route>
                 </Switch>

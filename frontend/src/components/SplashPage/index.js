@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { fetchAllSpots } from "../../store/spots";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import "./SplashPage.css";
 
 function SplashPage() {
@@ -15,9 +16,9 @@ function SplashPage() {
 
     const reactiveSpots = spots?.map((spot) => (
         <div key={spot.id} className="spotContainer">
-            <div>
+            <NavLink to={`/spots/${spot.id}`}>
                 <img src={spot.previewImage} alt="preview" className="previewImage"></img>
-            </div>
+            </NavLink>
             <div className="spotInfoContainerOne">
                 <div>
                     {spot.city}, {spot.state}

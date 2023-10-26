@@ -6,10 +6,8 @@ import "./SpotDetails.css";
 
 function SpotDetails() {
     const { spotId } = useParams();
-    console.log("spotId", spotId);
     const dispatch = useDispatch();
     const spots = useSelector((state) => state.spots);
-    console.log("spots", spots);
 
     useEffect(() => {
         dispatch(fetchSpotDetails(spotId));
@@ -17,6 +15,10 @@ function SpotDetails() {
 
     const spot = spots[spotId];
     console.log("spot", spot);
+    console.log("spots", spots);
+
+    if (!spot) return null;
+    if (!spot.SpotImages) return null;
 
     return (
         <div className="spotDetailsContainer">
@@ -28,13 +30,13 @@ function SpotDetails() {
             </div>
             <div className="allImagesContainer">
                 <div className="mainSpotImageContainer">
-                    <img alt="pic 1" className="mainSpotImage"></img>
+                    <img src={spot.SpotImages[0].url} alt="pic 1" className="mainSpotImage"></img>
                 </div>
                 <div className="otherImagesContainer">
-                    <img src={spot.previewImage} alt="pic 2" className="spotImage"></img>
-                    <img src="" alt="pic 3" className="spotImage"></img>
-                    <img src="" alt="pic 4" className="spotImage"></img>
-                    <img src="" alt="pic 5" className="spotImage"></img>
+                    <img src={spot.SpotImages[1].url} alt="pic 2" className="spotImage"></img>
+                    <img src={spot.SpotImages[2].url} alt="pic 3" className="spotImage"></img>
+                    <img src={spot.SpotImages[3].url} alt="pic 4" className="spotImage"></img>
+                    <img src={spot.SpotImages[4].url} alt="pic 5" className="spotImage"></img>
                 </div>
             </div>
             <div className="spotInfoContainer">

@@ -7,6 +7,7 @@ import "./SplashPage.css";
 function SplashPage() {
     const dispatch = useDispatch();
     const spots = useSelector((state) => Object.values(state.spots));
+    const spot = spots[0];
 
     useEffect(() => {
         dispatch(fetchAllSpots());

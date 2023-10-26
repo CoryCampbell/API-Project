@@ -39,9 +39,7 @@ export const fetchSpotDetails = (spotId) => async (dispatch) => {
     return response;
 };
 
-const initialState = {
-    spots: null
-};
+const initialState = {};
 
 export const spotsReducer = (state = initialState, action) => {
     let normalizedAllSpots = {};

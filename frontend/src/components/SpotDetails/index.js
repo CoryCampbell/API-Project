@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { fetchSpotDetails } from "../../store/spots";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import Reviews from "../Reviews";
 import "./SpotDetails.css";
 
 function SpotDetails() {
@@ -75,6 +76,7 @@ function SpotDetails() {
                     </div>
                 </div>
             </div>
+            <Reviews />
         </div>
     );
 }

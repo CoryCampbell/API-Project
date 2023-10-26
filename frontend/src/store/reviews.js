@@ -1,5 +1,3 @@
-import csrfFetch from "./csrf";
-
 const GET_SPOT_REVIEWS = "spotReviews/getSpotReviews";
 
 const getSpotReviews = (payload) => {
@@ -10,25 +8,27 @@ const getSpotReviews = (payload) => {
 };
 
 export const fetchSpotReviews = (spotId) => async (dispatch) => {
-    const response = await csrfFetch(`/${spotId}/reviews`, {
+    const response = await fetch(`api/spots/${spotId}/reviews`, {
         method: "GET"
     });
 
-    const spotReviews = await response.json();
-    console.log("spotReviews-------------", spotReviews);
-    dispatch(getSpotReviews(spotReviews));
+    const reviews = await response.json();
+
+    dispatch(getSpotReviews(reviews));
     return response;
 };
 
-const initialState = {
-    spots: null
-};
+const initialState = {};
 
 export const spotReviewsReducer = (state = initialState, action) => {
+    let normalizedSpotReviews = {};
     switch (action.type) {
         case GET_SPOT_REVIEWS:
-            console.log("action", action);
-            return { ...state, [action.payload.id]: action.payload };
+            console.log("action.payload", action.payload);
+            action.payload.reviews.forEach((review) => {
+                normalizedSpotReviews[review.id] = review;
+            });
+            return normalizedSpotReviews;
         default:
             return state;
     }

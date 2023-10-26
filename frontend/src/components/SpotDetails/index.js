@@ -15,18 +15,36 @@ function SpotDetails() {
         dispatch(fetchSpotDetails(spotId));
     }, [dispatch, spotId]);
 
+    const spot = spots[spotId];
+    console.log("spot", spot);
+
     return (
         <div className="spotDetailsContainer">
-            <>Spot Details Component for {spotId}</>
-            <div className="imagesContainer">
-                imagesContainer
-                <img alt="pic 1" className="spotImage"></img>
-                <img alt="pic 2" className="spotImage"></img>
-                <img alt="pic 3" className="spotImage"></img>
-                <img alt="pic 4" className="spotImage"></img>
-                <img alt="pic 5" className="spotImage"></img>
+            <div>
+                <div>{spot.name}</div>
+                <div>
+                    {spot.city}, {spot.state}, {spot.country}
+                </div>
             </div>
-            <div>spotInfoContainer</div>
+            <div className="allImagesContainer">
+                <div className="mainSpotImageContainer">
+                    <img alt="pic 1" className="mainSpotImage"></img>
+                </div>
+                <div className="otherImagesContainer">
+                    <img src={spot.previewImage} alt="pic 2" className="spotImage"></img>
+                    <img src="" alt="pic 3" className="spotImage"></img>
+                    <img src="" alt="pic 4" className="spotImage"></img>
+                    <img src="" alt="pic 5" className="spotImage"></img>
+                </div>
+            </div>
+            <div className="spotInfoContainer">
+                <div className="spotInfoLeft">
+                    Hosted by owner #{spot.ownerId}
+                    <div>{spot.description}</div>
+                </div>
+                <div className="spotInfoRight">spotInfoContainerRight</div>
+            </div>
+            <div className="spotReviewContainer">Reviews</div>
         </div>
     );
 }

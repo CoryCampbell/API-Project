@@ -75,7 +75,6 @@ function SpotDetails() {
                     </div>
                 </div>
             </div>
-            <div className="spotReviewContainer">Reviews</div>
         </div>
     );
 }

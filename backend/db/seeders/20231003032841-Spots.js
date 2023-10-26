@@ -78,7 +78,7 @@ module.exports = {
                     lng: -87.17615,
                     name: "wow, a king used to live two doors down",
                     description:
-                        "Maybe you might see some royalty. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nibh mauris cursus mattis molestie a. Faucibus in ornare quam viverra orci. Donec massa sapien faucibus et molestie ac feugiat sed lectus. Augue mauris augue neque gravida in fermentum et sollicitudin ac. Velit egestas dui id ornare arcu odio ut sem. Cras ornare arcu dui vivamus. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Sagittis eu volutpat odio facilisis.",
+                        "Maybe you might see some royalty. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nibh mauris cursus mattis molestie a. Faucibus in ornare quam viverra orci.",
                     price: 8
                 },
                 {

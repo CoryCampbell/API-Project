@@ -1,9 +1,63 @@
 .spotDetailsContainer {
   margin: auto;
   max-width: 1000px;
-
 }
 
-.imagesContainer {
+.allImagesContainer {
+  display: flex;
   border: solid black;
+    box-sizing: border-box;
+  width: 100%;
+  height: 400px;
+}
+
+.mainSpotImageContainer {
+  width: 100%;
+}
+
+.otherImagesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.spotInfoContainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.mainSpotImage {
+  width: 100%;
+    border: solid white;
+    box-sizing: border-box;
+}
+
+.spotImage {
+  border: solid pink;
+  box-sizing: border-box;
+  width: 50%;
+  height: 50%;
+}
+
+.spotInfoContainer {
+  width: 100%;
+  height: 200px;
+}
+
+.spotInfoLeft {
+  border: solid red;
+    box-sizing: border-box;
+  width: 70%;
+}
+.spotInfoRight {
+  border: solid blue;
+    box-sizing: border-box;
+  width: 30%;
+}
+
+.spotReviewContainer {
+  border: solid green;
+    box-sizing: border-box;
+  width: 100%;
+  height: 400px;
 }

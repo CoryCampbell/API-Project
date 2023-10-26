@@ -5,13 +5,12 @@
 
 .allImagesContainer {
   display: flex;
-  border: solid black;
-  box-sizing: border-box;
   width: 100%;
 }
 
 .mainSpotImageContainer {
   width: 100%;
+  border-radius: 25px;
 }
 
 .otherImagesContainer {
@@ -27,38 +26,103 @@
 
 .mainSpotImage {
   width: 100%;
-    border: solid white;
-    box-sizing: border-box;
-    height: 100%;
-
+  height: 100%;
+    border: solid transparent 5px;
+  box-sizing: border-box;
 }
 
 .spotImage {
-  border: solid pink;
-  box-sizing: border-box;
   width: 50%;
   height: 50%;
+    border: solid transparent 5px;
+  box-sizing: border-box;
 }
 
 .spotInfoContainer {
   width: 100%;
-  height: 200px;
+  height: auto;
+  margin-bottom: 10px;
 }
 
 .spotInfoLeft {
-  border: solid red;
-    box-sizing: border-box;
-  width: 70%;
+  width: 65%;
 }
 .spotInfoRight {
-  border: solid blue;
-    box-sizing: border-box;
-  width: 30%;
+  width: 35%;
 }
 
 .spotReviewContainer {
-  border: solid green;
-    box-sizing: border-box;
   width: 100%;
   height: 400px;
+  border-top: solid black;
+  box-sizing: border-box;
+}
+
+.reserveBox {
+  border: solid;
+  border-radius: 20px;
+  height: 60%;
+  width: 90%;
+  margin: auto;
+}
+
+.reserveInfoContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 25%;
+}
+
+.reserveButtonContainer {
+  display: flex;
+  width: 100%;
+  height: 75%;
+  margin: auto;
+}
+
+.reserveButton {
+  margin: auto;
+  width: 80%;
+  height: 40%;
+  background-color: red;
+  border-radius: 20px;
+}
+
+.reserveInfoRight {
+  display: flex;
+  width: 30%;
+  justify-content: space-between;
+}
+
+.hostContainer {
+  display: flex;
+}
+
+.nameContainer {
+  display: flex;
+  width: 25%;
+  justify-content: flex-start;
+}
+
+.nameContent {
+  padding-left: 5px;
+}
+
+.spotPriceContainer {
+  display: flex;
+}
+
+.spotPriceContent {
+  font-size: 30px;
+}
+
+.nightContent {
+  display: flex;
+  align-items: center;
+  padding-left: 5px;
+}
+
+.hostContainer {
+  font-size: 25px;
+  margin: 10px 0px 10px 0px;
 }

@@ -17,6 +17,10 @@ function SpotDetails() {
     console.log("spot", spot);
     console.log("spots", spots);
 
+    const reserveAlert = () => {
+        alert("Feature Coming Soon...");
+    };
+
     if (!spot) return null;
     if (!spot.SpotImages) return null;
 
@@ -41,10 +45,35 @@ function SpotDetails() {
             </div>
             <div className="spotInfoContainer">
                 <div className="spotInfoLeft">
-                    Hosted by owner #{spot.ownerId}
+                    <div className="hostContainer">
+                        Hosted by
+                        <div className="nameContainer">
+                            <div className="nameContent">{spot.Owner.firstName}</div>
+                            <div className="nameContent">{spot.Owner.lastName}</div>
+                        </div>
+                    </div>
                     <div>{spot.description}</div>
                 </div>
-                <div className="spotInfoRight">spotInfoContainerRight</div>
+                <div className="spotInfoRight">
+                    <div className="reserveBox">
+                        <div className="reserveInfoContainer">
+                            <div className="spotPriceContainer">
+                                <div className="spotPriceContent">${spot.price}</div>
+                                <div className="nightContent">/night</div>
+                            </div>
+                            <div className="reserveInfoRight">
+                                <i className="fa-solid fa-star">{spot.avgRating}</i>
+                                <div>·</div>
+                                <div>#{spot.numReviews}</div>
+                            </div>
+                        </div>
+                        <div className="reserveButtonContainer">
+                            <button className="reserveButton" onClick={reserveAlert}>
+                                Reserve
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div className="spotReviewContainer">Reviews</div>
         </div>

@@ -24,8 +24,9 @@ module.exports = {
                     country: "Australia",
                     lat: -43.12432,
                     lng: 24.12312,
-                    name: "Bobby",
-                    description: "Comes with shrimp",
+                    name: "Dentist Office",
+                    description:
+                        "Comes with shrimp!! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nibh mauris cursus mattis molestie a. Faucibus in ornare quam viverra orci. Donec massa sapien faucibus et molestie ac feugiat sed lectus. Augue mauris augue neque gravida in fermentum et sollicitudin ac. Velit egestas dui id ornare arcu odio ut sem. Cras ornare arcu dui vivamus. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Sagittis eu volutpat odio facilisis.",
                     price: 4
                 },
                 {
@@ -37,7 +38,8 @@ module.exports = {
                     lat: 46.12132,
                     lng: -87.12312,
                     name: "Haunted Mansion",
-                    description: "How long can you stay?",
+                    description:
+                        "How long can you stay? Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nibh mauris cursus mattis molestie a. Faucibus in ornare quam viverra orci. Donec massa sapien faucibus et molestie ac feugiat sed lectus. Augue mauris augue neque gravida in fermentum et sollicitudin ac. Velit egestas dui id ornare arcu odio ut sem. Cras ornare arcu dui vivamus. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Sagittis eu volutpat odio facilisis.",
                     price: 6
                 },
                 {
@@ -49,7 +51,8 @@ module.exports = {
                     lat: 45.12132,
                     lng: -87.12312,
                     name: "Fabulous Castle",
-                    description: "The king used to live here",
+                    description:
+                        "The king used to live here.. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nibh mauris cursus mattis molestie a. Faucibus in ornare quam viverra orci. Donec massa sapien faucibus et molestie ac feugiat sed lectus. Augue mauris augue neque gravida in fermentum et sollicitudin ac. Velit egestas dui id ornare arcu odio ut sem. Cras ornare arcu dui vivamus. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Sagittis eu volutpat odio facilisis.",
                     price: 600
                 },
                 {
@@ -61,7 +64,8 @@ module.exports = {
                     lat: 46.12134,
                     lng: -87.12315,
                     name: "Fabulous Castle's neighbor. Just a plain house.",
-                    description: "The king used to live next door.",
+                    description:
+                        "The king used to live next door. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nibh mauris cursus mattis molestie a. Faucibus in ornare quam viverra orci. Donec massa sapien faucibus et molestie ac feugiat sed lectus. Augue mauris augue neque gravida in fermentum et sollicitudin ac. Velit egestas dui id ornare arcu odio ut sem. Cras ornare arcu dui vivamus. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Sagittis eu volutpat odio facilisis.",
                     price: 10
                 },
                 {
@@ -73,7 +77,8 @@ module.exports = {
                     lat: 45.12124,
                     lng: -87.17615,
                     name: "wow, a king used to live two doors down",
-                    description: "Maybe you might see some royalty.",
+                    description:
+                        "Maybe you might see some royalty. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nibh mauris cursus mattis molestie a. Faucibus in ornare quam viverra orci. Donec massa sapien faucibus et molestie ac feugiat sed lectus. Augue mauris augue neque gravida in fermentum et sollicitudin ac. Velit egestas dui id ornare arcu odio ut sem. Cras ornare arcu dui vivamus. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Sagittis eu volutpat odio facilisis.",
                     price: 8
                 },
                 {
@@ -85,7 +90,8 @@ module.exports = {
                     lat: 45.12455,
                     lng: -87.17699,
                     name: "wow, a king used to live three doors down",
-                    description: "Maybeeeee you might see some royalty.",
+                    description:
+                        "Maybeeeee you might see some royalty. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nibh mauris cursus mattis molestie a. Faucibus in ornare quam viverra orci. Donec massa sapien faucibus et molestie ac feugiat sed lectus. Augue mauris augue neque gravida in fermentum et sollicitudin ac. Velit egestas dui id ornare arcu odio ut sem. Cras ornare arcu dui vivamus. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Sagittis eu volutpat odio facilisis.",
                     price: 6
                 }
             ],

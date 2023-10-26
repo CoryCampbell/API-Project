@@ -24,24 +24,44 @@ const handleSubmit = (e) => {
         });
 };
 
+const demoUser = () => {
+    setCredential("Demo-lition");
+    setPassword("password");
+};
+
 return (
-    <>
+    <div className="loginContainer">
         <h1 className="loginH1">Log In</h1>
         <form onSubmit={handleSubmit} className="loginForm">
             <label className="loginLabel">
                 Username or Email
-                <input type="text" value={credential} onChange={(e) => setCredential(e.target.value)} required />
+                <input
+                    className="loginInput"
+                    type="text"
+                    value={credential}
+                    onChange={(e) => setCredential(e.target.value)}
+                    required
+                />
             </label>
             <label className="loginLabel">
                 Password
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                <input
+                    className="loginInput"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                />
             </label>
             {errors.message && <p className="loginErrorMessage">{errors.message}</p>}
             <button type="submit" className="loginButton">
                 Log In
             </button>
+            <button className="demoUserButton" onClick={demoUser}>
+                Demo User
+            </button>
         </form>
-    </>
+    </div>
 );
 }
 export default LoginFormModal;

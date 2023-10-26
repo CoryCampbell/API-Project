@@ -9,16 +9,18 @@ function Navigation({ isLoaded }) {
 
     return (
         <>
-            <ul className="fullNavBar">
-                <NavLink exact to="/" className="logoDiv">
-                    <i className="fa-brands fa-airbnb"></i>
-                    <p className="airbnbText">airbnb</p>
-                </NavLink>
-                {isLoaded && (
-                    <li className="drop-down-active">
-                        <ProfileButton user={sessionUser} />
-                    </li>
-                )}
+            <ul className="fullNavBarContainer">
+                <div className="navBarContent">
+                    <NavLink exact to="/" className="logoDiv">
+                        <i className="fa-brands fa-airbnb"></i>
+                        <p className="airbnbText">airbnb</p>
+                    </NavLink>
+                    {isLoaded && (
+                        <li className="drop-down-active">
+                            <ProfileButton user={sessionUser} />
+                        </li>
+                    )}
+                </div>
             </ul>
         </>
     );

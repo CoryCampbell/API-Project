@@ -1,5 +1,15 @@
 /* practice styling NOT FINAL */
 
+.loginContainer {
+  border: solid rgb(184, 252, 89) 25px;
+  border-radius: 25px;
+  color: black;
+}
+
+#modal-content {
+  border-radius: 25px;
+}
+
 .loginH1 {
   display: flex;
   justify-content: center;
@@ -15,28 +25,41 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-end;
-
+  align-items: center;
   background-color: rgb(184, 252, 89);
-  width: 500px;
-  height: 200px;
+  width: 100%;
+  height: 300px;
   margin: auto;
 }
 
+.loginInput {
+  margin: auto;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  border-radius: 5px;
+  box-sizing: border-box;
+
+}
 
 .loginLabel {
   display: flex;
   flex-direction: column;
   font-size: 20px;
-  margin: auto;
+  width: 100%;
+  margin: 15px 0px 15px 0px;
+    border-radius: 5px;
+  box-sizing: border-box;
 }
 
 .loginButton {
   font-size: 20px;
   margin: auto;
-  width: 30%;
+  width: 100%;
   height: 20%;
-  border-radius: 5%;
+  border-radius: 5px;
+  box-sizing: border-box;
+  cursor: pointer;
 }
 
 .loginErrorMessage {
@@ -45,4 +68,18 @@
   align-items: center;
   margin: auto;
   background-color: red;
+}
+
+.demoUserButton {
+  padding-top: 15px;
+  font-size: 30px;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+.demoUserButton:hover {
+cursor: pointer;
 }

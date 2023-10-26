@@ -1,10 +1,11 @@
 body {
   margin: auto;
-  background-color: teal;
+  background-color: rgb(35, 150, 150);
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: bold;
+  width: 100%;
+  color: black;
 }
-
 .dropdownMain {
   display: flex;
   cursor: pointer;
@@ -16,14 +17,12 @@ body {
   height: 50px;
 }
 
-.fullNavBar {
+.fullNavBarContainer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: 50px;
-  margin-top: auto;
-  width: auto;
+  width: 100%;
   border-bottom: .1rem solid rgb(184, 252, 89);
   padding-bottom: 5px;
   padding-left: 0px;
@@ -58,7 +57,12 @@ body {
   font-weight: bold;
 }
 
-
+.navBarContent {
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+  margin: auto;
+}
 
 li {
   display: flex;
@@ -76,8 +80,8 @@ li:hover {
   flex-direction: column;
   align-items: flex-start;
   position: fixed;
-  top: 70px;
-  right: 60px;
+  top: 75px;
+  right: 25px;
   padding: 10px;
   width: 180px;
   background-color: rgb(184, 252, 89);

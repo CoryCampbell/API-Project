@@ -10,9 +10,36 @@
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  background-color: red;
+  margin-bottom: 20px;
+  font-size: 30px;
 }
 
 .perReview {
-  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
+}
+
+.singleReviewContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.reviewHeaderSpacer {
+  margin: 0px 15px 0px 15px;
+}
+
+.dateContainer {
+  display: flex;
+  flex-direction: row;
+  opacity: 40%;
+}
+
+.reviewUsername {
+  font-size: 20px;
+}
+
+.yearText {
+  margin-left: 5px;
 }

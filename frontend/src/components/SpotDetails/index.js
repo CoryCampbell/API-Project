@@ -68,7 +68,8 @@ function SpotDetails() {
                                 <div className="nightContent">/night</div>
                             </div>
                             <div className="reserveInfoRight">
-                                <i className="fa-solid fa-star">{spot?.avgRating}</i>
+                                <i className="fa-solid fa-star"></i>
+                                <div>{spot?.avgRating}</div>
                                 <div>·</div>
                                 <div>{spot?.numReviews} Reviews</div>
                             </div>

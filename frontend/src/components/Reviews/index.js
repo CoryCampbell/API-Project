@@ -17,6 +17,8 @@ function Reviews({ spotId }) {
     console.log("spot", spot);
     console.log("reviews", reviews);
 
+    if (!reviews.length) return null;
+
     return (
         <div className="reviewsContainer">
             <div className="reviewsHeader">

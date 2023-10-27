@@ -16,6 +16,7 @@ function SpotDetails() {
     console.log("spot---------", spot);
 
     const reviews = useSelector((state) => Object.values(state.reviews));
+    console.log("reviews", reviews);
 
     useEffect(() => {
         dispatch(fetchSpotDetails(spotId));
@@ -24,7 +25,6 @@ function SpotDetails() {
     const reserveAlert = () => {
         alert("Feature Coming Soon...");
     };
-
 
     if (!spot) return null;
     if (!spots) return null;

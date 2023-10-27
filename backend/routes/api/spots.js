@@ -134,6 +134,12 @@ router.get("/:spotId/bookings", requireAuth, async (req, res) => {
 router.get("/:spotId/reviews", async (req, res) => {
     const spotId = req.params.spotId;
 
+    try {
+        await Spot.findByPk(spotId);
+    } catch {
+        return res.status(404).json({ message: "Spot couldn't be found" });
+    }
+
     const allReviews = await Review.findAll({
         where: {
             spotId
@@ -143,7 +149,6 @@ router.get("/:spotId/reviews", async (req, res) => {
             { model: ReviewImage, attributes: ["id", "url"] }
         ]
     });
-    if (allReviews.toString() === "") return res.status(404).json({ message: "Spot couldn't be found" });
 
     res.json({ "Reviews": allReviews });
 });

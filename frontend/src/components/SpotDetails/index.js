@@ -10,13 +10,10 @@ function SpotDetails() {
     const dispatch = useDispatch();
 
     const spots = useSelector((state) => state.spots);
-    console.log("spots", spots);
 
     const spot = useSelector((state) => state.spots[spotId]);
-    console.log("spot---------", spot);
 
     const reviews = useSelector((state) => Object.values(state.reviews));
-    console.log("reviews", reviews);
 
     useEffect(() => {
         dispatch(fetchSpotDetails(spotId));
@@ -35,7 +32,7 @@ function SpotDetails() {
             <div>
                 <div>{spot?.name}</div>
                 <div>
-                    {spot?.city}, {spot.state}, {spot.country}
+                    {spot?.city}, {spot?.state}, {spot?.country}
                 </div>
             </div>
             <div className="allImagesContainer">

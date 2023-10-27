@@ -36,7 +36,6 @@ export const fetchSpotDetails = (spotId) => async (dispatch) => {
     const spotDetails = await response.json();
 
     dispatch(getSpotDetails(spotDetails));
-    console.log("spotDetails", spotDetails);
     return spotDetails;
 };
 
@@ -51,7 +50,6 @@ export const spotsReducer = (state = initialState, action) => {
             });
             return normalizedAllSpots;
         case GET_SPOT_DETAILS:
-            console.log("action", action);
             return { ...state, [action.payload.id]: action.payload };
         default:
             return state;

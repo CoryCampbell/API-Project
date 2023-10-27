@@ -1,6 +1,6 @@
 .postReviewContainer {
-  height: 500px;
-  width: 600px;
+  height: 300px;
+  width: 400px;
 }
 
 .reviewForm {
@@ -8,6 +8,5 @@
   flex-direction: column;
   margin: auto;
   background-color: red;
-  height: 400px;
   width: 95%;
 }

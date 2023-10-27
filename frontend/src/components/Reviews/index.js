@@ -34,10 +34,8 @@ function Reviews({ spotId }) {
     const spot = spots[spotId];
 
     const user = useSelector((state) => state.session.user);
-    console.log("user", user);
 
     const youOwnThisSpot = spot?.Owner.id === user?.id;
-    console.log("youOwnThisSpot", youOwnThisSpot);
 
     let loggedIn = false;
     if (user) loggedIn = true;
@@ -46,9 +44,6 @@ function Reviews({ spotId }) {
         console.log("test");
     }
 
-    console.log("spots", spots);
-    console.log("spot", spot);
-    console.log("reviews", reviews);
 
     if (!reviews.length)
         return (

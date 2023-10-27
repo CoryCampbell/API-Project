@@ -5,30 +5,29 @@ import "./Reviews.css";
 
 function Reviews({ spotId }) {
     const dispatch = useDispatch();
-    const reviews = useSelector((state) => Object.values(state.reviews));
     const spots = useSelector((state) => state.spots);
-
-    console.log("spots-----", spots);
-    console.log("reviews", reviews);
+    const reviews = useSelector((state) => Object.values(state.reviews));
 
     useEffect(() => {
         dispatch(fetchSpotReviews(spotId));
     }, [dispatch, spotId]);
 
     const spot = spots[spotId];
-
-    if (!spot) return null;
-    if (!reviews) return null;
+    console.log("spots", spots);
+    console.log("spot", spot);
+    console.log("reviews", reviews);
 
     return (
         <div className="reviewsContainer">
             <div className="reviewsHeader">
-                <i className="fa-solid fa-star">{spot.avgRating}</i>
+                <i className="fa-solid fa-star">{spot?.avgRating}</i>
                 <div> · </div>
-                <div>{spot.numReviews} Reviews</div>
+                <div>{spot?.numReviews} Reviews</div>
             </div>
-            {reviews.map((review) => (
-                <div className="perReview">{review?.review}</div>
+            {reviews?.map((review) => (
+                <div key={review.id} className="perReview">
+                    {review?.review}
+                </div>
             ))}
         </div>
     );

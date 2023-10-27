@@ -15,7 +15,7 @@ export const fetchSpotReviews = (spotId) => async (dispatch) => {
     });
 
     const reviews = await response.json();
-    console.log("reviews", reviews);
+
     dispatch(getSpotReviews(reviews));
     return response;
 };
@@ -27,8 +27,9 @@ export const spotReviewsReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_SPOT_REVIEWS:
             action.payload.Reviews?.forEach((review) => {
-                normalizedSpotReviews[review?.id] = review;
+                normalizedSpotReviews[review.id] = review;
             });
+
             return normalizedSpotReviews;
         default:
             return state;

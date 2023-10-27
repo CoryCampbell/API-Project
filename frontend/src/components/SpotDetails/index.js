@@ -8,19 +8,26 @@ import "./SpotDetails.css";
 function SpotDetails() {
     const { spotId } = useParams();
     const dispatch = useDispatch();
+
     const spots = useSelector((state) => state.spots);
+    console.log("spots", spots);
+
+    const spot = useSelector((state) => state.spots[spotId]);
+    console.log("spot---------", spot);
+
+    const reviews = useSelector((state) => Object.values(state.reviews));
 
     useEffect(() => {
         dispatch(fetchSpotDetails(spotId));
     }, [dispatch, spotId]);
 
-    const spot = spots[spotId];
-
     const reserveAlert = () => {
         alert("Feature Coming Soon...");
     };
 
+
     if (!spot) return null;
+    if (!spots) return null;
     if (!spot.SpotImages) return null;
 
     return (
@@ -33,13 +40,13 @@ function SpotDetails() {
             </div>
             <div className="allImagesContainer">
                 <div className="mainSpotImageContainer">
-                    <img src={spot?.SpotImages[0].url} alt="pic 1" className="mainSpotImage"></img>
+                    <img src={spots[spotId].SpotImages[0].url} alt="pic 1" className="mainSpotImage"></img>
                 </div>
                 <div className="otherImagesContainer">
-                    <img src={spot?.SpotImages[1].url} alt="pic 2" className="spotImage"></img>
-                    <img src={spot?.SpotImages[2].url} alt="pic 3" className="spotImage"></img>
-                    <img src={spot?.SpotImages[3].url} alt="pic 4" className="spotImage"></img>
-                    <img src={spot?.SpotImages[4].url} alt="pic 5" className="spotImage"></img>
+                    <img src={spots[spotId].SpotImages[1].url} alt="pic 2" className="spotImage"></img>
+                    <img src={spots[spotId].SpotImages[2].url} alt="pic 3" className="spotImage"></img>
+                    <img src={spots[spotId].SpotImages[3].url} alt="pic 4" className="spotImage"></img>
+                    <img src={spots[spotId].SpotImages[4].url} alt="pic 5" className="spotImage"></img>
                 </div>
             </div>
             <div className="spotInfoContainer">

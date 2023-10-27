@@ -131,7 +131,7 @@ router.get("/:spotId/bookings", requireAuth, async (req, res) => {
 });
 
 //get all reviews by a spotId
-router.get("/:spotId/reviews", requireAuth, async (req, res) => {
+router.get("/:spotId/reviews", async (req, res) => {
     const spotId = req.params.spotId;
 
     const allReviews = await Review.findAll({
@@ -299,7 +299,6 @@ router.get("/", async (req, res) => {
 
     //refactor the results
     const result = [];
-
     paginatedSpots.forEach(async (spotObj) => {
         const jsonSpotObject = spotObj.toJSON();
         const spotPreviewImage = spotObj.dataValues.SpotImages[0].dataValues.previewImage;

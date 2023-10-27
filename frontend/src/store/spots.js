@@ -25,7 +25,7 @@ export const fetchAllSpots = () => async (dispatch) => {
     const allSpots = await response.json();
 
     dispatch(getAllSpots(allSpots));
-    return response;
+    return allSpots;
 };
 
 export const fetchSpotDetails = (spotId) => async (dispatch) => {
@@ -36,7 +36,8 @@ export const fetchSpotDetails = (spotId) => async (dispatch) => {
     const spotDetails = await response.json();
 
     dispatch(getSpotDetails(spotDetails));
-    return response;
+    console.log("spotDetails", spotDetails);
+    return spotDetails;
 };
 
 const initialState = {};
@@ -51,7 +52,7 @@ export const spotsReducer = (state = initialState, action) => {
             return normalizedAllSpots;
         case GET_SPOT_DETAILS:
             console.log("action", action);
-            return { ...state, [action.payload.id]: action.payload };
+            return { [action.payload.id]: action.payload };
         default:
             return state;
     }

@@ -30,6 +30,14 @@ function PostReviewModal() {
             <h1>How was your stay?</h1>
             <form onSubmit={handleSubmit} className="reviewForm">
                 <input className="reviewText" type="text" value={text} onChange={(e) => setText(e.target.value)} />
+                <div className="starContainer">
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                </div>
+                <button>Submit</button>
             </form>
         </div>
     );

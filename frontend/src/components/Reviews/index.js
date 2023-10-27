@@ -30,6 +30,20 @@ function Reviews({ spotId }) {
     });
 
     const spot = spots[spotId];
+
+    const user = useSelector((state) => state.session.user);
+    console.log("user", user);
+
+    const youOwnThisSpot = spot?.Owner.id === user?.id;
+    console.log("youOwnThisSpot", youOwnThisSpot);
+
+    let loggedIn = true;
+    if (!user) loggedIn = false;
+
+    function postNewReview() {
+        console.log("test");
+    }
+
     console.log("spots", spots);
     console.log("spot", spot);
     console.log("reviews", reviews);
@@ -43,6 +57,7 @@ function Reviews({ spotId }) {
                     <div className="reviewHeaderSpacer"> · </div>
                     <div>{spot?.numReviews} Reviews</div>
                 </div>
+                {loggedIn && !youOwnThisSpot && <button className="createAReviewButton">Post Your Review</button>}
             </>
         );
 
@@ -54,6 +69,11 @@ function Reviews({ spotId }) {
                 <div className="reviewHeaderSpacer"> · </div>
                 <div>{spot?.numReviews} Reviews</div>
             </div>
+            {loggedIn && !youOwnThisSpot && (
+                <button onClick={postNewReview} className="createAReviewButton">
+                    Post Your Review
+                </button>
+            )}
             <div className="singleReviewContainer">
                 {orderedReviews?.map((review) => (
                     <div key={review?.id} className="perReview">

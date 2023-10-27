@@ -43,3 +43,12 @@
 .yearText {
   margin-left: 5px;
 }
+
+.createAReviewButton {
+  cursor: pointer;
+  width: 150px;
+  background-color: greenyellow;
+  height: 30px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}

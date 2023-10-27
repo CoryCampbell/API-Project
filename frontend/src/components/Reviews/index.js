@@ -54,10 +54,9 @@ function Reviews({ spotId }) {
                 <div className="reviewsHeader">
                     <i className="fa-solid fa-star"></i>
                     <div>New</div>
-                    <div className="reviewHeaderSpacer"> · </div>
-                    <div>{spot?.numReviews} Reviews</div>
                 </div>
                 {loggedIn && !youOwnThisSpot && <button className="createAReviewButton">Post Your Review</button>}
+                <div>Be the first to post a review!</div>
             </>
         );
 

@@ -52,7 +52,7 @@ export const spotsReducer = (state = initialState, action) => {
             return normalizedAllSpots;
         case GET_SPOT_DETAILS:
             console.log("action", action);
-            return { [action.payload.id]: action.payload };
+            return { ...state, [action.payload.id]: action.payload };
         default:
             return state;
     }

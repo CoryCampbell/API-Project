@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { fetchSpotReviews } from "../../store/reviews";
 import { useDispatch, useSelector } from "react-redux";
+import OpenModalMenuItem from "../OpenModalButton";
+import PostReviewModal from "../PostReviewModal";
 import "./Reviews.css";
 
 function Reviews({ spotId }) {
@@ -37,8 +39,8 @@ function Reviews({ spotId }) {
     const youOwnThisSpot = spot?.Owner.id === user?.id;
     console.log("youOwnThisSpot", youOwnThisSpot);
 
-    let loggedIn = true;
-    if (!user) loggedIn = false;
+    let loggedIn = false;
+    if (user) loggedIn = true;
 
     function postNewReview() {
         console.log("test");
@@ -50,14 +52,20 @@ function Reviews({ spotId }) {
 
     if (!reviews.length)
         return (
-            <>
+            <div className="reviewsContainer">
                 <div className="reviewsHeader">
                     <i className="fa-solid fa-star"></i>
                     <div>New</div>
                 </div>
-                {loggedIn && !youOwnThisSpot && <button className="createAReviewButton">Post Your Review</button>}
+                {loggedIn && !youOwnThisSpot && (
+                    <OpenModalMenuItem
+                        className="postReviewButton"
+                        buttonText="Post Your Review"
+                        modalComponent={<PostReviewModal />}
+                    />
+                )}
                 <div>Be the first to post a review!</div>
-            </>
+            </div>
         );
 
     return (

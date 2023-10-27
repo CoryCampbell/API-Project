@@ -43,6 +43,7 @@
   width: 100%;
   height: 14rem;
   margin-bottom: 10px;
+  margin-top: 10px;
   border-bottom: solid greenyellow;
 }
 
@@ -92,13 +93,11 @@
 
 .reserveInfoRight {
   display: flex;
-  width: 30%;
-  justify-content: space-between;
+  align-items: flex-end;
+  width: 50%;
+  justify-content: space-around;
 }
 
-.hostContainer {
-  display: flex;
-}
 
 .nameContainer {
   display: flex;
@@ -125,6 +124,7 @@
 }
 
 .hostContainer {
+  display: flex;
   font-size: 25px;
-  margin: 10px 0px 10px 0px;
+  margin: 0px 0px 10px 0px;
 }

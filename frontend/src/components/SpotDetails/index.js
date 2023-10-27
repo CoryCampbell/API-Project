@@ -15,8 +15,6 @@ function SpotDetails() {
     }, [dispatch, spotId]);
 
     const spot = spots[spotId];
-    console.log("spot", spot);
-    console.log("spots", spots);
 
     const reserveAlert = () => {
         alert("Feature Coming Soon...");
@@ -28,20 +26,20 @@ function SpotDetails() {
     return (
         <div className="spotDetailsContainer">
             <div>
-                <div>{spot.name}</div>
+                <div>{spot?.name}</div>
                 <div>
-                    {spot.city}, {spot.state}, {spot.country}
+                    {spot?.city}, {spot.state}, {spot.country}
                 </div>
             </div>
             <div className="allImagesContainer">
                 <div className="mainSpotImageContainer">
-                    <img src={spot.SpotImages[0].url} alt="pic 1" className="mainSpotImage"></img>
+                    <img src={spot?.SpotImages[0].url} alt="pic 1" className="mainSpotImage"></img>
                 </div>
                 <div className="otherImagesContainer">
-                    <img src={spot.SpotImages[1].url} alt="pic 2" className="spotImage"></img>
-                    <img src={spot.SpotImages[2].url} alt="pic 3" className="spotImage"></img>
-                    <img src={spot.SpotImages[3].url} alt="pic 4" className="spotImage"></img>
-                    <img src={spot.SpotImages[4].url} alt="pic 5" className="spotImage"></img>
+                    <img src={spot?.SpotImages[1].url} alt="pic 2" className="spotImage"></img>
+                    <img src={spot?.SpotImages[2].url} alt="pic 3" className="spotImage"></img>
+                    <img src={spot?.SpotImages[3].url} alt="pic 4" className="spotImage"></img>
+                    <img src={spot?.SpotImages[4].url} alt="pic 5" className="spotImage"></img>
                 </div>
             </div>
             <div className="spotInfoContainer">
@@ -49,23 +47,23 @@ function SpotDetails() {
                     <div className="hostContainer">
                         Hosted by
                         <div className="nameContainer">
-                            <div className="nameContent">{spot.Owner.firstName}</div>
-                            <div className="nameContent">{spot.Owner.lastName}</div>
+                            <div className="nameContent">{spot?.Owner.firstName}</div>
+                            <div className="nameContent">{spot?.Owner.lastName}</div>
                         </div>
                     </div>
-                    <div>{spot.description}</div>
+                    <div>{spot?.description}</div>
                 </div>
                 <div className="spotInfoRight">
                     <div className="reserveBox">
                         <div className="reserveInfoContainer">
                             <div className="spotPriceContainer">
-                                <div className="spotPriceContent">${spot.price}</div>
+                                <div className="spotPriceContent">${spot?.price}</div>
                                 <div className="nightContent">/night</div>
                             </div>
                             <div className="reserveInfoRight">
-                                <i className="fa-solid fa-star">{spot.avgRating}</i>
+                                <i className="fa-solid fa-star">{spot?.avgRating}</i>
                                 <div>·</div>
-                                <div>#{spot.numReviews}</div>
+                                <div>{spot?.numReviews} Reviews</div>
                             </div>
                         </div>
                         <div className="reserveButtonContainer">
@@ -76,7 +74,7 @@ function SpotDetails() {
                     </div>
                 </div>
             </div>
-            <Reviews />
+            <Reviews spotId={spotId} />
         </div>
     );
 }

@@ -40,13 +40,13 @@ function SpotDetails() {
             </div>
             <div className="allImagesContainer">
                 <div className="mainSpotImageContainer">
-                    <img src={spots[spotId].SpotImages[0].url} alt="pic 1" className="mainSpotImage"></img>
+                    <img src={spots[spotId].SpotImages[0]?.url} alt="pic 1" className="mainSpotImage"></img>
                 </div>
                 <div className="otherImagesContainer">
-                    <img src={spots[spotId].SpotImages[1].url} alt="pic 2" className="spotImage"></img>
-                    <img src={spots[spotId].SpotImages[2].url} alt="pic 3" className="spotImage"></img>
-                    <img src={spots[spotId].SpotImages[3].url} alt="pic 4" className="spotImage"></img>
-                    <img src={spots[spotId].SpotImages[4].url} alt="pic 5" className="spotImage"></img>
+                    <img src={spots[spotId].SpotImages[1]?.url} alt="pic 2" className="spotImage"></img>
+                    <img src={spots[spotId].SpotImages[2]?.url} alt="pic 3" className="spotImage"></img>
+                    <img src={spots[spotId].SpotImages[3]?.url} alt="pic 4" className="spotImage"></img>
+                    <img src={spots[spotId].SpotImages[4]?.url} alt="pic 5" className="spotImage"></img>
                 </div>
             </div>
             <div className="spotInfoContainer">

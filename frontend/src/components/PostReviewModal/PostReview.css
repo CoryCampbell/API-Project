@@ -1,0 +1,13 @@
+.postReviewContainer {
+  height: 500px;
+  width: 600px;
+}
+
+.reviewForm {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  background-color: red;
+  height: 400px;
+  width: 95%;
+}

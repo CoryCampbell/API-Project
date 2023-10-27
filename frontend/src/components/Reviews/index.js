@@ -77,9 +77,11 @@ function Reviews({ spotId }) {
                 <div>{spot?.numReviews} Reviews</div>
             </div>
             {loggedIn && !youOwnThisSpot && (
-                <button onClick={postNewReview} className="createAReviewButton">
-                    Post Your Review
-                </button>
+                <OpenModalMenuItem
+                    className="postReviewButton"
+                    buttonText="Post Your Review"
+                    modalComponent={<PostReviewModal />}
+                />
             )}
             <div className="singleReviewContainer">
                 {orderedReviews?.map((review) => (

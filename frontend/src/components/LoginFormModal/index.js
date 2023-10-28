@@ -25,7 +25,7 @@ const handleSubmit = (e) => {
 };
 
 const demoUser = () => {
-    setCredential("Demo-lition");
+    setCredential("DemoUserDownBad");
     setPassword("password");
 };
 

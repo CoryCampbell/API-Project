@@ -17,25 +17,29 @@ function SplashPage() {
                 <div className="imageContainer">
                     <img src={spot?.previewImage} alt="preview" className="previewImage"></img>
                 </div>
+                <div className="spotInfo">
+                    <div className="spotLocation">
+                        <div>
+                            {spot?.city}, {spot?.state}
+                        </div>
+                        <div className="spotAvgRating">
+                            <i className="fa-solid fa-star"></i>
+                            {spot?.avgRating}
+                        </div>
+                    </div>
+                    <div className="spotPrice">
+                        ${spot?.price}.00
+                        <div className="nightText">night</div>
+                    </div>
+                </div>
             </NavLink>
-            <div className="spotInfoContainerOne">
-                <div>
-                    {spot?.city}, {spot?.state}
-                </div>
-                <div className="spotAvgRating">
-                    <i className="fa-solid fa-star"></i>
-                    {spot?.avgRating}
-                </div>
-            </div>
-            <div>
-                ${spot?.price}
-                .00 night
-            </div>
         </div>
     ));
     return (
         <>
-            <ul className="allSpotsContainer">{reactiveSpots}</ul>
+            <div className="allSpotsContainer">
+                <div className="spreadSpotsContainer">{reactiveSpots}</div>
+            </div>
         </>
     );
 }

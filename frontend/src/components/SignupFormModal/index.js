@@ -52,24 +52,24 @@ function SignupFormModal() {
                         Email
                         <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} required />
                     </label>
-                    {errors.email && <p>{errors.email}</p>}
+                    {errors.email && <p className="signupErrorMessage">{errors.email}</p>}
                     <label className="signupLabel">
                         Username
                         <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
                     </label>
-                    {errors.username && <p>{errors.username}</p>}
+                    {errors.username && <p className="signupErrorMessage">{errors.username}</p>}
                 </div>
                 <div className="firstNameLastName">
                     <label className="signupLabel">
                         First Name
                         <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
                     </label>
-                    {errors.firstName && <p>{errors.firstName}</p>}
+                    {errors.firstName && <p className="signupErrorMessage">{errors.firstName}</p>}
                     <label className="signupLabel">
                         Last Name
                         <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} required />
                     </label>
-                    {errors.lastName && <p>{errors.lastName}</p>}
+                    {errors.lastName && <p className="signupErrorMessage">{errors.lastName}</p>}
                 </div>
                 <div className="passwordCreation">
                     <label className="signupLabel">
@@ -81,7 +81,7 @@ function SignupFormModal() {
                             required
                         />
                     </label>
-                    {errors.password && <p>{errors.password}</p>}
+                    {errors.password && <p className="signupErrorMessage">{errors.password}</p>}
                     <label className="signupLabel">
                         Confirm Password
                         <input
@@ -91,7 +91,7 @@ function SignupFormModal() {
                             required
                         />
                     </label>
-                    {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+                    {errors.confirmPassword && <p className="signupErrorMessage">{errors.confirmPassword}</p>}
                 </div>
                 <button type="submit" className="signupButton">
                     Sign Up

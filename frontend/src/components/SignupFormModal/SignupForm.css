@@ -6,7 +6,7 @@
   border-radius: 25px;
   width: 400px;
   min-height: 500px;
-  /* height: fit-content; */
+  height: fit-content;
 }
 
 .signupForm {
@@ -40,7 +40,7 @@
 .signupButton {
   font-size: 20px;
   margin: auto;
-  margin-top: 10px;
+  margin-top: 40px;
   width: 95%;
   height: 45px;
   cursor: pointer;
@@ -49,4 +49,12 @@
 .emailAndUsername, .firstNameLastName, .passwordCreation {
   width: 95%;
   margin: 16px 0px 16px 0px;
+}
+
+.signupErrorMessage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  background-color: red;
 }

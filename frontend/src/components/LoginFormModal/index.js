@@ -58,7 +58,7 @@ return (
                 Log In
             </button>
             <button className="demoUserButton" onClick={demoUser}>
-                Demo User
+                Log in as Demo User
             </button>
         </form>
     </div>

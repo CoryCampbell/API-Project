@@ -1,6 +1,7 @@
 import csrfFetch from "./csrf";
 
 const GET_ALL_SPOTS = "spots/getAllSpots";
+const GET_USER_SPOTS = "spots/getUserSpots";
 const GET_SPOT_DETAILS = "spots/getSpotDetails";
 
 const getAllSpots = (payload) => {
@@ -13,6 +14,13 @@ const getAllSpots = (payload) => {
 const getSpotDetails = (payload) => {
     return {
         type: GET_SPOT_DETAILS,
+        payload
+    };
+};
+
+const getUserSpots = (payload) => {
+    return {
+        type: GET_USER_SPOTS,
         payload
     };
 };
@@ -39,6 +47,17 @@ export const fetchSpotDetails = (spotId) => async (dispatch) => {
     return spotDetails;
 };
 
+export const fetchUserSpots = (userId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/spots/current`, {
+        method: "GET"
+    });
+
+    const userSpots = await response.json();
+
+    dispatch(getUserSpots(userId));
+    return userSpots;
+};
+
 const initialState = {};
 
 export const spotsReducer = (state = initialState, action) => {
@@ -49,6 +68,8 @@ export const spotsReducer = (state = initialState, action) => {
                 normalizedAllSpots[spot.id] = spot;
             });
             return normalizedAllSpots;
+        // case GET_USER_SPOTS
+        // return normalizedUserSpots;
         case GET_SPOT_DETAILS:
             return { ...state, [action.payload.id]: action.payload };
         default:

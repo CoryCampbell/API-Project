@@ -49,6 +49,7 @@ function PostReviewModal() {
                     placeholder="Leave your review here..."
                 />
                 <div className="starContainer">
+                    <i class="fa-solid fa-star"></i>
                     <i id="1" class="fa-regular fa-star" onClick={setRating}></i>
                     <i id="2" class="fa-regular fa-star" onClick={setRating}></i>
                     <i id="3" class="fa-regular fa-star" onClick={setRating}></i>

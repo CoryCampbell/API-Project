@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as sessionActions from "../../store/reviews";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
@@ -10,6 +10,17 @@ function PostReviewModal() {
     const [stars, setStars] = useState("");
     const [errors, setErrors] = useState({});
     const { closeModal } = useModal();
+
+    const setRating = (e) => {
+        //set rating to whatever star they clicked on
+        e.preventDefault();
+        setStars(e.target.id);
+        console.log("stars", stars);
+        //change the color of stars to match rating
+        // for (let i = 0; i < e.target.id; i++) {
+        //     //
+        // }
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -27,15 +38,22 @@ function PostReviewModal() {
 
     return (
         <div className="postReviewContainer">
-            <h1>How was your stay?</h1>
+            <h1 className="starh1">How was your stay?</h1>
             <form onSubmit={handleSubmit} className="reviewForm">
-                <input className="reviewText" type="text" value={text} onChange={(e) => setText(e.target.value)} />
+                <textarea
+                    className="reviewText"
+                    type="text"
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                    placeholder="Leave your review here..."
+                />
                 <div className="starContainer">
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
+                    <i id="1" class="fa-regular fa-star" onClick={setRating}></i>
+                    <i id="2" class="fa-regular fa-star" onClick={setRating}></i>
+                    <i id="3" class="fa-regular fa-star" onClick={setRating}></i>
+                    <i id="4" class="fa-regular fa-star" onClick={setRating}></i>
+                    <i id="5" class="fa-regular fa-star" onClick={setRating}></i>
+                    <div className="starText">Stars</div>
                 </div>
                 <button>Submit</button>
             </form>

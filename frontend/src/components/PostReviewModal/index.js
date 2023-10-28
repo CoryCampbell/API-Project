@@ -39,6 +39,7 @@ function PostReviewModal() {
     return (
         <div className="postReviewContainer">
             <h1 className="starh1">How was your stay?</h1>
+            {errors.message && <p className="postReviewErrorMessage">{errors.message}</p>}
             <form onSubmit={handleSubmit} className="reviewForm">
                 <textarea
                     className="reviewText"
@@ -55,7 +56,7 @@ function PostReviewModal() {
                     <i id="5" class="fa-regular fa-star" onClick={setRating}></i>
                     <div className="starText">Stars</div>
                 </div>
-                <button>Submit</button>
+                <button className="submitReviewButton">Submit Your Review</button>
             </form>
         </div>
     );

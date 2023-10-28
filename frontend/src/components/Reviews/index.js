@@ -27,8 +27,8 @@ function Reviews({ spotId }) {
         dispatch(fetchSpotReviews(spotId));
     }, [dispatch, spotId]);
 
-    const orderedReviews = reviews.slice().sort((a, b) => {
-        return new Date(b.createdAt) - new Date(a.createdAt);
+    const orderedReviews = reviews.slice().sort((review, secondReview) => {
+        return new Date(secondReview.createdAt) - new Date(review.createdAt);
     });
 
     const spot = spots[spotId];
@@ -37,13 +37,16 @@ function Reviews({ spotId }) {
 
     const youOwnThisSpot = spot?.Owner.id === user?.id;
 
+    console.log("reviews", reviews);
+    const haveNotReviewed = reviews.find((review) => review.User.id === user?.id) === true;
+    console.log("haveNotReviewed", haveNotReviewed);
+
     let loggedIn = false;
     if (user) loggedIn = true;
 
     function postNewReview() {
         console.log("test");
     }
-
 
     if (!reviews.length)
         return (
@@ -59,7 +62,7 @@ function Reviews({ spotId }) {
                         modalComponent={<PostReviewModal />}
                     />
                 )}
-                <div>Be the first to post a review!</div>
+                {!youOwnThisSpot && loggedIn && <div>Be the first to post a review!</div>}
             </div>
         );
 
@@ -71,7 +74,7 @@ function Reviews({ spotId }) {
                 <div className="reviewHeaderSpacer"> · </div>
                 <div>{spot?.numReviews} Reviews</div>
             </div>
-            {loggedIn && !youOwnThisSpot && (
+            {loggedIn && !youOwnThisSpot && haveNotReviewed && (
                 <OpenModalMenuItem
                     className="postReviewButton"
                     buttonText="Post Your Review"

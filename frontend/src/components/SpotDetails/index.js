@@ -20,7 +20,7 @@ function SpotDetails() {
     }, [dispatch, spotId]);
 
     const reserveAlert = () => {
-        alert("Feature Coming Soon...");
+        alert("Feature Coming Soon");
     };
 
     if (!spot) return null;
@@ -67,7 +67,7 @@ function SpotDetails() {
                             <div className="reserveInfoRight">
                                 <i className="fa-solid fa-star"></i>
                                 <div>{spot?.avgRating}</div>
-                                <div>·</div>
+                                <p className="divider"> · </p>
                                 <div>{spot?.numReviews} Reviews</div>
                             </div>
                         </div>

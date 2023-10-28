@@ -14,7 +14,9 @@ function SplashPage() {
     const reactiveSpots = spots?.map((spot) => (
         <div key={spot?.id} className="spotContainer">
             <NavLink to={`/spots/${spot?.id}`}>
-                <img src={spot?.previewImage} alt="preview" className="previewImage"></img>
+                <div className="imageContainer">
+                    <img src={spot?.previewImage} alt="preview" className="previewImage"></img>
+                </div>
             </NavLink>
             <div className="spotInfoContainerOne">
                 <div>

@@ -7,8 +7,8 @@ body {
   color: black;
 }
 .dropdownMain {
-  display: flex;
   cursor: pointer;
+  display: flex;
   justify-content: space-around;
   align-items: center;
   border: solid rgb(184, 252, 89);
@@ -37,6 +37,17 @@ body {
 
 .fa-airbnb {
   rotate: 180deg;
+}
+
+.logoutButton {
+    cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 120px;
+  margin-left: 30px;
 }
 
 .userButton {
@@ -71,8 +82,9 @@ li {
 
 }
 
-li:hover {
-  cursor: pointer;
+.profile-dropdown .manageReviews:hover, .manageSpots:hover {
+     cursor: pointer;
+    background-color: rgb(212, 255, 153);
 }
 
 .profile-dropdown {
@@ -81,7 +93,7 @@ li:hover {
   align-items: flex-start;
   position: fixed;
   top: 75px;
-  right: 25px;
+  right: 48px;
   padding: 10px;
   width: 180px;
   background-color: rgb(184, 252, 89);
@@ -111,4 +123,28 @@ a:visited {
 .fa-bars {
   font-size: 30px;
     color: rgb(184, 252, 89);
+}
+
+.userControls {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-top: black solid 1px;
+  border-bottom: black solid 1px;
+  margin: 5px 0px 5px 0px;
+}
+
+.manageReviews, .manageSpots {
+    cursor: pointer;
+}
+
+.login:hover, .signup:hover {
+  cursor: pointer;
+    background-color: rgb(212, 255, 153);
+
+}
+
+body {
+  cursor: default;
+  caret-color: transparent;
 }

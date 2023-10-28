@@ -29,6 +29,7 @@ justify-content: center;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
+  resize: none;
 }
 
 .starh1 {
@@ -54,4 +55,5 @@ justify-content: center;
   height: 40px;
   display: flex;
   justify-content: center;
+  align-items: center;
 }

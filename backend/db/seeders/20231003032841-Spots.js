@@ -18,15 +18,15 @@ module.exports = {
             [
                 {
                     ownerId: 1,
-                    address: "P Sherman 42 Wallaby Way",
+                    address: "42 Wallaby Way",
                     city: "Sydney",
-                    state: "IDK",
+                    state: "New South Wales",
                     country: "Australia",
                     lat: -43.12432,
                     lng: 24.12312,
-                    name: "Dentist Office",
+                    name: "P. Sherman's Dentist Office",
                     description:
-                        "Comes with shrimp!! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nibh mauris cursus mattis molestie a. Faucibus in ornare quam viverra orci. Donec massa sapien faucibus et molestie ac feugiat sed lectus. Augue mauris augue neque gravida in fermentum et sollicitudin ac. Velit egestas dui id ornare arcu odio ut sem. Cras ornare arcu dui vivamus. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Sagittis eu volutpat odio facilisis.",
+                        "Dentist office of the prestigious Phillip Sherman!! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nibh mauris cursus mattis molestie a. Faucibus in ornare quam viverra orci. Donec massa sapien faucibus et molestie ac feugiat sed lectus. Augue mauris augue neque gravida in fermentum et sollicitudin ac. Velit egestas dui id ornare arcu odio ut sem. Cras ornare arcu dui vivamus. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Sagittis eu volutpat odio facilisis.",
                     price: 89
                 },
                 {
@@ -37,7 +37,7 @@ module.exports = {
                     country: "USA",
                     lat: 46.12132,
                     lng: -87.12312,
-                    name: "Haunted Mansion",
+                    name: "The Haunted Mansion",
                     description:
                         "How long can you stay? Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nibh mauris cursus mattis molestie a. Faucibus in ornare quam viverra orci. Donec massa sapien faucibus et molestie ac feugiat sed lectus. Augue mauris augue neque gravida in fermentum et sollicitudin ac. Velit egestas dui id ornare arcu odio ut sem. Cras ornare arcu dui vivamus. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Sagittis eu volutpat odio facilisis.",
                     price: 69
@@ -63,7 +63,7 @@ module.exports = {
                     country: "USA",
                     lat: 46.12134,
                     lng: -87.12315,
-                    name: "Fabulous Castle's neighbor. Just a plain house.",
+                    name: "The House Next To The Castle",
                     description:
                         "The king used to live next door. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nibh mauris cursus mattis molestie a. Faucibus in ornare quam viverra orci. Donec massa sapien faucibus et molestie ac feugiat sed lectus. Augue mauris augue neque gravida in fermentum et sollicitudin ac. Velit egestas dui id ornare arcu odio ut sem. Cras ornare arcu dui vivamus. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Sagittis eu volutpat odio facilisis.",
                     price: 100
@@ -76,7 +76,7 @@ module.exports = {
                     country: "USA",
                     lat: 45.12124,
                     lng: -87.17615,
-                    name: "wow, a king used to live two doors down",
+                    name: "The House Next To The House Next To The Castle",
                     description:
                         "Maybe you might see some royalty. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nibh mauris cursus mattis molestie a. Faucibus in ornare quam viverra orci.",
                     price: 80
@@ -89,7 +89,7 @@ module.exports = {
                     country: "USA",
                     lat: 45.12455,
                     lng: -87.17699,
-                    name: "wow, a king used to live three doors down",
+                    name: "The House Next To The House Next To The House Next To The Castle",
                     description:
                         "Maybeeeee you might see some royalty. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nibh mauris cursus mattis molestie a. Faucibus in ornare quam viverra orci. Donec massa sapien faucibus et molestie ac feugiat sed lectus. Augue mauris augue neque gravida in fermentum et sollicitudin ac. Velit egestas dui id ornare arcu odio ut sem. Cras ornare arcu dui vivamus. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Sagittis eu volutpat odio facilisis.",
                     price: 60

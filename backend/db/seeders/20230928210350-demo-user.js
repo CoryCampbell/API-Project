@@ -15,37 +15,44 @@ module.exports = {
                 {
                     email: "demo@user.io",
                     firstName: "Demo",
-                    lastName: "Lition",
-                    username: "Demo-lition",
+                    lastName: "User",
+                    username: "DemoUserDownBad",
                     hashedPassword: bcrypt.hashSync("password")
                 },
                 {
-                    email: "user1@user.io",
-                    firstName: "Fake",
-                    lastName: "User",
-                    username: "FakeUser1",
+                    email: "dontmakemeangry@yahoo.com",
+                    firstName: "Bruce",
+                    lastName: "Banner",
+                    username: "IamHulk",
                     hashedPassword: bcrypt.hashSync("password2")
                 },
                 {
-                    email: "user2@user.io",
-                    firstName: "Fake2",
-                    lastName: "Usertoo",
-                    username: "FakeUser2",
+                    email: "swimming@gmail.com",
+                    firstName: "Malcolm",
+                    lastName: "McCormick",
+                    username: "MacMiller",
                     hashedPassword: bcrypt.hashSync("password3")
                 },
                 {
-                    email: "user3@user.io",
-                    firstName: "Fake3",
-                    lastName: "Userthree",
-                    username: "FakeUser3",
-                    hashedPassword: bcrypt.hashSync("password3")
+                    email: "hahahafunnyman@aol.com",
+                    firstName: "William",
+                    lastName: "Montgomery",
+                    username: "TheBigRedMachine",
+                    hashedPassword: bcrypt.hashSync("password4")
                 },
                 {
-                    email: "user4@user.io",
-                    firstName: "Fake4",
-                    lastName: "Userfour",
-                    username: "FakeUser4",
-                    hashedPassword: bcrypt.hashSync("password3")
+                    email: "jarvis01@hq.com",
+                    firstName: "Tony",
+                    lastName: "Stark",
+                    username: "IronMan4Life",
+                    hashedPassword: bcrypt.hashSync("password5")
+                },
+                {
+                    email: "usemeforcreatingnewstuff@gmail.com",
+                    firstName: "testerboy",
+                    lastName: "reviewmaker",
+                    username: "iteststuffgud",
+                    hashedPassword: bcrypt.hashSync("password6")
                 }
             ],
             { validate: true }

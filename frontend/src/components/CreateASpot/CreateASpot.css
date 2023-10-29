@@ -1,3 +1,7 @@
+body {
+  color: rgb(184, 252, 89);
+}
+
 .createaspotContainer {
   width: 50%;
   margin: auto;
@@ -11,21 +15,57 @@
 
 .cityAndState {
   display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.cityLeftContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.cityRightContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+
+.commaContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+.cityText {
+  width: 330px;
+}
+
+.stateText {
+  width: 100%;
 }
 
 label {
   display: flex;
   flex-direction: column;
+  margin: 10px 0px 10px 0px;
+}
+
+input {
+  box-sizing: border-box;
 }
 
 .descriptionTextarea {
   width: 100%;
   height: 150px;
-  resize: none
+  resize: none;
+  margin-bottom: 25px;
 }
 
 .titleText {
   width: 100%;
+  margin-bottom: 25px;
 }
 
 .dollaSign {
@@ -35,6 +75,7 @@ label {
 .priceInfoLineContainer {
   display: flex;
   height: 21px;
+    margin-bottom: 25px;
 }
 
 .priceInfoText {
@@ -43,8 +84,9 @@ label {
 
 .imageText {
   width: 100%;
-  margin-top: 25px;
+  margin-bottom: 25px;
 }
+
 
 .submitContainer {
   display: flex;
@@ -52,6 +94,35 @@ label {
   margin: 30px;
 }
 
-.createSpotButton {
+.createSpotButton {}
 
+
+.locationInfoContainer {
+  border-bottom: .1rem solid rgb(184, 252, 89);
+}
+
+.descriptionContainer {
+  border-bottom: .1rem solid rgb(184, 252, 89);
+}
+
+.titleInfoContainer {
+  border-bottom: .1rem solid rgb(184, 252, 89);
+}
+
+.priceInfoContainer {
+  border-bottom: .1rem solid rgb(184, 252, 89);
+}
+
+.photosInfoContainer {
+  border-bottom: .1rem solid rgb(184, 252, 89);
+}
+
+h2 {
+  margin-bottom: 0px;
+}
+
+h4 {
+  margin-top: 0px;
+  font-size: 15px;
+  font-weight: normal;
 }

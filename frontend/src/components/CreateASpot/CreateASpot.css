@@ -1,11 +1,8 @@
-body {
-  color: rgb(184, 252, 89);
-}
-
 .createaspotContainer {
   width: 50%;
   margin: auto;
   margin-bottom: 400px;
+    color: rgb(184, 252, 89);
 }
 
 .createaspotForm {
@@ -36,6 +33,7 @@ body {
   display: flex;
   flex-direction: row;
   align-items: flex-end;
+  margin-left: 2px;
 }
 
 .cityText {

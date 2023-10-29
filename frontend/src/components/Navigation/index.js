@@ -15,11 +15,18 @@ function Navigation({ isLoaded }) {
                         <i className="fa-brands fa-airbnb"></i>
                         <p className="airbnbText">airbnb</p>
                     </NavLink>
-                    {isLoaded && (
-                        <li className="drop-down-active">
-                            <ProfileButton user={sessionUser} />
-                        </li>
-                    )}
+                    <div className="rightNavContainer">
+                        {sessionUser && (
+                            <NavLink to="/" className="createaspotLink">
+                                Create A Spot
+                            </NavLink>
+                        )}
+                        {isLoaded && (
+                            <li className="drop-down-active">
+                                <ProfileButton user={sessionUser} />
+                            </li>
+                        )}
+                    </div>
                 </div>
             </ul>
         </>

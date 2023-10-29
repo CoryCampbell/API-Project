@@ -5,6 +5,7 @@ import * as sessionActions from "../../store/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 
 function ProfileButton({ user }) {
     const history = useHistory();
@@ -58,7 +59,9 @@ function ProfileButton({ user }) {
                         </li>
                         <li>{user.email}</li>
                         <div className="userControls">
-                            <li className="manageSpots">Manage Spots</li>
+                            <NavLink className="manageSpotsButton" to="/spots/current">
+                                <li className="manageSpots">Manage Spots</li>
+                            </NavLink>
                             <li className="manageReviews">Manage Reviews</li>
                         </div>
                         <li>

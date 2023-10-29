@@ -7,34 +7,51 @@ import "./ManageSpots.css";
 function ManageSpots() {
     const dispatch = useDispatch();
     const spots = useSelector((state) => Object.values(state.spots));
+    const user = useSelector((state) => state.session.user);
+    console.log("user", user);
     useEffect(() => {
         dispatch(fetchAllSpots());
     }, [dispatch]);
 
-    const reactiveSpots = spots?.map((spot) => (
-        <div key={spot?.id} className="spotContainer">
-            <NavLink to={`/spots/${spot?.id}`}>
-                <img src={spot?.previewImage} alt="preview" className="previewImage"></img>
-            </NavLink>
-            <div className="spotInfoContainerOne">
-                <div>
-                    {spot?.city}, {spot?.state}
-                </div>
-                <div className="spotAvgRating">
-                    <i className="fa-solid fa-star"></i>
-                    {spot?.avgRating}
-                </div>
+    const userSpots = spots.filter((spot) => spot.ownerId === user.id);
+
+    const allUserSpots = userSpots?.map((spot) => (
+        <div className="fullSpotContainer">
+            <div key={spot?.id} className="spotContainer">
+                <NavLink to={`/spots/${spot?.id}`}>
+                    <div className="imageContainer">
+                        <img src={spot?.previewImage} alt="preview" className="previewImage"></img>
+                    </div>
+                    <div className="spotInfo">
+                        <div className="spotLocation">
+                            <div>
+                                {spot?.city}, {spot?.state}
+                            </div>
+                            <div className="spotAvgRating">
+                                <i className="fa-solid fa-star"></i>
+                                {spot?.avgRating}
+                            </div>
+                        </div>
+                        <div className="spotPrice">
+                            ${spot?.price}.00
+                            <div className="nightText">night</div>
+                        </div>
+                    </div>
+                </NavLink>
             </div>
-            <div>
-                ${spot?.price}
-                .00 night
+            <div className="crudButtonsContainer">
+                <button className="updateButton">Update</button>
+                <button className="deleteButton">Delete</button>
             </div>
         </div>
     ));
+
     return (
-        <>
-            <ul className="allSpotsContainer">{reactiveSpots}</ul>
-        </>
+        <div className="userSpotsContainer">
+            <h1 className="manageSpotsH1">Manage Spots</h1>
+            <button className="createButton">Create a New Spot</button>
+            <ul className="allSpotsContainer">{allUserSpots}</ul>
+        </div>
     );
 }
 

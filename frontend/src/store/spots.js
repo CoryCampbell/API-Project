@@ -68,8 +68,6 @@ export const spotsReducer = (state = initialState, action) => {
                 normalizedAllSpots[spot.id] = spot;
             });
             return normalizedAllSpots;
-        // case GET_USER_SPOTS
-        // return normalizedUserSpots;
         case GET_SPOT_DETAILS:
             return { ...state, [action.payload.id]: action.payload };
         default:

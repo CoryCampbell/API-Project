@@ -13,19 +13,29 @@
 .cityAndState {
   display: flex;
   flex-direction: row;
-  width: 100%;
   justify-content: space-between;
-  margin-bottom: 15px;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.cityLabel {
+  width: 100%;
+}
+
+.stateLabel {
+  width: 100%;
 }
 
 .cityLeftContainer {
   display: flex;
   flex-direction: row;
+  width: 59%;
 }
 
 .cityRightContainer {
   display: flex;
   flex-direction: row;
+  width: 40%;
 }
 
 
@@ -34,14 +44,6 @@
   flex-direction: row;
   align-items: flex-end;
   margin-left: 2px;
-}
-
-.cityText {
-  width: 330px;
-}
-
-.stateText {
-  width: 100%;
 }
 
 label {

@@ -88,9 +88,9 @@ li {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  position: fixed;
-  top: 75px;
-  right: 25px;
+  position: relative;
+
+  right: 75px;
   padding: 10px;
   width: 180px;
   background-color: rgb(184, 252, 89);
@@ -155,4 +155,9 @@ padding-right: 20px;
 
 .rightNavContainer {
   width: fit-content;
+}
+
+.drop-down-active {
+  height: 50px;
+  width: 126px;
 }

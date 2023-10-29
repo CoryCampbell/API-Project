@@ -40,8 +40,16 @@ function ManageSpots() {
                 </NavLink>
             </div>
             <div className="crudButtonsContainer">
-                <button className="updateButton">Update</button>
-                <button className="deleteButton">Delete</button>
+                <button className="updateButton">
+                    <NavLink to="/spots/:id/edit" className="updateButtonLink">
+                        Update
+                    </NavLink>
+                </button>
+                <button className="deleteButton">
+                    <NavLink to="/spots/current" className="deleteButtonLink">
+                        Delete
+                    </NavLink>
+                </button>
             </div>
         </div>
     ));
@@ -49,7 +57,12 @@ function ManageSpots() {
     return (
         <div className="userSpotsContainer">
             <h1 className="manageSpotsH1">Manage Spots</h1>
-            <button className="createButton">Create a New Spot</button>
+            <button className="createButton">
+                {" "}
+                <NavLink to="/spots/new" className="createSpotLink">
+                    Create a New Spot
+                </NavLink>
+            </button>
             <ul className="allSpotsContainer">{allUserSpots}</ul>
         </div>
     );

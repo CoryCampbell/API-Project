@@ -16,55 +16,48 @@ function ManageSpots() {
     const userSpots = spots.filter((spot) => spot.ownerId === user.id);
 
     const allUserSpots = userSpots?.map((spot) => (
-        <div className="fullSpotContainer">
-            <div key={spot?.id} className="spotContainer">
-                <NavLink to={`/spots/${spot?.id}`}>
-                    <div className="imageContainer">
-                        <img src={spot?.previewImage} alt="preview" className="previewImage"></img>
-                    </div>
-                    <div className="spotInfo">
-                        <div className="spotLocation">
-                            <div>
-                                {spot?.city}, {spot?.state}
-                            </div>
-                            <div className="spotAvgRating">
-                                <i className="fa-solid fa-star"></i>
-                                {spot?.avgRating}
-                            </div>
-                        </div>
-                        <div className="spotPrice">
-                            ${spot?.price}.00
-                            <div className="nightText">night</div>
-                        </div>
-                    </div>
-                </NavLink>
+      <div className="fullSpotContainer">
+        <div key={spot?.id} className="spotContainer">
+          <NavLink to={`/spots/${spot?.id}`}>
+            <div className="imageContainer">
+              <img src={spot?.previewImage} alt="preview" className="previewImage"></img>
             </div>
-            <div className="crudButtonsContainer">
-                <button className="updateButton">
-                    <NavLink to="/spots/:id/edit" className="updateButtonLink">
-                        Update
-                    </NavLink>
-                </button>
-                <button className="deleteButton">
-                    <NavLink to="/spots/current" className="deleteButtonLink">
-                        Delete
-                    </NavLink>
-                </button>
+            <div className="spotInfo">
+              <div className="spotLocation">
+                <div>
+                  {spot?.city}, {spot?.state}
+                </div>
+                <div className="spotAvgRating">
+                  <i className="fa-solid fa-star"></i>
+                  {spot?.avgRating}
+                </div>
+              </div>
+              <div className="spotPrice">
+                ${spot?.price}.00
+                <div className="nightText">night</div>
+              </div>
             </div>
+          </NavLink>
         </div>
+        <div className="crudButtonsContainer">
+          <NavLink to="/spots/:id/edit" className="updateButtonLink">
+            Update
+          </NavLink>
+          <NavLink to="/spots/current" className="deleteButtonLink">
+            Delete
+          </NavLink>
+        </div>
+      </div>
     ));
 
     return (
-        <div className="userSpotsContainer">
-            <h1 className="manageSpotsH1">Manage Spots</h1>
-            <button className="createButton">
-                {" "}
-                <NavLink to="/spots/new" className="createSpotLink">
-                    Create a New Spot
-                </NavLink>
-            </button>
-            <ul className="allSpotsContainer">{allUserSpots}</ul>
-        </div>
+      <div className="userSpotsContainer">
+        <h1 className="manageSpotsH1">Manage Spots</h1>
+        <NavLink to="/spots/new" className="createSpotLink">
+          Create a New Spot
+        </NavLink>
+        <ul className="allSpotsContainer">{allUserSpots}</ul>
+      </div>
     );
 }
 

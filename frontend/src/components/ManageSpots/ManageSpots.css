@@ -2,14 +2,12 @@
   margin: auto;
 }
 
-.crudContainer {
+.crudButtonsContainer {
   display: flex;
   flex-direction: row;
-}
-
-.spotInfoContainerOne {
-  display: flex;
-  flex-direction: row;
+  justify-content: space-around;
+  position: relative;
+  top: -15px;
 }
 
 .imageContainer {
@@ -19,13 +17,6 @@
 
 .manageSpotsH1 {
   color: rgb(184, 252, 89);
-}
-
-.createButton {
-  background-color: red;
-  width: 10%;
-  height: 30px;
-  border-radius: 3px;
 }
 
 .userSpotsContainer {
@@ -39,4 +30,52 @@
   display: flex;
   flex-direction: row;
   padding: 0px;
+}
+
+.createSpotLink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: teal;
+  border: solid black 2px;
+  font-size: 12px;
+  width: 150px;
+  height: 35px;
+}
+
+.updateButtonLink, .deleteButtonLink {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border: solid black 1px;
+  font-size: 12px;
+  width: 100px;
+  height: 25px;
+}
+
+.updateButtonLink {
+  background-color: teal;
+}
+
+.deleteButtonLink {
+  background-color: rgb(92, 0, 0);
+}
+
+.spotContainer {
+  position: relative;
+  right: 20px;
+  width: 350px;
+}
+
+.userSpotsContainer {
+  margin: 0px 50px 200px 50px;
+}
+
+.fullSpotContainer {
+width: 350px;
+}
+
+h1 {
+  margin-bottom: 5px;
 }

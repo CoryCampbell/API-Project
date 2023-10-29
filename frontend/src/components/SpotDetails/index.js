@@ -25,8 +25,14 @@ function SpotDetails() {
     if (!spots) return null;
     if (!spot.SpotImages) return null;
 
+    let onlyOneReview = false;
+    if (spot.numReviews === 1) onlyOneReview = true;
+
     let totalNumReviewsText = "Reviews";
-    let reviewCheck = spot?.numReviews > 0;
+    let reviewsExistBoolean = spot?.numReviews > 0;
+
+    if (onlyOneReview) totalNumReviewsText = "Review";
+
     let totalNumReviewsCount = spot?.numReviews;
 
     return (
@@ -70,9 +76,9 @@ function SpotDetails() {
                   <i className="fa-solid fa-star"></i>
                   <div> {spot?.avgRating ? <p>{parseFloat(`${spot?.avgRating}`).toFixed(1)}</p> : <p>New</p>}</div>
                   <div className="totalReviewsDynamic">
-                    {reviewCheck && <p className="divider"> · </p>}
-                    <div className="totalNumReviewsCount">{reviewCheck && totalNumReviewsCount}</div>
-                    {reviewCheck && totalNumReviewsText}
+                    {reviewsExistBoolean && <p className="divider"> · </p>}
+                    <div className="totalNumReviewsCount">{reviewsExistBoolean && totalNumReviewsCount}</div>
+                    {reviewsExistBoolean && totalNumReviewsText}
                   </div>
                 </div>
               </div>

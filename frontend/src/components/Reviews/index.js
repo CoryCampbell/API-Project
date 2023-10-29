@@ -37,63 +37,66 @@ function Reviews({ spotId }) {
 
     const youOwnThisSpot = spot?.Owner.id === user?.id;
 
-    console.log("reviews", reviews);
+    let numReviewsText = "Reviews";
+    if (spot.numReviews === 1) numReviewsText = "Review";
+
     const haveNotReviewed = reviews.find((review) => review.User.id === user?.id) === true;
-    console.log("haveNotReviewed", haveNotReviewed);
 
     let loggedIn = false;
     if (user) loggedIn = true;
 
     function postNewReview() {
-        console.log("test");
+      console.log("test");
     }
 
     if (!reviews.length)
-        return (
-            <div className="reviewsContainer">
-                <div className="reviewsHeader">
-                    <i className="fa-solid fa-star"></i>
-                    <div>New</div>
-                </div>
-                {loggedIn && !youOwnThisSpot && (
-                    <OpenModalMenuItem
-                        className="postReviewButton"
-                        buttonText="Post Your Review"
-                        modalComponent={<PostReviewModal />}
-                    />
-                )}
-                {!youOwnThisSpot && loggedIn && <div>Be the first to post a review!</div>}
-            </div>
-        );
+      return (
+        <div className="reviewsContainer">
+          <div className="reviewsHeader">
+            <i className="fa-solid fa-star"></i>
+            <div>New</div>
+          </div>
+          {loggedIn && !youOwnThisSpot && (
+            <OpenModalMenuItem
+              className="postReviewButton"
+              buttonText="Post Your Review"
+              modalComponent={<PostReviewModal />}
+            />
+          )}
+          {!youOwnThisSpot && loggedIn && <div>Be the first to post a review!</div>}
+        </div>
+      );
 
     return (
-        <div className="reviewsContainer">
-            <div className="reviewsHeader">
-                <i className="fa-solid fa-star"></i>
-                <div>{spot?.avgRating}</div>
-                <div className="reviewHeaderSpacer"> · </div>
-                <div>{spot?.numReviews} Reviews</div>
-            </div>
-            {loggedIn && !youOwnThisSpot && haveNotReviewed && (
-                <OpenModalMenuItem
-                    className="postReviewButton"
-                    buttonText="Post Your Review"
-                    modalComponent={<PostReviewModal />}
-                />
-            )}
-            <div className="singleReviewContainer">
-                {orderedReviews?.map((review) => (
-                    <div key={review?.id} className="perReview">
-                        <div className="reviewUsername">{review.User.firstName}</div>
-                        <div className="dateContainer">
-                            <div className="monthText">{month[new Date(review.createdAt).getMonth()]}</div>
-                            <div className="yearText">{review.createdAt.slice(0, 4)}</div>
-                        </div>
-                        <div>{review?.review}</div>
-                    </div>
-                ))}
-            </div>
+      <div className="reviewsContainer">
+        <div className="reviewsHeader">
+          <i className="fa-solid fa-star"></i>
+          <div>{spot?.avgRating}</div>
+          <div className="reviewHeaderSpacer"> · </div>
+          <div>
+            {spot?.numReviews} {numReviewsText}
+          </div>
         </div>
+        {loggedIn && !youOwnThisSpot && haveNotReviewed && (
+          <OpenModalMenuItem
+            className="postReviewButton"
+            buttonText="Post Your Review"
+            modalComponent={<PostReviewModal />}
+          />
+        )}
+        <div className="singleReviewContainer">
+          {orderedReviews?.map((review) => (
+            <div key={review?.id} className="perReview">
+              <div className="reviewUsername">{review.User.firstName}</div>
+              <div className="dateContainer">
+                <div className="monthText">{month[new Date(review.createdAt).getMonth()]}</div>
+                <div className="yearText">{review.createdAt.slice(0, 4)}</div>
+              </div>
+              <div>{review?.review}</div>
+            </div>
+          ))}
+        </div>
+      </div>
     );
 }
 

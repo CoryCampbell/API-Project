@@ -11,20 +11,26 @@ function SplashPage() {
         dispatch(fetchAllSpots());
     }, [dispatch]);
 
+    if (!spots.length) return null;
+
     const reactiveSpots = spots?.map((spot) => (
       <div key={spot?.id} className="splashSpotContainer">
         <NavLink to={`/spots/${spot?.id}`}>
           <div className="imageContainer">
-            <img src={spot?.previewImage} alt="preview" className="previewImage"></img>
+            <div className="splashToolTip" title={spot.name}>
+              <img src={spot?.previewImage} alt="preview" className="previewImage" />
+            </div>
           </div>
           <div className="spotInfo">
             <div className="spotLocation">
-              <div>
+              <div className="splashCityAndState">
                 {spot?.city}, {spot?.state}
               </div>
               <div className="spotAvgRating">
                 <i className="fa-solid fa-star"></i>
-                {spot?.avgRating}
+                <div className="splashRatingText">
+                  {spot?.avgRating ? <p>{parseFloat(`${spot?.avgRating}`).toFixed(1)}</p> : <p>New</p>}
+                </div>
               </div>
             </div>
             <div className="spotPrice">

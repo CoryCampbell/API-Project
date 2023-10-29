@@ -5,7 +5,7 @@
 }
 
 .detailsName {
-  font-size: 30px;
+  font-size: 25px;
   margin: 20px 0px 20px 0px;
 }
 
@@ -95,9 +95,8 @@
 
 .reserveInfoRight {
   display: flex;
-  align-items: flex-end;
-  width: 50%;
-  justify-content: space-around;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 
@@ -116,7 +115,7 @@
 }
 
 .spotPriceContent {
-  font-size: 30px;
+  font-size: 20px;
 }
 
 .nightContent {
@@ -131,6 +130,16 @@
   margin: 0px 0px 10px 0px;
 }
 
-.divider {
-  margin: 0px 5px 0px 5px;
+p.divider {
+  margin: 0px 10px 0px 10px;
+}
+
+.totalReviewsDynamic {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.totalNumReviewsCount {
+  margin: 0px 5px 0px 0px;
 }

@@ -25,6 +25,10 @@ function SpotDetails() {
     if (!spots) return null;
     if (!spot.SpotImages) return null;
 
+    let totalNumReviewsText = "Reviews";
+    let reviewCheck = spot?.numReviews > 0;
+    let totalNumReviewsCount = spot?.numReviews;
+
     return (
       <div className="spotDetailsContainer">
         <div>
@@ -64,9 +68,12 @@ function SpotDetails() {
                 </div>
                 <div className="reserveInfoRight">
                   <i className="fa-solid fa-star"></i>
-                  <div>{spot?.avgRating}</div>
-                  <p className="divider"> · </p>
-                  <div>{spot?.numReviews} Reviews</div>
+                  <div> {spot?.avgRating ? <p>{parseFloat(`${spot?.avgRating}`).toFixed(1)}</p> : <p>New</p>}</div>
+                  <div className="totalReviewsDynamic">
+                    {reviewCheck && <p className="divider"> · </p>}
+                    <div className="totalNumReviewsCount">{reviewCheck && totalNumReviewsCount}</div>
+                    {reviewCheck && totalNumReviewsText}
+                  </div>
                 </div>
               </div>
               <div className="reserveButtonContainer">

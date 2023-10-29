@@ -67,3 +67,26 @@ body {
 .spotInfo {
 width: 100%;
 }
+
+.splashTooltip {
+  position: relative;
+  cursor: pointer;
+}
+
+.splashTooltip:hover > toolti{
+}
+
+.spotAvgRating {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 15px;
+}
+
+.splashRatingText {
+  display: flex;
+align-items: center;
+  height: 100%;
+}

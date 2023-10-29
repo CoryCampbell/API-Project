@@ -89,7 +89,7 @@ li {
   flex-direction: column;
   align-items: flex-start;
   position: relative;
-
+  top: 5px;
   right: 75px;
   padding: 10px;
   width: 180px;
@@ -158,6 +158,6 @@ padding-right: 20px;
 }
 
 .drop-down-active {
-  height: 50px;
+  height: 45px;
   width: 126px;
 }

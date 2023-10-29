@@ -40,7 +40,7 @@ function ManageSpots() {
           </NavLink>
         </div>
         <div className="manageCrudButtonsContainer">
-          <NavLink to="/spots/:id/edit" className="updateButtonLink">
+          <NavLink to={`/spots/${spot?.id}/edit`} className="updateButtonLink">
             Update
           </NavLink>
           <NavLink to="/spots/current" className="deleteButtonLink">

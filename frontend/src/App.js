@@ -7,36 +7,40 @@ import AllSpots from "./components/SplashPage";
 import SpotDetails from "./components/SpotDetails";
 import ManageSpots from "./components/ManageSpots";
 import CreateASpot from "./components/CreateASpot";
+import UpdateASpot from "./components/UpdateASpot";
 
 function App() {
-    const dispatch = useDispatch();
-    const [isLoaded, setIsLoaded] = useState(false);
-    useEffect(() => {
-        dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
-    }, [dispatch]);
+  const dispatch = useDispatch();
+  const [isLoaded, setIsLoaded] = useState(false);
+  useEffect(() => {
+    dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
+  }, [dispatch]);
 
-    return (
-        <>
-            <Navigation isLoaded={isLoaded} />
-            {isLoaded && (
-                <Switch>
-                    <Route exact path="/">
-                        <AllSpots />
-                    </Route>
-                    <Route path="/spots/new">
-                        <CreateASpot />
-                    </Route>
-                    <Route path="/spots/current">
-                        <ManageSpots />
-                    </Route>
-                    <Route path="/spots/:spotId">
-                        <SpotDetails />
-                    </Route>
-                    <Route>"404: Not Found"</Route>
-                </Switch>
-            )}
-        </>
-    );
+  return (
+    <>
+      <Navigation isLoaded={isLoaded} />
+      {isLoaded && (
+        <Switch>
+          <Route exact path="/">
+            <AllSpots />
+          </Route>
+          <Route path="/spots/new">
+            <CreateASpot />
+          </Route>
+          <Route path="/spots/current">
+            <ManageSpots />
+          </Route>
+          <Route path="/spots/:spotId/edit">
+            <UpdateASpot />
+          </Route>
+          <Route path="/spots/:spotId">
+            <SpotDetails />
+          </Route>
+          <Route>"404: Not Found"</Route>
+        </Switch>
+      )}
+    </>
+  );
 }
 
 export default App;

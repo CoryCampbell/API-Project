@@ -5,7 +5,7 @@ function UpdateASpot() {
       <div className="createaspotContainer">
         <form className="createaspotForm">
           <div className="locationInfoContainer">
-            <h1>Create a new Spot</h1>
+            <h1>Update your Spot</h1>
             <h2>Where's your place located?</h2>
             <h4>Guests will only get your exact address once they've booked a reservation.</h4>
             <label>

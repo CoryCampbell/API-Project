@@ -2,45 +2,44 @@
   margin: auto;
 }
 
-.crudButtonsContainer {
+.manageCrudButtonsContainer {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  position: relative;
-  top: -15px;
+  justify-content: space-evenly;
 }
 
-.imageContainer {
-  width: 350px;
-  height: 250px;
+.manageImageContainer {
+  width: 100%;
+  height: 100%;
 }
 
 .manageSpotsH1 {
   color: rgb(184, 252, 89);
 }
 
-.userSpotsContainer {
+.manageUserSpotsContainer {
   margin: 0px 50px 0px 50px;
   display: flex;
   flex-direction: column;
   align-items: flex-start
 }
 
-.allSpotsContainer {
+.manageAllSpotsContainer {
   display: flex;
   flex-direction: row;
   padding: 0px;
 }
 
-.createSpotLink {
+.manageCreateSpotLink {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: teal;
-  border: solid black 2px;
+  border: solid black 1px;
   font-size: 12px;
-  width: 150px;
-  height: 35px;
+  width: 100px;
+  height: 20px;
+  font-size: 8px;
 }
 
 .updateButtonLink, .deleteButtonLink {
@@ -62,20 +61,33 @@
   background-color: rgb(92, 0, 0);
 }
 
-.spotContainer {
-  position: relative;
-  right: 20px;
-  width: 350px;
+.manageSpotContainer {
 }
 
-.userSpotsContainer {
-  margin: 0px 50px 200px 50px;
+.fullManageSpotContainer {
+  width: 230px;
+  height: 240px;
 }
 
-.fullSpotContainer {
-width: 350px;
-}
-
-h1 {
+.manageSpotsH1 {
   margin-bottom: 5px;
+  font-size: 20px;
+}
+
+.managePreviewImage {
+  width: 230px;
+}
+
+.manageSpotLocation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 10px;
+}
+
+.manageSpotPrice {
+  display: flex;
+  flex-direction: row;
+  font-size: 10px;
+  margin-bottom: 10px;
 }

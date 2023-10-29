@@ -17,7 +17,7 @@ function Navigation({ isLoaded }) {
             </NavLink>
             <div className="rightNavContainer">
               {sessionUser && (
-                <NavLink to="/spots/new" className="createaspotLink">
+                <NavLink to="/spots/new" className="navCreateaspotLink">
                   Create A Spot
                 </NavLink>
               )}

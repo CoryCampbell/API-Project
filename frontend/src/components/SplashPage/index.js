@@ -12,35 +12,33 @@ function SplashPage() {
     }, [dispatch]);
 
     const reactiveSpots = spots?.map((spot) => (
-        <div key={spot?.id} className="spotContainer">
-            <NavLink to={`/spots/${spot?.id}`}>
-                <div className="imageContainer">
-                    <img src={spot?.previewImage} alt="preview" className="previewImage"></img>
-                </div>
-                <div className="spotInfo">
-                    <div className="spotLocation">
-                        <div>
-                            {spot?.city}, {spot?.state}
-                        </div>
-                        <div className="spotAvgRating">
-                            <i className="fa-solid fa-star"></i>
-                            {spot?.avgRating}
-                        </div>
-                    </div>
-                    <div className="spotPrice">
-                        ${spot?.price}.00
-                        <div className="nightText">night</div>
-                    </div>
-                </div>
-            </NavLink>
-        </div>
+      <div key={spot?.id} className="splashSpotContainer">
+        <NavLink to={`/spots/${spot?.id}`}>
+          <div className="imageContainer">
+            <img src={spot?.previewImage} alt="preview" className="previewImage"></img>
+          </div>
+          <div className="spotInfo">
+            <div className="spotLocation">
+              <div>
+                {spot?.city}, {spot?.state}
+              </div>
+              <div className="spotAvgRating">
+                <i className="fa-solid fa-star"></i>
+                {spot?.avgRating}
+              </div>
+            </div>
+            <div className="spotPrice">
+              ${spot?.price}.00
+              <div className="nightText">night</div>
+            </div>
+          </div>
+        </NavLink>
+      </div>
     ));
     return (
-        <>
-            <div className="allSpotsContainer">
-                <div className="spreadSpotsContainer">{reactiveSpots}</div>
-            </div>
-        </>
+      <div className="fullSplashPage">
+        <div className="splashSpreadSpotsContainer">{reactiveSpots}</div>
+      </div>
     );
 }
 

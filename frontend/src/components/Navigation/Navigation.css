@@ -76,7 +76,6 @@ li {
   display: flex;
   flex-direction: column;
   list-style-type: none;
-
 }
 
 .profile-dropdown .manageReviews:hover, .manageSpots:hover {
@@ -147,10 +146,15 @@ body {
 
 .manageSpots {
   color: black;
+width: 150px;
 }
 
-.createaspotLink {
+.navCreateaspotLink {
 padding-right: 20px;
+font-size: 12px;
+width: 100px;
+display: flex;
+justify-content: center;
 }
 
 .rightNavContainer {
@@ -161,3 +165,7 @@ padding-right: 20px;
   height: 45px;
   width: 126px;
 }
+
+/* .spreadSpotsContainer {
+  width: 85%;
+} */

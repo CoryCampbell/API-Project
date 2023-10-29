@@ -16,14 +16,14 @@ function ManageSpots() {
     const userSpots = spots.filter((spot) => spot.ownerId === user.id);
 
     const allUserSpots = userSpots?.map((spot) => (
-      <div className="fullSpotContainer">
-        <div key={spot?.id} className="spotContainer">
+      <div className="fullManageSpotContainer">
+        <div key={spot?.id} className="manageSpotContainer">
           <NavLink to={`/spots/${spot?.id}`}>
-            <div className="imageContainer">
-              <img src={spot?.previewImage} alt="preview" className="previewImage"></img>
+            <div className="manageImageContainer">
+              <img src={spot?.previewImage} alt="preview" className="managePreviewImage"></img>
             </div>
-            <div className="spotInfo">
-              <div className="spotLocation">
+            <div className="manageSpotInfo">
+              <div className="manageSpotLocation">
                 <div>
                   {spot?.city}, {spot?.state}
                 </div>
@@ -32,14 +32,14 @@ function ManageSpots() {
                   {spot?.avgRating}
                 </div>
               </div>
-              <div className="spotPrice">
+              <div className="manageSpotPrice">
                 ${spot?.price}.00
                 <div className="nightText">night</div>
               </div>
             </div>
           </NavLink>
         </div>
-        <div className="crudButtonsContainer">
+        <div className="manageCrudButtonsContainer">
           <NavLink to="/spots/:id/edit" className="updateButtonLink">
             Update
           </NavLink>
@@ -51,12 +51,12 @@ function ManageSpots() {
     ));
 
     return (
-      <div className="userSpotsContainer">
+      <div className="manageUserSpotsContainer">
         <h1 className="manageSpotsH1">Manage Spots</h1>
-        <NavLink to="/spots/new" className="createSpotLink">
+        <NavLink to="/spots/new" className="manageCreateSpotLink">
           Create a New Spot
         </NavLink>
-        <ul className="allSpotsContainer">{allUserSpots}</ul>
+        <ul className="manageAllSpotsContainer">{allUserSpots}</ul>
       </div>
     );
 }

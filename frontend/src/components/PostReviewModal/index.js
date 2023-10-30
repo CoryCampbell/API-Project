@@ -47,6 +47,7 @@ function PostReviewModal() {
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder="Leave your review here..."
+          required
         />
         <div className="starContainer">
           <i id="1" class="fa-regular fa-star" onClick={setRating}></i>

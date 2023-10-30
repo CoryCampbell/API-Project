@@ -95,7 +95,7 @@ module.exports = {
               price: 60
             },
             {
-              ownerId: 1,
+              ownerId: 5,
               address: "Bennelong Point",
               city: "Sydney",
               state: "New South Wales",

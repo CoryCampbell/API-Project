@@ -36,14 +36,17 @@ function Reviews({ spotId }) {
     const user = useSelector((state) => state.session.user);
 
     const youOwnThisSpot = spot?.Owner.id === user?.id;
+    console.log("youOwnThisSpot", youOwnThisSpot);
 
     let numReviewsText = "Reviews";
     if (spot.numReviews === 1) numReviewsText = "Review";
 
     const haveNotReviewed = reviews.find((review) => review.User.id === user?.id) === true;
-
+    console.log("haveNotReviewed", haveNotReviewed);
     let loggedIn = false;
     if (user) loggedIn = true;
+
+    console.log("loggedIn", loggedIn);
 
     function postNewReview() {
       console.log("test");
@@ -77,7 +80,7 @@ function Reviews({ spotId }) {
             {spot?.numReviews} {numReviewsText}
           </div>
         </div>
-        {loggedIn && !youOwnThisSpot && haveNotReviewed && (
+        {loggedIn && !youOwnThisSpot && !haveNotReviewed && (
           <OpenModalMenuItem
             className="postReviewButton"
             buttonText="Post Your Review"

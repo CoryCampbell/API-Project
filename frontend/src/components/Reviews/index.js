@@ -35,17 +35,17 @@ function Reviews({ spotId }) {
 
     const user = useSelector((state) => state.session.user);
 
-    const youOwnThisSpot = spot?.Owner.id === user?.id;
-    console.log("youOwnThisSpot", youOwnThisSpot);
+    const youDontOwnThisSpot = spot?.Owner.id !== user?.id;
+    console.log("youDontOwnThisSpot", youDontOwnThisSpot);
 
     let numReviewsText = "Reviews";
     if (spot.numReviews === 1) numReviewsText = "Review";
 
-    const haveNotReviewed = reviews.find((review) => review.User.id === user?.id) === true;
+    const haveNotReviewed = reviews.find((review) => review.User.id === user?.id) === undefined;
     console.log("haveNotReviewed", haveNotReviewed);
+
     let loggedIn = false;
     if (user) loggedIn = true;
-
     console.log("loggedIn", loggedIn);
 
     function postNewReview() {
@@ -59,14 +59,14 @@ function Reviews({ spotId }) {
             <i className="fa-solid fa-star"></i>
             <div>New</div>
           </div>
-          {loggedIn && !youOwnThisSpot && (
+          {loggedIn && youDontOwnThisSpot && haveNotReviewed && (
             <OpenModalMenuItem
               className="postReviewButton"
               buttonText="Post Your Review"
               modalComponent={<PostReviewModal />}
             />
           )}
-          {!youOwnThisSpot && loggedIn && <div>Be the first to post a review!</div>}
+          {youDontOwnThisSpot && loggedIn && haveNotReviewed && <div>Be the first to post a review!</div>}
         </div>
       );
 
@@ -80,7 +80,7 @@ function Reviews({ spotId }) {
             {spot?.numReviews} {numReviewsText}
           </div>
         </div>
-        {loggedIn && !youOwnThisSpot && !haveNotReviewed && (
+        {loggedIn && youDontOwnThisSpot && haveNotReviewed && (
           <OpenModalMenuItem
             className="postReviewButton"
             buttonText="Post Your Review"

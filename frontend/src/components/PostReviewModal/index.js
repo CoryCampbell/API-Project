@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import * as sessionActions from "../../store/reviews";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-import "./PostReview.css";
+import "./PostReviewModal.css";
 
 function PostReviewModal() {
   const dispatch = useDispatch();
@@ -15,11 +15,6 @@ function PostReviewModal() {
     //set rating to whatever star they clicked on
     e.preventDefault();
     setStars(e.target.id);
-
-    //change the color of stars to match rating
-    // for (let i = 0; i < e.target.id; i++) {
-    //     //
-    // }
   };
 
   const handleSubmit = (e) => {
@@ -50,11 +45,11 @@ function PostReviewModal() {
           required
         />
         <div className="starContainer">
-          <i id="1" class="fa-regular fa-star" onClick={setRating}></i>
-          <i id="2" class="fa-regular fa-star" onClick={setRating}></i>
-          <i id="3" class="fa-regular fa-star" onClick={setRating}></i>
-          <i id="4" class="fa-regular fa-star" onClick={setRating}></i>
-          <i id="5" class="fa-regular fa-star" onClick={setRating}></i>
+          <i id="1" className={stars > 0 ? "fa-solid fa-star" : "fa-regular fa-star"} onClick={setRating}></i>
+          <i id="2" className={stars > 1 ? "fa-solid fa-star" : "fa-regular fa-star"} onClick={setRating}></i>
+          <i id="3" className={stars > 2 ? "fa-solid fa-star" : "fa-regular fa-star"} onClick={setRating}></i>
+          <i id="4" className={stars > 3 ? "fa-solid fa-star" : "fa-regular fa-star"} onClick={setRating}></i>
+          <i id="5" className={stars > 4 ? "fa-solid fa-star" : "fa-regular fa-star"} onClick={setRating}></i>
           <div className="starText">Stars</div>
         </div>
         <button className="submitReviewButton" disabled={text.length < 10 || stars < 1}>
@@ -66,6 +61,3 @@ function PostReviewModal() {
 }
 
 export default PostReviewModal;
-
-//! SOLID STAR ICON
-//<i class="fa-solid fa-star"></i>;

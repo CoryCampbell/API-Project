@@ -16,8 +16,8 @@ function ManageSpots() {
     const userSpots = spots.filter((spot) => spot.ownerId === user.id);
 
     const allUserSpots = userSpots?.map((spot) => (
-      <div className="fullManageSpotContainer">
-        <div key={spot?.id} className="manageSpotContainer">
+      <div key={spot?.id} className="fullManageSpotContainer">
+        <div className="manageSpotContainer">
           <NavLink to={`/spots/${spot?.id}`}>
             <div className="manageImageContainer">
               <img src={spot?.previewImage} alt="preview" className="managePreviewImage"></img>

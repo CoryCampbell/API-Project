@@ -1,3 +1,7 @@
+#modal-content {
+  background-color: rgb(184, 252, 89);
+}
+
 .postReviewContainer {
   height: 350px;
   width: 400px;
@@ -9,7 +13,10 @@
   align-items: center;
   margin: auto;
   width: 95%;
+  background-color: rgb(184, 252, 89);
 }
+
+
 
 .starContainer {
   display: flex;
@@ -30,6 +37,8 @@ justify-content: center;
   justify-content: flex-start;
   align-items: flex-start;
   resize: none;
+  background-color: rgb(138, 199, 199);
+  caret-color: black;
 }
 
 .starh1 {
@@ -55,4 +64,9 @@ justify-content: center;
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+}
+
+.starContainer .fa-solid {
+  color: teal;
 }

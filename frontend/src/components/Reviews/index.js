@@ -16,6 +16,7 @@ function Reviews({ spotId }) {
 
   console.log("spot", spot);
   console.log("reviews", reviews);
+  console.log("user", user);
 
   const month = [
     "January",
@@ -43,17 +44,14 @@ function Reviews({ spotId }) {
   });
 
   const youDontOwnThisSpot = spot?.Owner.id !== user?.id;
-  console.log("youDontOwnThisSpot", youDontOwnThisSpot);
 
   let numReviewsText = "Reviews";
   if (spot?.numReviews === 1) numReviewsText = "Review";
 
   const haveNotReviewed = reviews?.find((review) => review?.User.id === user?.id) === undefined;
-  console.log("haveNotReviewed", haveNotReviewed);
 
   let loggedIn = false;
   if (user) loggedIn = true;
-  console.log("loggedIn", loggedIn);
 
   if (!reviews.length)
     return (
@@ -93,10 +91,10 @@ function Reviews({ spotId }) {
       <div className="singleReviewContainer">
         {orderedReviews?.map((review) => (
           <div key={review?.id} className="perReview">
-            <div className="reviewUsername">{review.User.firstName}</div>
+            <div className="reviewUsername">{review?.User.firstName}</div>
             <div className="dateContainer">
-              <div className="monthText">{month[new Date(review.createdAt).getMonth()]}</div>
-              <div className="yearText">{review.createdAt.slice(0, 4)}</div>
+              <div className="monthText">{month[new Date(review?.createdAt).getMonth()]}</div>
+              <div className="yearText">{review?.createdAt.slice(0, 4)}</div>
             </div>
             <div>{review?.review}</div>
             {user?.id === review?.User?.id ? (

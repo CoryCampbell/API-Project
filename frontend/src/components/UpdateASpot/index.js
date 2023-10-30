@@ -75,8 +75,6 @@ function UpdateASpot() {
       const response = await dispatch(updateASpot(updatedSpot));
       if (response) {
         history.push(`/spot/${response.id}`);
-      } else {
-        return console.log(errors);
       }
     } else console.log(errors);
   };

@@ -66,20 +66,23 @@ export const fetchUserSpots = (userId) => async (dispatch) => {
   return userSpots;
 };
 
-export const createNewSpot = () => async (dispatch) => {
+export const createNewSpot = (payload) => async (dispatch) => {
   const response = await csrfFetch("/api/spots", {
-    method: "POST"
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ ...payload })
   });
 
-  const newSpot = await response.json();
-
-  dispatch(createSpot(newSpot));
-  return newSpot;
+  if (response.ok) {
+    const newSpot = await response.json();
+    dispatch(createSpot(newSpot));
+    return newSpot;
+  }
 };
 
-const initialState = {};
-
-export const spotsReducer = (state = initialState, action) => {
+export const spotsReducer = (state = {}, action) => {
   let normalizedAllSpots = {};
   switch (action.type) {
     case GET_ALL_SPOTS:

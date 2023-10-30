@@ -5,12 +5,18 @@
     color: rgb(184, 252, 89);
 }
 
+.createLatAndLngContainer {
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 .createaspotForm {
   display: flex;
   flex-direction: column;
 }
 
-.cityAndState {
+.cityAndState, .createLatAndLngContainer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -18,24 +24,32 @@
   margin-bottom: 5px;
 }
 
-.cityLabel {
+.cityLabel, .latitudeLabel {
   width: 100%;
 }
 
-.stateLabel {
+.stateLabel, .longitudeLabel {
   width: 100%;
 }
 
-.cityLeftContainer {
+.cityLeftContainer, .latLeftContainer {
   display: flex;
   flex-direction: row;
   width: 59%;
 }
 
-.cityRightContainer {
+.latLeftContainer {
+  width: 50%;
+}
+
+.cityRightContainer, .LngRightContainer {
   display: flex;
   flex-direction: row;
   width: 40%;
+}
+
+.LngRightContainer {
+  width: 50%;
 }
 
 
@@ -125,4 +139,73 @@ h4 {
   margin-top: 0px;
   font-size: 15px;
   font-weight: normal;
+}
+
+.errors {
+  color: red;
+  font-size: 10px;
+}
+
+.countryError {
+  margin-left: 10px;
+}
+
+.addressError {
+  margin-left: 10px;
+}
+
+.cityError {
+  margin-left: 10px;
+}
+
+.stateError {
+  margin-left: 10px;
+}
+
+.latError {
+  margin-left: 10px;
+}
+
+.lngError {
+  margin-left: 10px;
+}
+
+.descriptionError {
+  position: relative;
+  top: -15px;
+  height: 0px;
+  margin: 5px;
+}
+
+.titleError {
+  position: relative;
+  top: -15px;
+  height: 0px;
+  margin: 5px;
+}
+
+.priceError {
+  position: relative;
+  top: -15px;
+  height: 0px;
+  margin: 5px;
+}
+
+.mainImageError {
+  position: relative;
+  top: -15px;
+  height: 0px;
+  margin: 5px;
+}
+
+.createLabelAndErrorTop {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.createLabelAndErrorBottom {
+  margin: 0px;
 }

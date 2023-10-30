@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchSpotDetails } from "../../store/spots";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -8,14 +8,14 @@ import "./SpotDetails.css";
 function SpotDetails() {
   const { spotId } = useParams();
   const dispatch = useDispatch();
+  const [loaded, setLoaded] = useState(false);
+  const [refresher, setRefresher] = useState(false);
 
-  const spots = useSelector((state) => state.spots.allSpots);
-  console.log("spots", spots);
   const spot = useSelector((state) => state.spots.thisSpot);
-  console.log("spot--------", spot);
 
   useEffect(() => {
     dispatch(fetchSpotDetails(spotId));
+    setLoaded(true);
   }, [dispatch, spotId]);
 
   const reserveAlert = () => {
@@ -24,6 +24,9 @@ function SpotDetails() {
 
   if (!spot) return null;
   if (!spot.SpotImages) return null;
+  console.log("spot.id", spot.id);
+  console.log("spotId", spotId);
+  if (spot.id !== parseInt(spotId)) return null;
 
   let onlyOneReview = false;
   if (spot.numReviews === 1) onlyOneReview = true;
@@ -90,7 +93,7 @@ function SpotDetails() {
           </div>
         </div>
       </div>
-      <Reviews spotId={spotId} />
+      {/* <Reviews spotId={spotId} /> */}
     </div>
   );
 }

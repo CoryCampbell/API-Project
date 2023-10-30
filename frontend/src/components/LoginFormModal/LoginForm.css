@@ -10,6 +10,14 @@
   border-radius: 25px;
 }
 
+#modal-content .loginButton:disabled {
+  background-color: rgb(109, 131, 131);
+  opacity: 45%;
+}
+#modal-content .loginButton {
+  background-color: teal;
+}
+
 .loginH1 {
   display: flex;
   justify-content: center;

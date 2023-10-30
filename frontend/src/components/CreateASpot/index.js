@@ -3,7 +3,7 @@ import "./CreateASpot.css";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useEffect, useState } from "react";
 import { fetchAllSpots } from "../../store/spots";
-import { createNewSpot } from "../../store/spots";
+import { createNewSpot, createNewImage, fetchSpotDetails } from "../../store/spots";
 
 function CreateASpot() {
   const dispatch = useDispatch();
@@ -36,20 +36,6 @@ function CreateASpot() {
     dispatch(fetchAllSpots());
   }, [dispatch, user]);
 
-  const newSpot = {
-    ownerId: user.id,
-    country,
-    address,
-    city,
-    state,
-    lat,
-    lng,
-    description,
-    name: title,
-    price,
-    previewImage: imageMain
-  };
-
   function ValidateCredentials() {
     const errorsObject = {};
     if (!country) errorsObject.country = "Country is required";
@@ -72,10 +58,80 @@ function CreateASpot() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const newSpot = {
+      ownerId: user.id,
+      country,
+      address,
+      city,
+      state,
+      lat,
+      lng,
+      description,
+      name: title,
+      price
+    };
+
+    const newPreview = {
+      url: imageMain,
+      preview: true
+    };
+
     if (!Object.values(errors).length) {
       const response = await dispatch(createNewSpot(newSpot));
 
+      if (response) {
+        console.log("response.id", response.id);
+        dispatch(createNewImage(newPreview, response.id));
+      }
+
+      if (image2) {
+        const newImage = {
+          url: image2,
+          preview: false
+        };
+
+        dispatch(createNewImage(newImage, response.id));
+      }
+
+      if (image3) {
+        const newImage = {
+          url: image3,
+          preview: false
+        };
+
+        dispatch(createNewImage(newImage, response.id));
+      }
+
+      if (image4) {
+        const newImage = {
+          url: image4,
+          preview: false
+        };
+        dispatch(createNewImage(newImage, response.id));
+      }
+
+      if (image5) {
+        const newImage = {
+          url: image5,
+          preview: false
+        };
+        dispatch(createNewImage(newImage, response.id));
+      }
+
       history.push(`/spots/${response.id}`);
+      setAddress("");
+      setCountry("");
+      setCity("");
+      setState("");
+      setDescription("");
+      setTitle("");
+      setPrice("");
+      setImageMain("");
+      setImage2("");
+      setImage3("");
+      setImage4("");
+      setImage5("");
+      dispatch(fetchSpotDetails(response.id));
     }
   };
 

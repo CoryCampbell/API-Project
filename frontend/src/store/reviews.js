@@ -22,10 +22,14 @@ export const fetchSpotReviews = (spotId) => async (dispatch) => {
     method: "GET"
   });
 
-  const reviews = await response.json();
-  console.log("reviews-----------", reviews);
-  dispatch(getSpotReviews(reviews));
-  return reviews;
+  if (response.ok) {
+    const reviews = await response.json();
+    dispatch(getSpotReviews(reviews));
+    return reviews;
+  } else {
+    const errors = await response.json();
+    return errors;
+  }
 };
 
 export const postReview = (spotId) => async (dispatch) => {
@@ -47,7 +51,6 @@ const initialState = {
 export const spotReviewsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_SPOT_REVIEWS:
-      console.log("action.payload", action.payload);
       return {
         ...state,
         currentSpot: action.payload

@@ -10,11 +10,13 @@ function Reviews({ spotId }) {
 
   const spots = useSelector((state) => state.spots.allSpots.Spots);
   const spot = useSelector((state) => state.spots.thisSpot);
-  const reviews = useSelector((state) => state.reviews.currentSpot.Reviews);
+  const reviews = useSelector((state) => state.reviews.currentSpot);
+  const user = useSelector((state) => state.session.user);
 
   console.log("spot", spot);
-  console.log("spotsssssssss", spots);
-  console.log("reviewsssssssss", reviews);
+  console.log("spots", spots);
+  console.log("reviews", reviews);
+
   const month = [
     "January",
     "February",
@@ -29,16 +31,14 @@ function Reviews({ spotId }) {
     "November",
     "December"
   ];
+
   useEffect(() => {
-    dispatch(fetchSpotReviews(spotId));
-  }, [dispatch, spotId]);
+    dispatch(fetchSpotReviews(spot.id));
+  }, [dispatch, spot]);
 
   const orderedReviews = reviews.sort((review, secondReview) => {
     return new Date(secondReview.createdAt) - new Date(review.createdAt);
   });
-
-  const user = useSelector((state) => state.session.user);
-  console.log("user", user);
 
   const youDontOwnThisSpot = spot?.Owner.id !== user?.id;
   console.log("youDontOwnThisSpot", youDontOwnThisSpot);
@@ -53,9 +53,9 @@ function Reviews({ spotId }) {
   if (user) loggedIn = true;
   console.log("loggedIn", loggedIn);
 
-  function postNewReview() {
-    console.log("test");
-  }
+  // function postNewReview() {
+  //   console.log("test");
+  // }
 
   if (!reviews.length)
     return (

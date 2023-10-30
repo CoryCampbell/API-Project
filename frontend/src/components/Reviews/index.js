@@ -1,20 +1,20 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { fetchSpotReviews } from "../../store/reviews";
 import { useDispatch, useSelector } from "react-redux";
 import OpenModalMenuItem from "../OpenModalButton";
 import PostReviewModal from "../PostReviewModal";
+import DeleteReview from "../DeleteReview";
 import "./Reviews.css";
+import OpenModalButton from "../OpenModalButton";
 
 function Reviews({ spotId }) {
   const dispatch = useDispatch();
 
-  const spots = useSelector((state) => state.spots.allSpots.Spots);
   const spot = useSelector((state) => state.spots.thisSpot);
-  const reviews = useSelector((state) => state.reviews.currentSpot);
+  const reviews = useSelector((state) => state.reviews.currentSpot.Reviews);
   const user = useSelector((state) => state.session.user);
 
   console.log("spot", spot);
-  console.log("spots", spots);
   console.log("reviews", reviews);
 
   const month = [
@@ -33,10 +33,12 @@ function Reviews({ spotId }) {
   ];
 
   useEffect(() => {
-    dispatch(fetchSpotReviews(spot.id));
-  }, [dispatch, spot]);
+    dispatch(fetchSpotReviews(spotId));
+  }, [dispatch, spotId]);
 
-  const orderedReviews = reviews.sort((review, secondReview) => {
+  if (!reviews) return null;
+
+  const orderedReviews = reviews?.slice().sort((review, secondReview) => {
     return new Date(secondReview.createdAt) - new Date(review.createdAt);
   });
 
@@ -44,7 +46,7 @@ function Reviews({ spotId }) {
   console.log("youDontOwnThisSpot", youDontOwnThisSpot);
 
   let numReviewsText = "Reviews";
-  if (spot.numReviews === 1) numReviewsText = "Review";
+  if (spot?.numReviews === 1) numReviewsText = "Review";
 
   const haveNotReviewed = reviews?.find((review) => review?.User.id === user?.id) === undefined;
   console.log("haveNotReviewed", haveNotReviewed);
@@ -52,10 +54,6 @@ function Reviews({ spotId }) {
   let loggedIn = false;
   if (user) loggedIn = true;
   console.log("loggedIn", loggedIn);
-
-  // function postNewReview() {
-  //   console.log("test");
-  // }
 
   if (!reviews.length)
     return (
@@ -89,7 +87,7 @@ function Reviews({ spotId }) {
         <OpenModalMenuItem
           className="postReviewButton"
           buttonText="Post Your Review"
-          modalComponent={<PostReviewModal />}
+          modalComponent={<PostReviewModal user={user} spot={spot} />}
         />
       )}
       <div className="singleReviewContainer">
@@ -101,6 +99,15 @@ function Reviews({ spotId }) {
               <div className="yearText">{review.createdAt.slice(0, 4)}</div>
             </div>
             <div>{review?.review}</div>
+            {user.id === review?.User?.id ? (
+              <div className="deleteReviewButtonContainer">
+                <OpenModalButton
+                  className="deleteReviewButton"
+                  buttonText="Delete"
+                  modalComponent={<DeleteReview review={review} spot={spot} />}
+                />
+              </div>
+            ) : null}
           </div>
         ))}
       </div>

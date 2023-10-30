@@ -9,7 +9,6 @@ function SpotDetails() {
   const { spotId } = useParams();
   const dispatch = useDispatch();
   const [loaded, setLoaded] = useState(false);
-  const [refresher, setRefresher] = useState(false);
 
   const spot = useSelector((state) => state.spots.thisSpot);
 
@@ -93,7 +92,7 @@ function SpotDetails() {
           </div>
         </div>
       </div>
-      {/* <Reviews spotId={spotId} /> */}
+      <Reviews spotId={spotId} />
     </div>
   );
 }

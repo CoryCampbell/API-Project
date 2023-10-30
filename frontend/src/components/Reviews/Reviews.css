@@ -53,3 +53,9 @@
   border-radius: 5px;
   margin-bottom: 15px;
 }
+
+.deleteReviewButtonContainer button {
+  background-color: red;
+  font-size: 15px;
+  font-weight: bold;
+}

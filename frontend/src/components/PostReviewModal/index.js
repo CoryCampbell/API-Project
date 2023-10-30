@@ -1,40 +1,44 @@
 import React, { useState } from "react";
 import * as sessionActions from "../../store/reviews";
-import { useDispatch } from "react-redux";
+import { fetchSpotDetails } from "../../store/spots";
+import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./PostReviewModal.css";
 
-function PostReviewModal() {
+function PostReviewModal({ spot, user }) {
   const dispatch = useDispatch();
   const [text, setText] = useState("");
   const [stars, setStars] = useState("");
-  const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
+  const spotId = useSelector((state) => state.spots.thisSpot.id);
+  console.log("spotId----", spotId);
 
   const setRating = (e) => {
-    //set rating to whatever star they clicked on
     e.preventDefault();
     setStars(e.target.id);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrors({});
+    const newReview = {
+      userId: user?.id,
+      spotId: spot?.id,
+      review: text,
+      stars
+    };
 
-    return dispatch(sessionActions.postReview({ text, stars }))
-      .then(closeModal)
-      .catch(async (res) => {
-        const data = await res.json();
-        if (data && data.message) {
-          setErrors(data);
-        }
-      });
+    const response = await dispatch(sessionActions.postReview(newReview, spotId));
+    await dispatch(sessionActions.fetchSpotReviews(spotId));
+    await dispatch(fetchSpotDetails(spotId));
+    closeModal();
+    setText("");
+    setStars(0);
+    return response;
   };
 
   return (
     <div className="postReviewContainer">
       <h1 className="starh1">How was your stay?</h1>
-      {errors.message && <p className="postReviewErrorMessage">{errors.message}</p>}
       <form onSubmit={handleSubmit} className="reviewForm">
         <textarea
           className="reviewText"

@@ -4,7 +4,7 @@ const GET_ALL_SPOTS = "spots/getAllSpots";
 const GET_USER_SPOTS = "spots/getUserSpots";
 const GET_SPOT_DETAILS = "spots/getSpotDetails";
 const CREATE_A_SPOT = "spots/createSpot";
-const CREATE_SPOT_IMAGES = "spots/createSpotImages";
+const CREATE_SPOT_IMAGE = "spots/createSpotImages";
 const UPDATE_A_SPOT = "spots/deleteSpot";
 const DELETE_THIS_SPOT = "spots/deleteThisOneSpot";
 
@@ -28,9 +28,9 @@ const updateSpot = (payload) => {
   };
 };
 
-const createSpotImages = (payload) => {
+const createSpotImage = (payload) => {
   return {
-    type: CREATE_A_SPOT,
+    type: CREATE_SPOT_IMAGE,
     payload
   };
 };
@@ -129,6 +129,8 @@ export const updateASpot = (payload) => async (dispatch) => {
   if (response.ok) {
     const updatedSpot = await response.json();
     dispatch(updateSpot(updatedSpot));
+    console.log("updatedSpot", updatedSpot);
+    dispatch(fetchSpotDetails(payload.id));
     return updatedSpot;
   } else {
     const errors = await response.json();
@@ -144,7 +146,7 @@ export const createNewImage = (image, spotId) => async (dispatch) => {
 
   if (response.ok) {
     const newImage = await response.json();
-    dispatch(createSpotImages(newImage));
+    dispatch(createSpotImage(newImage));
     return newImage;
   } else {
     const errors = await response.json();
@@ -176,7 +178,8 @@ export const spotsReducer = (state = initialState, action) => {
       spotsAfterAddition[action.payload] = action.payload;
       return {
         ...state,
-        allSpots: spotsAfterAddition
+        allSpots: spotsAfterAddition,
+        thisSpot: action.payload
       };
 
     case DELETE_THIS_SPOT:

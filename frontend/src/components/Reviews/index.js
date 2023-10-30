@@ -99,7 +99,7 @@ function Reviews({ spotId }) {
               <div className="yearText">{review.createdAt.slice(0, 4)}</div>
             </div>
             <div>{review?.review}</div>
-            {user.id === review?.User?.id ? (
+            {user?.id === review?.User?.id ? (
               <div className="deleteReviewButtonContainer">
                 <OpenModalButton
                   className="deleteReviewButton"

@@ -8,13 +8,11 @@ import "./SpotDetails.css";
 function SpotDetails() {
   const { spotId } = useParams();
   const dispatch = useDispatch();
-  const [loaded, setLoaded] = useState(false);
 
   const spot = useSelector((state) => state.spots.thisSpot);
 
   useEffect(() => {
     dispatch(fetchSpotDetails(spotId));
-    setLoaded(true);
   }, [dispatch, spotId]);
 
   const reserveAlert = () => {

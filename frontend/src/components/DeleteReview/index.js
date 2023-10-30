@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchSpotReviews, deleteThisReview } from "../../store/reviews";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { fetchSpotDetails } from "../../store/spots";
 import "./DeleteReview.css";
@@ -24,7 +24,7 @@ function DeleteReview({ spot, review }) {
     closeModal();
   };
 
-  dispatch(fetchSpotDetails(spot.id));
+  if (!review) return null;
 
   return (
     <div className="deleteModal">

@@ -60,7 +60,6 @@ function UpdateASpot() {
 
     if (Object.keys(errors).length === 0) {
       const updatedSpot = {
-        id: spot.id,
         country,
         address,
         city,
@@ -72,7 +71,7 @@ function UpdateASpot() {
         lng
       };
 
-      const response = await dispatch(updateASpot(updatedSpot));
+      const response = await dispatch(updateASpot(updatedSpot, spot.id));
       if (response) {
         history.push(`/spot/${response.id}`);
       }

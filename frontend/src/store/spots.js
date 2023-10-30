@@ -4,6 +4,7 @@ const GET_ALL_SPOTS = "spots/getAllSpots";
 const GET_USER_SPOTS = "spots/getUserSpots";
 const GET_SPOT_DETAILS = "spots/getSpotDetails";
 const CREATE_A_SPOT = "spots/createSpot";
+const DELETE_THIS_SPOT = "spots/deleteThisOneSpot";
 
 const getAllSpots = (payload) => {
   return {
@@ -33,6 +34,26 @@ const getUserSpots = (payload) => {
   };
 };
 
+const deleteThisOneSpot = (payload) => {
+  return {
+    type: DELETE_THIS_SPOT,
+    payload
+  };
+};
+
+export const deleteThisSpot = (spotId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spotId}`, {
+    method: "DELETE"
+  });
+
+  if (response.ok) {
+    dispatch(deleteThisOneSpot(spotId));
+  } else {
+    const errors = response.json();
+    return errors;
+  }
+};
+
 export const fetchAllSpots = () => async (dispatch) => {
   const response = await csrfFetch("/api/spots", {
     method: "GET"
@@ -50,7 +71,6 @@ export const fetchSpotDetails = (spotId) => async (dispatch) => {
   });
 
   const spotDetails = await response.json();
-
   dispatch(getSpotDetails(spotDetails));
   return spotDetails;
 };
@@ -72,8 +92,9 @@ export const createNewSpot = (payload) => async (dispatch) => {
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ ...payload })
+    body: JSON.stringify(payload)
   });
+  console.log("response--------------->", response);
 
   if (response.ok) {
     const newSpot = await response.json();
@@ -82,20 +103,32 @@ export const createNewSpot = (payload) => async (dispatch) => {
   }
 };
 
-export const spotsReducer = (state = {}, action) => {
-  let normalizedAllSpots = {};
+const initialState = {
+  allSpots: {},
+  thisSpot: {}
+};
+
+export const spotsReducer = (state = initialState, action) => {
+  const spotsAfterAddition = { ...state.allSpots.Spots };
   switch (action.type) {
     case GET_ALL_SPOTS:
-      action.payload.Spots.forEach((spot) => {
-        normalizedAllSpots[spot.id] = spot;
-      });
-      return normalizedAllSpots;
-
-    case CREATE_A_SPOT:
-      return { ...state, [action.payload.id]: action.payload };
+      return {
+        ...state,
+        allSpots: action.payload
+      };
 
     case GET_SPOT_DETAILS:
-      return { ...state, [action.payload.id]: action.payload };
+      return { ...state, thisSpot: action.payload };
+
+    case CREATE_A_SPOT:
+      return { ...state, allSpots: spotsAfterAddition, thisSpot: action.payload };
+
+    case DELETE_THIS_SPOT:
+      delete spotsAfterAddition[action.payload];
+      return {
+        ...state,
+        allSpots: spotsAfterAddition
+      };
 
     default:
       return state;

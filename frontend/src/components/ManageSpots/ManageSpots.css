@@ -2,6 +2,53 @@
   margin: auto;
 }
 
+#modal-content button {
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+
+#modal-content {
+  border-radius: 10px;
+}
+
+#modal-content .deleteModal {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 420px;
+  height: 250px;
+  border-radius: 10px;
+}
+
+#modal-content .deleteText {
+  margin-bottom: 30px;
+}
+
+#modal-content h2 {
+  margin: 10px;
+}
+
+#modal-content .dontDelete {
+  background-color: darkgray;
+}
+
+#modal-content button {
+  color: black;
+  background-color: red;
+  width: 80%;
+  height: 50px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.deleteButtonLink button {
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+
 .manageCrudButtonsContainer {
   display: flex;
   flex-direction: row;

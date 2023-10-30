@@ -18,42 +18,54 @@ const postNewReview = (payload) => {
 };
 
 export const fetchSpotReviews = (spotId) => async (dispatch) => {
-    const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
-        method: "GET"
-    });
+  const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+    method: "GET"
+  });
 
-    const reviews = await response.json();
-
-    dispatch(getSpotReviews(reviews));
-    return reviews;
+  const reviews = await response.json();
+  console.log("reviews-----------", reviews);
+  dispatch(getSpotReviews(reviews));
+  return reviews;
 };
 
 export const postReview = (spotId) => async (dispatch) => {
-    const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
-        method: "POST"
-    });
+  const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+    method: "POST"
+  });
 
-    const newReview = await response.json();
+  const newReview = await response.json();
 
-    dispatch(postNewReview(newReview));
-    return newReview;
+  dispatch(postNewReview(newReview));
+  return newReview;
 };
 
-const initialState = {};
+const initialState = {
+  currentSpot: {},
+  currentUser: {}
+};
 
 export const spotReviewsReducer = (state = initialState, action) => {
-    let normalizedSpotReviews = {};
-    switch (action.type) {
-        case GET_SPOT_REVIEWS:
-            action.payload.Reviews?.forEach((review) => {
-                normalizedSpotReviews[review.id] = review;
-            });
-            return normalizedSpotReviews;
-        case POST_NEW_REVIEW:
-            return { ...state, [action.payload.id]: action.payload };
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case GET_SPOT_REVIEWS:
+      console.log("action.payload", action.payload);
+      return {
+        ...state,
+        currentSpot: action.payload
+      };
+    //   action.payload.Reviews?.forEach((review) => {
+    //     normalizedSpotReviews[review.id] = review;
+    //   });
+    //   return normalizedSpotReviews;
+    case POST_NEW_REVIEW:
+      return {
+        ...state,
+        currentSpot: {
+          Reviews: [...state.spot.Reviews, action.payload]
+        }
+      };
+    default:
+      return state;
+  }
 };
 
 export default spotReviewsReducer;

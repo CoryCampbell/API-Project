@@ -6,13 +6,12 @@ import "./SplashPage.css";
 
 function SplashPage() {
   const dispatch = useDispatch();
-  const spots = useSelector((state) => Object.values(state.spots));
+  const spots = useSelector((state) => state.spots.allSpots.Spots);
   console.log("spots", spots);
 
   useEffect(() => {
     dispatch(fetchAllSpots());
   }, [dispatch]);
-  if (!spots.length) return null;
 
   const reactiveSpots = spots?.map((spot) => (
     <div key={spot?.id} className="splashSpotContainer">

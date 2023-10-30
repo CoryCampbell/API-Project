@@ -18,29 +18,30 @@ function SignupFormModal() {
     const { closeModal } = useModal();
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        if (password === confirmPassword) {
-            setErrors({});
-            return dispatch(
-                sessionActions.signup({
-                    email,
-                    username,
-                    firstName,
-                    lastName,
-                    password
-                })
-            )
-                .then(closeModal)
-                .catch(async (res) => {
-                    const data = await res.json();
-                    if (data && data.errors) {
-                        setErrors(data.errors);
-                    }
-                });
-        }
-        return setErrors({
-            confirmPassword: "Confirm Password field must be the same as the Password field"
-        });
+      e.preventDefault();
+      if (password === confirmPassword) {
+        setErrors({});
+        return dispatch(
+          sessionActions.signup({
+            email,
+            username,
+            firstName,
+            lastName,
+            password
+          })
+        )
+          .then(closeModal)
+          .catch(async (res) => {
+            const data = await res.json();
+            if (data && data.errors) {
+              console.log("errors ======", data.errors);
+              setErrors(data.errors);
+            }
+          });
+      }
+      return setErrors({
+        confirmPassword: "Confirm Password field must be the same as the Password field"
+      });
     };
 
     return (
@@ -50,41 +51,36 @@ function SignupFormModal() {
           <div className="emailAndUsername">
             <label className="signupLabel">
               Email
-              <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} required />
+              <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
             </label>
             {errors.email && <p className="signupErrorMessage">{errors.email}</p>}
             <label className="signupLabel">
               Username
-              <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
+              <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
             </label>
             {errors.username && <p className="signupErrorMessage">{errors.username}</p>}
           </div>
           <div className="firstNameLastName">
             <label className="signupLabel">
               First Name
-              <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
+              <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
             </label>
             {errors.firstName && <p className="signupErrorMessage">{errors.firstName}</p>}
             <label className="signupLabel">
               Last Name
-              <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} required />
+              <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
             </label>
             {errors.lastName && <p className="signupErrorMessage">{errors.lastName}</p>}
           </div>
           <div className="passwordCreation">
             <label className="signupLabel">
               Password
-              <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+              <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             </label>
             {errors.password && <p className="signupErrorMessage">{errors.password}</p>}
             <label className="signupLabel">
               Confirm Password
-              <input
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-              />
+              <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
             </label>
             {errors.confirmPassword && <p className="signupErrorMessage">{errors.confirmPassword}</p>}
           </div>

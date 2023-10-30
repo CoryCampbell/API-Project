@@ -89,25 +89,27 @@ function Reviews({ spotId }) {
         />
       )}
       <div className="singleReviewContainer">
-        {orderedReviews?.map((review) => (
-          <div key={review?.id} className="perReview">
-            <div className="reviewUsername">{review?.User.firstName}</div>
-            <div className="dateContainer">
-              <div className="monthText">{month[new Date(review?.createdAt).getMonth()]}</div>
-              <div className="yearText">{review?.createdAt.slice(0, 4)}</div>
-            </div>
-            <div>{review?.review}</div>
-            {user?.id === review?.User?.id ? (
-              <div className="deleteReviewButtonContainer">
-                <OpenModalButton
-                  className="deleteReviewButton"
-                  buttonText="Delete"
-                  modalComponent={<DeleteReview review={review} spot={spot} />}
-                />
+        {orderedReviews
+          ?.map((review) => (
+            <div key={review?.id} className="perReview">
+              <div className="reviewUsername">{review?.User.firstName}</div>
+              <div className="dateContainer">
+                <div className="monthText">{month[new Date(review?.createdAt).getMonth()]}</div>
+                <div className="yearText">{review?.createdAt.slice(0, 4)}</div>
               </div>
-            ) : null}
-          </div>
-        ))}
+              <div>{review?.review}</div>
+              {user?.id === review?.User?.id ? (
+                <div className="deleteReviewButtonContainer">
+                  <OpenModalButton
+                    className="deleteReviewButton"
+                    buttonText="Delete"
+                    modalComponent={<DeleteReview review={review} spot={spot} />}
+                  />
+                </div>
+              ) : null}
+            </div>
+          ))
+          .reverse()}
       </div>
     </div>
   );

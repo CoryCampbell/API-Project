@@ -129,8 +129,7 @@ export const updateASpot = (updatedSpot, spotId) => async (dispatch) => {
   if (response.ok) {
     const updatedSpot = await response.json();
     dispatch(updateSpot(updatedSpot));
-    console.log("updatedSpot", updatedSpot);
-    dispatch(fetchSpotDetails(spotId));
+
     return updatedSpot;
   } else {
     const errors = await response.json();
